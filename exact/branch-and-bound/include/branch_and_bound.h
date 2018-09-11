@@ -1,6 +1,24 @@
 #ifndef BRANCH_AND_BOUND_H
 #define BRANCH_AND_BOUND_H
 
+#include <vector>
+
+struct Edge
+{
+	int v1;
+	int v2;
+	int weight;
+
+	bool operator<(const Edge& rhs) const
+    {
+    	if(weight < rhs.weight) return true;
+    	if(rhs.v1 < rhs.v2) return true;
+    	if(rhs.v1 == rhs.v2) return rhs.v1 < rhs.v2;
+    	return false;
+    }
+};
+
+bool greater_edge(Edge e1, Edge e2);
 
 /**
  * @brief      Class that solves the Quadratic Assignment Problem using a
@@ -10,6 +28,8 @@ class QAPBranch
 {
 
 private:
+	std::vector<Edge> f_edge_vector;
+	std::vector<Edge> d_edge_vector;
 
 	/* Number of facilities/locations */
 	int n;
@@ -35,19 +55,7 @@ private:
 	 */
 	void generate_initial_solution();
 
-
-	/**
-	 * @brief      Gets a lower bound for a partial solution so that the
-	 *             correspondig branch in the tree may possibly be pruned off.
-	 *
-	 * @param[in]  partial_solution_size  The size of the partial solution
-	 *                                    (i.e., the number of facilities
-	 *                                    already assigned)
-	 * @param      partial_solution       The partial solution itself
-	 *
-	 * @return     A lower bound for the cost that the given partial solution may have
-	 */
-	int lower_bound_for_partial_solution(int partial_solution_size, int* partial_solution);
+	int lower_bound_for_partial_solution(int partial_solution_size, bool* already_in_solution, int current_partial_cost);
 
 	/**
 	 * @brief      Explores a given node of the search tree, corresponding to a
@@ -65,6 +73,7 @@ private:
 	void recursive_search_tree_exploring(int current_cost, int current_solution_size, 
 										 int* current_solution, bool* already_in_solution);
 
+	void matrices_to_ordered_edge_vectors();
 public:
 
 	/**
