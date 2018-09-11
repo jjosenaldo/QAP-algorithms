@@ -176,4 +176,5 @@ int QAPBranch::get_current_best_cost()
 {
 	return this->current_best_cost;
 }
+
 bool greater_edge(Edge e1, Edge e2){return e2 < e1;}
