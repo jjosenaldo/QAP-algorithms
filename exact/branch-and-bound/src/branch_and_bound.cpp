@@ -1,6 +1,7 @@
 #include <algorithm> // std::fill, std::copy
 #include <climits> // std:;INT_MAX
 #include "branch_and_bound.h"
+#include <functional>
 
 QAPBranch::QAPBranch(int n, int** d_mat, int** f_mat)
 {
@@ -30,7 +31,8 @@ void QAPBranch::solve()
 	delete[] already_in_solution;
 }
 
-void QAPBranch::recursive_search_tree_exploring(int current_cost, int current_solution_size, int* current_solution, bool* already_in_solution)
+void QAPBranch::recursive_search_tree_exploring(int current_cost, 
+	int current_solution_size, int* current_solution, bool* already_in_solution)
 {
 	// full solution (leaf): check if it is better than the best already found
 	if(current_solution_size == n)
@@ -113,6 +115,9 @@ void QAPBranch::generate_initial_solution()
 // TO-DO
 int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, int* partial_solution)
 {
+	
+	std::sort()
+
 	// just to avoid parameter-not-used warnings!!!!!!!!!!
 	return partial_solution_size+partial_solution[0];
 }

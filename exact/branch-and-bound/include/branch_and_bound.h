@@ -1,6 +1,7 @@
 #ifndef BRANCH_AND_BOUND_H
 #define BRANCH_AND_BOUND_H
 
+
 /**
  * @brief      Class that solves the Quadratic Assignment Problem using a
  *             branch-and-bound technique.
@@ -61,7 +62,8 @@ private:
 	 *                                    facilitiy was assigned to a location
 	 *                                    already
 	 */
-	void recursive_search_tree_exploring(int current_cost, int current_solution_size, int* current_solution, bool* already_in_solution);
+	void recursive_search_tree_exploring(int current_cost, int current_solution_size, 
+										 int* current_solution, bool* already_in_solution);
 
 public:
 
@@ -97,7 +99,6 @@ public:
 	 * @return     The cost of the best solution so far.
 	 */
 	int get_current_best_cost();
-
 
 };
 
