@@ -1,16 +1,18 @@
 #include <algorithm> // std::copy, std::fill, std::random_shuffle, std::sort
 #include <climits> // std:;INT_MAX
+#include <iostream>
 #include "branch_and_bound.h"
-#include <functional>
 
 QAPBranch::QAPBranch(int n, int** d_mat, int** f_mat)
 {
 	this->n = n;
 	this->d_mat = d_mat;
 	this->f_mat = f_mat;
+	this->number_of_nodes = 0;
 
 	this->generate_initial_solution();	
-	this->matrices_to_ordered_edge_vectors();
+	//this->matrices_to_ordered_edge_vectors();
+	this->matrices_to_pair_arrays();
 }
 
 QAPBranch::~QAPBranch()
@@ -18,20 +20,51 @@ QAPBranch::~QAPBranch()
 	delete[] this->current_best_solution;
 }
 
+void QAPBranch::matrices_to_pair_arrays()
+{
+	this->d_pair_array = new std::pair<int, int>[this->n];
+	this->f_pair_array = new std::pair<int, int>[this->n];
+
+	for(int i = 0; i < n; ++i)
+	{
+		this->d_pair_array[i] = std::make_pair(i, 0);
+		this->f_pair_array[i] = std::make_pair(i, 0);
+	}
+
+	for(int i = 0; i < this->n; ++i)
+	{
+		for(int j = 0; j < this->n; ++j)
+		{
+			this->d_pair_array[i].second += this->d_mat[i][j];
+			this->d_pair_array[j].second += this->d_mat[i][j];
+			this->f_pair_array[i].second += this->f_mat[i][j];
+			this->f_pair_array[j].second += this->f_mat[i][j];
+		}
+	}
+
+	// ascending
+	std::sort(this->d_pair_array, this->d_pair_array+this->n, [](std::pair<int,int> p1, std::pair<int,int> p2){return p1.second < p2.second;});
+
+	// descending
+	std::sort(this->f_pair_array, this->f_pair_array+this->n, [](std::pair<int,int> p1, std::pair<int,int> p2){return p1.second > p2.second;});
+}
+
 void QAPBranch::matrices_to_ordered_edge_vectors()
 {
-	int number_of_edges = this->n * this->n; 
+	int number_of_edges = this->n * (this->n - 1);
 
 	this->f_edge_vector.reserve(number_of_edges);
 	this->d_edge_vector.reserve(number_of_edges);
 
-	int pos = 0;
 	for(int i = 0; i < n; ++i)
 	{
 		for(int j = 0; j < n; ++j)
 		{
-			this->f_edge_vector[pos] = {i, j, this->f_mat[i][j]};
-			this->d_edge_vector[pos++] = {i, j, this->d_mat[i][j]};
+			if(i != j)
+			{
+				this->f_edge_vector.push_back({i, j, this->f_mat[i][j]});
+				this->d_edge_vector.push_back({i, j, this->d_mat[i][j]});
+			}
 		}
 	}
 
@@ -44,7 +77,6 @@ void QAPBranch::matrices_to_ordered_edge_vectors()
 
 void QAPBranch::solve()
 {
-
 	int* current_solution = new int[n];
 
 	bool* already_in_solution = new bool[n];
@@ -59,6 +91,15 @@ void QAPBranch::solve()
 void QAPBranch::recursive_search_tree_exploring(int current_cost, 
 	int current_solution_size, int* current_solution, bool* already_in_solution)
 {
+	//std::cout << (++this->number_of_nodes) << "\n";
+	++this->number_of_nodes;
+	std::cout << "node: #" << this->number_of_nodes << "\n";
+	std::cout << "current_cost: " << current_cost << std::endl;
+	std::cout << "best_cost: " << this->current_best_cost << std::endl;
+	std::cout << "solution:";
+	for(int i = 0; i < current_solution_size; ++i) std::cout << " " <<current_solution[i];
+	std::cout << "\n";
+
 	// full solution (leaf): check if it is better than the best already found
 	if(current_solution_size == n)
 	{
@@ -90,7 +131,8 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 	else
 	{
 		// analyze solution feasibility
-		int lower_bound = this->lower_bound_for_partial_solution(current_solution_size, already_in_solution, current_cost);
+		int lower_bound = this->lower_bound_for_partial_solution(current_solution_size, current_solution, already_in_solution, current_cost);
+		std::cout << "lower_bound:" << lower_bound << std::endl;
 
 		// current solution can't get better than the best known so far: its
 		// branch must be pruned off
@@ -111,7 +153,7 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 					already_in_solution[i] = true;
 
 					// compute the cost increase, i.e., the product d_{a,b}*f_{pi(a), pi(b)}
-					// for all 0 <= a,b < n such that a,b<=current_solution_sizes
+					// for all 0 <= a,b < n such that a,b<=current_solution_size
 					int cost_increase = 0;
 					for(int j = 0; j < current_solution_size; ++j)
 						cost_increase += d_mat[j][current_solution_size]*f_mat[current_solution[j]][i]
@@ -132,36 +174,52 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 // TO-DO
 void QAPBranch::generate_initial_solution()
 {
-
+	this->current_best_cost = 0;
 	this->current_best_solution = new int[this->n];
 
 	for(int i = 0; i < this->n; ++i)
 		this->current_best_solution[i] = i;
 
-	
 	std::random_shuffle(this->current_best_solution, this->current_best_solution + this->n);
+	for(int i = 0; i < this->n; ++i)
+		std::cout << this->current_best_solution[i] << " ";
+	std::cout << std::endl;
+
+	for(int i = 0; i < this->n; ++i)
+	{
+		for(int j = 0; j < this->n; ++j)
+		{
+			this->current_best_cost += this->f_mat[this->current_best_solution[i]][this->current_best_solution[j]] 
+			*this->d_mat[i][j];
+		}
+	}
 }
 
 // TO-DO
-int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, bool* already_in_solution, int current_partial_cost)
-{
-	
-	std::vector<Edge>::iterator it_d_vector = this->d_edge_vector.begin();
-	std::vector<Edge>::iterator it_f_vector = this->f_edge_vector.begin();
-
+int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, int* current_solution, bool* already_in_solution, int current_partial_cost)
+{	
 	int cost_increase = 0;
-	int remaining_nodes = this->n - partial_solution_size;
 
-	while(remaining_nodes >= 0)
+	int f_it = 0;
+
+	for(int i = 0; i < this->n; ++i)
+	{		
+		if(this->d_pair_array[i].first >= partial_solution_size)
+		{
+			while(already_in_solution[this->f_pair_array[f_it].first]) 
+				++f_it;
+
+			current_solution[this->d_pair_array[i].first] = this->f_pair_array[f_it++].first;
+		}
+	}
+
+	for(int i = partial_solution_size; i < this->n; ++i)
 	{
-		while(already_in_solution[(*it_d_vector).v1] || already_in_solution[(*it_d_vector).v2])
-			++it_d_vector;
-
-		while(already_in_solution[(*it_f_vector).v1] || already_in_solution[(*it_f_vector).v2])
-			++it_f_vector;
-
-		cost_increase += (*it_d_vector).weight * (*it_f_vector).weight;
-		--remaining_nodes;
+		for(int j = 0; j < i; ++j)
+		{
+			cost_increase += this->d_mat[i][j] * this->f_mat[current_solution[i]][current_solution[j]]
+							+ this->d_mat[j][i] * this->f_mat[current_solution[j]][current_solution[i]];
+		}
 	}
 
 	return cost_increase + current_partial_cost;
@@ -175,6 +233,11 @@ int* QAPBranch::get_current_best_solution()
 int QAPBranch::get_current_best_cost()
 {
 	return this->current_best_cost;
+}
+
+int QAPBranch::get_number_of_nodes()
+{
+	return this->number_of_nodes;
 }
 
 bool greater_edge(Edge e1, Edge e2){return e2 < e1;}

@@ -1,6 +1,7 @@
 #ifndef BRANCH_AND_BOUND_H
 #define BRANCH_AND_BOUND_H
 
+#include <utility>
 #include <vector>
 
 
@@ -15,10 +16,7 @@ struct Edge
 
 	bool operator<(const Edge& rhs) const
     {
-    	if(weight < rhs.weight) return true;
-    	if(v1 < rhs.v1) return true;
-    	if(v1 == rhs.v1) return v2 < rhs.v2;
-    	return false;
+    	return weight < rhs.weight;
     }
 };
 
@@ -43,6 +41,10 @@ class QAPBranch
 {
 
 private:
+	std::pair<int, int>* f_pair_array;
+	std::pair<int, int>* d_pair_array;
+
+	int number_of_nodes;
 	/* Facility matrix as a vector of Edge */
 	std::vector<Edge> f_edge_vector;
 
@@ -86,7 +88,7 @@ private:
 	 *
 	 * @return     the lower bound of the current partial solution
 	 */
-	int lower_bound_for_partial_solution(int partial_solution_size, bool* already_in_solution, int current_partial_cost);
+	int lower_bound_for_partial_solution(int partial_solution_size, int* current_solution, bool* already_in_solution, int current_partial_cost);
 
 	/**
 	 * @brief      Explores a given node of the search tree, corresponding to a
@@ -109,6 +111,8 @@ private:
 	 *             edges.
 	 */
 	void matrices_to_ordered_edge_vectors();
+
+	void matrices_to_pair_arrays();
 public:
 
 	/**
@@ -143,6 +147,8 @@ public:
 	 * @return     The cost of the best solution so far.
 	 */
 	int get_current_best_cost();
+
+	int get_number_of_nodes();
 
 };
 
