@@ -1,8 +1,12 @@
 #include "branch_and_bound.h"
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
+
 int main()
 {
+	std::srand(std::time(0));
 	int n;
 	std::cin >> n;
 	int** d_mat = new int*[n];
@@ -30,7 +34,7 @@ int main()
 	qapBranch.solve();
 
 	int* sol = qapBranch.get_current_best_solution();
-
+	std::cout << qapBranch.get_number_of_nodes() <<  "\n";
 	for(int i = 0; i < n; ++i) std::cout << sol[i] << " ";
 	std::cout << "\n";
 	return 0;

@@ -1,8 +1,13 @@
 #ifndef BRANCH_AND_BOUND_H
 #define BRANCH_AND_BOUND_H
 
+#include <utility>
 #include <vector>
 
+
+/**
+ * @brief      A simple weighted edge.
+ */
 struct Edge
 {
 	int v1;
@@ -11,13 +16,21 @@ struct Edge
 
 	bool operator<(const Edge& rhs) const
     {
-    	if(weight < rhs.weight) return true;
-    	if(rhs.v1 < rhs.v2) return true;
-    	if(rhs.v1 == rhs.v2) return rhs.v1 < rhs.v2;
-    	return false;
+    	return weight < rhs.weight;
     }
 };
 
+
+/**
+ * @brief      Compares two edges and return the "greater" of them in some
+ *             sense. The function is used to sort a Edge vector in
+ *             decreasing order.
+ *
+ * @param[in]  e1    first edge
+ * @param[in]  e2    second edge
+ *
+ * @return     the greater edge
+ */
 bool greater_edge(Edge e1, Edge e2);
 
 /**
@@ -28,7 +41,14 @@ class QAPBranch
 {
 
 private:
+	std::pair<int, int>* f_pair_array;
+	std::pair<int, int>* d_pair_array;
+
+	int number_of_nodes;
+	/* Facility matrix as a vector of Edge */
 	std::vector<Edge> f_edge_vector;
+
+	/* Location matrix as a vector of Edge */
 	std::vector<Edge> d_edge_vector;
 
 	/* Number of facilities/locations */
@@ -55,7 +75,20 @@ private:
 	 */
 	void generate_initial_solution();
 
-	int lower_bound_for_partial_solution(int partial_solution_size, bool* already_in_solution, int current_partial_cost);
+
+	/**
+	 * @brief      Defines a lower bound from a partially built solution. The
+	 *             lower bound consists of a value such that when the solution
+	 *             is fully built, if its cost exceeds that value, it should be
+	 *             discarded since it won't yield an optimal solution.
+	 *
+	 * @param[in]  partial_solution_size  The number of facilities already allocated in the current solution
+	 * @param      already_in_solution    Bool array to check if a given facility is in the solution
+	 * @param[in]  current_partial_cost   The cost of the solution so far
+	 *
+	 * @return     the lower bound of the current partial solution
+	 */
+	int lower_bound_for_partial_solution(int partial_solution_size, int* current_solution, bool* already_in_solution, int current_partial_cost);
 
 	/**
 	 * @brief      Explores a given node of the search tree, corresponding to a
@@ -73,7 +106,13 @@ private:
 	void recursive_search_tree_exploring(int current_cost, int current_solution_size, 
 										 int* current_solution, bool* already_in_solution);
 
+	/**
+	 * @brief      Converts the distance and facility matrices to vector of
+	 *             edges.
+	 */
 	void matrices_to_ordered_edge_vectors();
+
+	void matrices_to_pair_arrays();
 public:
 
 	/**
@@ -108,6 +147,8 @@ public:
 	 * @return     The cost of the best solution so far.
 	 */
 	int get_current_best_cost();
+
+	int get_number_of_nodes();
 
 };
 
