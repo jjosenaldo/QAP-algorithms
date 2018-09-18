@@ -1,6 +1,7 @@
 #include <algorithm> // std::copy, std::fill, std::random_shuffle, std::sort
 #include <climits> // std:;INT_MAX
-#include <iostream>
+#include <iostream> // std::cout 
+#include <functional> // std::greater<int>
 #include "branch_and_bound.h"
 
 QAPBranch::QAPBranch(int n, int** d_mat, int** f_mat)
@@ -198,31 +199,59 @@ void QAPBranch::generate_initial_solution()
 // TO-DO
 int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, int* current_solution, bool* already_in_solution, int current_partial_cost)
 {	
-	int cost_increase = 0;
+	int remaining_facilities = this->n - partial_solution_size;
+	int** new_f = new int*[remaining_facilities];
+	int** new_d = new int*[remaining_facilities];
 
-	int f_it = 0;
-
-	for(int i = 0; i < this->n; ++i)
-	{		
-		if(this->d_pair_array[i].first >= partial_solution_size)
-		{
-			while(already_in_solution[this->f_pair_array[f_it].first]) 
-				++f_it;
-
-			current_solution[this->d_pair_array[i].first] = this->f_pair_array[f_it++].first;
-		}
+	for(int i = 0; i < remaining_facilities; ++i)
+	{
+		new_f[i] = new int[remaining_facilities];
+		new_d[i] = new int[remaining_facilities];
 	}
 
 	for(int i = partial_solution_size; i < this->n; ++i)
 	{
-		for(int j = 0; j < i; ++j)
-		{
-			cost_increase += this->d_mat[i][j] * this->f_mat[current_solution[i]][current_solution[j]]
-							+ this->d_mat[j][i] * this->f_mat[current_solution[j]][current_solution[i]];
-		}
+		for(int j = partial_solution_size; j < this->n; ++j)
+			new_d[i-partial_solution_size][j-partial_solution_size] = this->d_mat[i][j];
+
+		std::sort(new_d[i-partial_solution_size], new_d[i-partial_solution_size] + remaining_facilities);
 	}
 
-	return cost_increase + current_partial_cost;
+	int pointer_row = 0;
+	for(int i = 0; i < this->n; ++i)
+	{
+		if(already_in_solution[i])
+			continue;
+
+		int pointer_col = 0;
+
+		for(int j = 0; j < this->n; ++j)
+			if(!already_in_solution[j])
+				new_f[pointer_row][pointer_col++] = this->f_mat[i][j];
+
+		std::sort(new_f[pointer_row], new_f[pointer_row] + remaining_facilities, std::greater<int>());
+
+		++pointer_row;
+	}
+
+	int* min_prod = new int[remaining_facilities];
+	std::fill(min_prod, min_prod + remaining_facilities, 0);
+
+	for(int i = 0; i < remaining_facilities; ++i)
+		for(int j = 0; j < remaining_facilities; ++j)
+			if(i != j) 
+				min_prod[i] += new_d[i][j]*new_f[i][j];
+
+	int** g = new int*[remaining_facilities];
+
+	for(int i = 0; i < remaining_facilities; ++i)
+	{
+		g[i] = new int[remaining_facilities];
+
+		for(int j = 0; j < remaining_facilities; ++j)
+		 	g[i][j] = new_f[i][i] * new_d[j][j] + min_prod[i];
+	}
+
 }
 
 int* QAPBranch::get_current_best_solution()
@@ -240,4 +269,7 @@ int QAPBranch::get_number_of_nodes()
 	return this->number_of_nodes;
 }
 
-bool greater_edge(Edge e1, Edge e2){return e2 < e1;}
+bool greater_edge(Edge e1, Edge e2)
+{
+	return e2 < e1;
+}
