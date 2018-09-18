@@ -30,6 +30,7 @@ int main()
 			std::cin >> f_mat[i][j];
 	}
 
+	printf("%s\n", "Running QAP..." );
 	QAPBranch qapBranch = QAPBranch( n,  d_mat,  f_mat);
 	qapBranch.solve();
 
@@ -37,5 +38,7 @@ int main()
 	std::cout << qapBranch.get_number_of_nodes() <<  "\n";
 	for(int i = 0; i < n; ++i) std::cout << sol[i] << " ";
 	std::cout << "\n";
+
+	printf("%s\n", "\nfinish." );
 	return 0;
 }

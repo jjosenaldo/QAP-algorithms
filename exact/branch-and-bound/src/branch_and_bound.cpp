@@ -95,12 +95,12 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 {
 	//std::cout << (++this->number_of_nodes) << "\n";
 	++this->number_of_nodes;
-	std::cout << "\nnode: #" << this->number_of_nodes << "\n";
-	std::cout << "current_cost: " << current_cost << std::endl;
-	std::cout << "best_cost: " << this->current_best_cost << std::endl;
-	std::cout << "solution:";
-	for(int i = 0; i < current_solution_size; ++i) std::cout << " " <<current_solution[i];
-	std::cout << "\n";
+	// std::cout << "\nnode: #" << this->number_of_nodes << "\n";
+	// std::cout << "current_cost: " << current_cost << std::endl;
+	// std::cout << "best_cost: " << this->current_best_cost << std::endl;
+	// std::cout << "solution:";
+	// for(int i = 0; i < current_solution_size; ++i) std::cout << " " <<current_solution[i];
+	// std::cout << "\n";
 
 	// full solution (leaf): check if it is better than the best already found
 	if(current_solution_size == n)
@@ -139,7 +139,7 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 		{
 			// analyze solution feasibility
 			lower_bound = this->lower_bound_for_partial_solution(current_solution_size, already_in_solution, current_cost);
-			std::cout << "lower_bound:" << lower_bound << std::endl;
+			// std::cout << "lower_bound:" << lower_bound << std::endl;
 			lower_bound_evaluated = true;
 		}
 
@@ -147,6 +147,9 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 		// branch must be pruned off
 		if(lower_bound_evaluated && lower_bound > current_best_cost)
 		{
+			// std::cout << "---------------------------------\n";
+			// std::cout << "NÃO ABRIU UM NÓ!!!\n";
+			// std::cout << "---------------------------------\n";
 			return;
 		}
 
@@ -190,9 +193,9 @@ void QAPBranch::generate_initial_solution()
 		this->current_best_solution[i] = i;
 
 	std::random_shuffle(this->current_best_solution, this->current_best_solution + this->n);
-	for(int i = 0; i < this->n; ++i)
-		std::cout << this->current_best_solution[i] << " ";
-	std::cout << std::endl;
+	// for(int i = 0; i < this->n; ++i)
+	// 	std::cout << this->current_best_solution[i] << " ";
+	// std::cout << std::endl;
 
 	for(int i = 0; i < this->n; ++i)
 	{
@@ -266,7 +269,7 @@ int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, bool*
 	}
 
 	int lap = hungarian_least_cost(remaining_facilities, g);
-	std::cout << "lap: " << lap << std::endl;
+	// std::cout << "lap: " << lap << std::endl;
 
 	return current_partial_cost + lap;
 }
