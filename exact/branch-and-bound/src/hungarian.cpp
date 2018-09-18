@@ -1,190 +1,265 @@
-#include "hungarian.h"
+#include <bits/stdc++.h>
+using namespace std;
 
-/**
- * @brief      main function of the algorithm.
- * 
- *             According to this step we need to check whether
- *             the matching is already perfect, if the answer is
- *             positive we just stop algorithm, otherwise we need
- *             to clear S, T and alternating tree and then find
- *             some exposed vertex from the X part. Also, in this
- *             step we are initializing a slack array.
- */
-void augment ()
+#define INF 1e8
+
+int N;
+int max_match;
+int* label_x;
+int* label_y;
+int* match_xy;
+int* match_yx;
+bool* S;
+bool* T;
+int* slack;
+int* slack_causer;
+int* prev_on_tree;
+
+void add_to_tree(int current, int prev, int** cost)
 {
-	
-	//check wether matching is already perfect
-	if (max_match == facilities) return;
+	int slack_for_new_node;
 
-	//the root vertex
-	int root;
+	// adds the current vertex to S
+	S[current] = true;
 
-	// queue for bfs
-	int queue_bfs[max_number_of_vertices];
+	prev_on_tree[current] = prev;
 
-	// write and read
-	int write[0], read[0]; 
-
-	memset(S, false, sizeof(S)); // init set S
-	memset(T, false, sizeof(T)); // init set T
-	memset(prev, -1, sizeof(prev)) //init set prev - for the alternating tree
-
-	for ( int i=0; i < facilities; i++)
+	// update slacks since we added a vertex to S
+	for(int i = 0; i < N; ++i)
 	{
-		if (xy_match[i] == -1)
-		{
-			queue_bfs[write++] == root = i;
-			prev[i] = -2;
-			S[x] = true;
-			break;
-		}
+		slack_for_new_node = label_x[current] + label_y[i] - cost[current][i];
 
-		//initializing slack array
-		for (int j=0; j < facilities; j++)
+		if(slack_for_new_node < slack[i])
 		{
-			slack[j] = labels_x[root] + labels_y[j] - matrix_cost[root][j];
-			slackx[j] = root;
+			slack[i] = slack_for_new_node;
+			slack_causer[i] = current;
 		}
 	}
+}
 
-	int x;
+void init_labels(int** cost)
+{
+	fill(label_y, label_y+N, 0);
+	fill(label_x, label_x+N, -INF);
 
-	while (true)
-	{
-		//building tree with bfs cycle
-		while (read < write)
-		{
-			// current vertex from X part
-			x = queue_bfs[read++]; 
+	for(int i = 0; i < N; ++i)
+		for(int j = 0; j < N; ++j)
+			label_x[i] = max(label_x[i], cost[i][j]);
 
-			//iterate through all edges in equality graph 
-			for (int i=0; i < facilities; i++)
-			{
-				if ((matrix_cost[x][i] == (labels_x[x] + labels_y[i])) && !T[i])
-				{
-					if (yx_match[i] == -1) break;
-					T[i] = true;
-					
-					// add vertex yx[y], which is matched
-					// with y, to the queue
-					queue_bfs[write++] = yx_match[i];
-				
-					//add edges (x,y) and (y,yx[y]) to the tree
-					add_to_tree(yx_match[y], x); 
-				}
-				if (i < facilities) break; //augmenting path found!
-			}
-			
-			if (i < facilities) break; //augmenting path found!
-			update_labels(); //augmenting path not found, so improve labeling
-			write = read = 0;
-
-			for (int i=0; i < facilities; i++)
-			{
-				/**
-				 * in this cycle we add edges that were added to the equality graph as a
-				 * result of improving the labeling, we add edge (slackx[y], y) to the tree if
-				 * and only if !T[y] && slack[y] == 0, also with this edge we add another one
-				 * (y, yx[y]) or augment the matching, if y was exposed
-				 */
-				
-				if (!T[i] && slack[i] == 0)
-				{
-					//exposed vertex in Y found - augmenting path exists!
-					if (yx_match[i] == -1)
-					{
-						x = slack_x[i];
-						break;
-					} else 
-					{
-						T[i] = true; //else just add y to T
-						if (!S[yx_match[i]])
-						{
-							//add vertex yx[y], which is matched with
-							//y, to the queue /and add edges (x,y) and (y,
-							//yx[y]) to the tree
-							queue_dfs[write++] = yx[i];
-							add_to_tree(yx_match[i], slack_x[i])
-
-						}
-					}
-				}
-				if (i < facilities) break; //augmenting path found!
-			}
-			if (i < facilities) //we found augmenting path!
-			{
-				max_match++; //increment matching
-				//in this cycle we inverse edges along augmenting path
-				for (int cx = x, cy = y, ty; cx != -2; cx = prev[cx], cy = ty)
-				{
-					ty = xy_match[cx];
-					yx_match[cy] = cx;
-					xy_match[cx] = cy;
-				}
-				augment(); //recall function, go to step 1 of the algorithm
-			}
-		}
-	}
-
+	fill(match_xy, match_xy+N, -1);
+	fill(match_yx, match_yx+N, -1);
 }
 
 void update_labels()
 {
 	int delta = INF;
 
-	// calculate delta using slack
-	for (int i=0; i < facilities; i++)
-		if (!T[i]) delta = std::min(delta, slack[i]);
+	// find delta
+	for(int i = 0; i < N; ++i)
+	{
+		// "i" is in X\T
+		if(!T[i])
+			delta = min(delta, slack[i]);
+	}
 
-	// update X labels
-	for (int j=0; j < facilities; j++)
-		if (S[j]) labels_x[j] -= delta;
+	// update labels
+	for(int i = 0; i < N; ++i)
+	{
+		if(S[i])
+			label_x[i] -= delta; 
 
-	// update Y labels
-	for (int i=0; i < facilities; i++)
-		if (T[i]) labels_y += delta;
+		if(T[i])
+			label_y[i] += delta;
+	}
 
-	// update slack array
-	for (int i=0; i < facilities; i++)
-		if (!T[i]) slack[i] -= delta;
-
+	// update slacks
+	for(int i = 0; i < N; ++i)
+	{
+		if(!T[i])
+			slack[i] -= delta;
+	}
 }
 
-void add_to_tree (int x, int prev_x)
+void augment(int** cost)
 {
-	S[x] = true; // add x to S
-	prev[x] = prev_x; // we need this when augmenting
+	if(max_match == N)
+		return;
 
-	//update slacks, because we add new vertex to S
-	for (int i = 0; i < facilities; i++) 
+	// queue for BFS
+	int* bfs_queue = new int[N];
+
+	// index for writing in the BFS queue
+	int queue_write = 0;
+
+	// index for reading in the BFS queue
+	int queue_reading = 0;
+
+	// clear S and T
+	fill(S, S+N, false);
+	fill(T, T+N, false);
+
+	int root;
+
+	// clear alternating tree
+	fill(prev_on_tree, prev_on_tree+N, -1);
+
+	// looks for an exposed vertex
+	for(int i = 0; i < N; ++i)
 	{
-		if (labels_x[x] + labels_y[i] - matrix_cost[x][i] < slack[i])
+		//exposed vertex in X: add it to S, make it the root of the tree, add it to the BFS queue
+		if(match_xy[i] == -1)
 		{
-			slack[i] = labels_x[x] + labels_y[i] - matrix_cost[x][i];
-			slack_x[i] = x;
+			bfs_queue[queue_write++] = i;
+			root = i;
+			prev_on_tree[root] = -2;
+			S[root] = true;
+			break;
 		}
 	}
 
+	// update slacks (X = {x}, so it's the slack causer for everyone in Y)
+	for(int i = 0; i < N; ++i)
+	{
+		slack[i] = label_x[root] + label_y[i] - cost[root][i];
+		slack_causer[i] = root;
+	}
+
+	int current;
+	int i;
+
+	while(true)
+	{
+		// build tree with bfs
+		while(queue_reading < queue_write)
+		{
+			current = bfs_queue[queue_reading++];
+
+			// iterates over the (current,i) edges of the equality subgraph that aren't in T
+			for(i = 0; i < N; ++i)
+
+				if(cost[current][i] == label_x[current] + label_y[i] && !T[i])
+				{
+					// "i" vertex is exposed on Y: an augmenting path was found
+					if(match_yx[i] == -1)
+						break;
+
+					// adds "i" to T
+					T[i] = true;
+
+					// adds the match of "i" to the queue
+					bfs_queue[queue_write++] = match_yx[i];
+
+					// adds the edges (current,i) and (i,match_yx[i]) to the alternating tree
+					add_to_tree(match_yx[i], current, cost);
+				}
+	
+			// augmenting path found				
+			if(i < N) 
+				break;
+		}
+
+		// augmenting path found
+		if(i < N)
+			break;
+
+		// improve the labels
+		update_labels();
+
+		queue_reading = 0;
+		queue_write = 0;
+
+		for(i = 0; i < N; ++i)
+			// edges added to the equality subgraph after the label improving
+			if(!T[i] && slack[i] == 0)
+			{
+				// "i" is exposed in Y: augmenting path found
+				if(match_yx[i] == -1)
+				{
+					current = slack_causer[i];
+					break;
+				}
+
+				// "i" is not exposed
+				else
+				{
+					// adds "i" to T
+					T[i] = true;
+
+					if(!S[ match_yx[i] ])
+					{
+						// adds the match of "i" to the queue
+						bfs_queue[queue_write++] = match_yx[i];
+
+						add_to_tree(match_yx[i], slack_causer[i], cost);
+					}
+				}	
+			}
+
+		// augmenting path found
+		if(i < N)
+			break;
+	}
+
+	// augmenting path found
+	if(i < N)
+	{
+		// increment the matching in one edge
+		++max_match;
+
+		// invert the edges along the path
+		for (int cx = current, cy = i, ty; cx != -2; cx = prev_on_tree[cx], cy = ty)
+		{
+			ty = match_xy[cx];
+			match_yx[cy] = cx;
+			match_xy[cx] = cy;
+		}
+
+		// try to augment again
+		augment(cost);
+	}
 }
 
-int hungarian()
+int hungarian_least_cost(int n, int** matrix)
 {
-	int ret = 0; //weight of the optimal matching
-	max_match = 0; //number of vertices in current matching
-	memset(xy, -1, sizeof(xy));
-	memset(yx, -1, sizeof(yx));
-	init_labels(); //step 0
-	augment(); //steps 1-3
-	for (int x = 0; x < n; x++) //forming answer there
-		ret += matrix_cost[x][xy[x]];
-	return ret;
-}
+	N = n;
+	max_match = 0;
+	label_x = new int[n];
+	label_y = new int[n];
+	match_xy = new int[n];
+	match_yx = new int[n];
+	S = new bool[n];
+	T = new bool[n];
+	slack = new int[n];
+	slack_causer = new int[n];
+	prev_on_tree = new int[n];
 
-void init_labels()
-{
-	memset(labels_x, 0, sizeof(labels_x));
-	memset(labels_y, 0, sizeof(labels_y));
-	for (int x = 0; x < facilities; x++)
-		for (int y = 0; y < facilities; y++)
-			labels_x[x] = std::max(labels_x[x], matrix_cost[x][y]);
+	fill(match_xy, match_xy+N, -1);
+	fill(match_yx, match_yx+N, -1);
+
+	int maximum = -INF;
+	for(int i = 0; i < n; ++i)
+		maximum = std::max(*std::max_element(matrix[i], matrix[i]+n), maximum);
+
+	for(int i = 0; i < n; ++i)
+		for(int j = 0; j < n; ++j)
+				matrix[i][j] = maximum - matrix[i][j];
+
+	cout << "LAP MATRIX" << endl;
+	for(int i = 0; i < n; ++i) {
+		for(int j = 0; j < n; ++j) cout << matrix[i][j] << " ";
+		cout << endl;
+	}
+
+	init_labels(matrix);
+	augment(matrix);
+
+	int cost = 0;
+
+	// print matching
+	for(int i = 0; i < N; ++i)
+		cost += -(matrix[i][match_xy[i]]-maximum);
+		//cout << "(" << i << ", " << match_xy[i] << ")\n";
+
+	return cost;
+
 }

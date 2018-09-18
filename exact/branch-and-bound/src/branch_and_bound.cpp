@@ -3,6 +3,7 @@
 #include <iostream> // std::cout 
 #include <functional> // std::greater<int>
 #include "branch_and_bound.h"
+#include "hungarian.h"
 
 QAPBranch::QAPBranch(int n, int** d_mat, int** f_mat)
 {
@@ -94,7 +95,7 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 {
 	//std::cout << (++this->number_of_nodes) << "\n";
 	++this->number_of_nodes;
-	std::cout << "node: #" << this->number_of_nodes << "\n";
+	std::cout << "\nnode: #" << this->number_of_nodes << "\n";
 	std::cout << "current_cost: " << current_cost << std::endl;
 	std::cout << "best_cost: " << this->current_best_cost << std::endl;
 	std::cout << "solution:";
@@ -131,13 +132,20 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 	// non-empty partial solution
 	else
 	{
-		// analyze solution feasibility
-		int lower_bound = this->lower_bound_for_partial_solution(current_solution_size, current_solution, already_in_solution, current_cost);
-		std::cout << "lower_bound:" << lower_bound << std::endl;
+		int lower_bound;
+		bool lower_bound_evaluated = false;
+
+		if(current_solution_size < this->n-1)
+		{
+			// analyze solution feasibility
+			lower_bound = this->lower_bound_for_partial_solution(current_solution_size, already_in_solution, current_cost);
+			std::cout << "lower_bound:" << lower_bound << std::endl;
+			lower_bound_evaluated = true;
+		}
 
 		// current solution can't get better than the best known so far: its
 		// branch must be pruned off
-		if(lower_bound > current_best_cost)
+		if(lower_bound_evaluated && lower_bound > current_best_cost)
 		{
 			return;
 		}
@@ -194,10 +202,10 @@ void QAPBranch::generate_initial_solution()
 			*this->d_mat[i][j];
 		}
 	}
-}
+}	
 
 // TO-DO
-int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, int* current_solution, bool* already_in_solution, int current_partial_cost)
+int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, bool* already_in_solution, int current_partial_cost)
 {	
 	int remaining_facilities = this->n - partial_solution_size;
 	int** new_f = new int*[remaining_facilities];
@@ -205,31 +213,37 @@ int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, int* 
 
 	for(int i = 0; i < remaining_facilities; ++i)
 	{
-		new_f[i] = new int[remaining_facilities];
-		new_d[i] = new int[remaining_facilities];
+		new_f[i] = new int[remaining_facilities-1];
+		new_d[i] = new int[remaining_facilities-1];
 	}
 
+	int pointer_row = 0, pointer_col;
 	for(int i = partial_solution_size; i < this->n; ++i)
 	{
-		for(int j = partial_solution_size; j < this->n; ++j)
-			new_d[i-partial_solution_size][j-partial_solution_size] = this->d_mat[i][j];
+		pointer_col = 0;
 
-		std::sort(new_d[i-partial_solution_size], new_d[i-partial_solution_size] + remaining_facilities);
+		for(int j = partial_solution_size; j < this->n; ++j)
+			if(i != j)
+				new_d[pointer_row][pointer_col++] = this->d_mat[i][j];
+
+		std::sort(new_d[i-partial_solution_size], new_d[i-partial_solution_size] + remaining_facilities -1);
+
+		++pointer_row;
 	}
 
-	int pointer_row = 0;
+	pointer_row = 0;
 	for(int i = 0; i < this->n; ++i)
 	{
 		if(already_in_solution[i])
 			continue;
 
-		int pointer_col = 0;
+		pointer_col = 0;
 
 		for(int j = 0; j < this->n; ++j)
-			if(!already_in_solution[j])
+			if(i != j && !already_in_solution[j])
 				new_f[pointer_row][pointer_col++] = this->f_mat[i][j];
 
-		std::sort(new_f[pointer_row], new_f[pointer_row] + remaining_facilities, std::greater<int>());
+		std::sort(new_f[pointer_row], new_f[pointer_row] + remaining_facilities-1, std::greater<int>());
 
 		++pointer_row;
 	}
@@ -238,9 +252,8 @@ int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, int* 
 	std::fill(min_prod, min_prod + remaining_facilities, 0);
 
 	for(int i = 0; i < remaining_facilities; ++i)
-		for(int j = 0; j < remaining_facilities; ++j)
-			if(i != j) 
-				min_prod[i] += new_d[i][j]*new_f[i][j];
+		for(int j = 0; j < remaining_facilities-1; ++j)
+			min_prod[i] += new_d[i][j]*new_f[i][j];
 
 	int** g = new int*[remaining_facilities];
 
@@ -252,6 +265,10 @@ int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, int* 
 		 	g[i][j] = new_f[i][i] * new_d[j][j] + min_prod[i];
 	}
 
+	int lap = hungarian_least_cost(remaining_facilities, g);
+	std::cout << "lap: " << lap << std::endl;
+
+	return current_partial_cost + lap;
 }
 
 int* QAPBranch::get_current_best_solution()

@@ -1,738 +1,412 @@
-2 10 7 3 1 11 5 4 0 8 9 6 
+2 0 1 3 
+
 node: #1
 current_cost: 0
-best_cost: 726
+best_cost: 1046
 solution:
+
 node: #2
 current_cost: 0
-best_cost: 726
+best_cost: 1046
 solution: 0
-lower_bound:756
+LAP MATRIX
+0 0 75 
+1 1 76 
+127 127 127 
+lap: 319
+lower_bound:319
+
 node: #3
-current_cost: 0
-best_cost: 726
-solution: 1
-lower_bound:788
+current_cost: 336
+best_cost: 1046
+solution: 0 1
+LAP MATRIX
+0 23 
+23 23 
+lap: 46
+lower_bound:382
+
 node: #4
-current_cost: 0
-best_cost: 726
-solution: 2
-lower_bound:776
+current_cost: 836
+best_cost: 1046
+solution: 0 1 2
+
 node: #5
-current_cost: 0
-best_cost: 726
-solution: 3
-lower_bound:786
+current_cost: 982
+best_cost: 1046
+solution: 0 1 2 3
+
 node: #6
-current_cost: 0
-best_cost: 726
-solution: 4
-lower_bound:750
+current_cost: 558
+best_cost: 982
+solution: 0 1 3
+
 node: #7
-current_cost: 0
-best_cost: 726
-solution: 5
-lower_bound:766
+current_cost: 884
+best_cost: 982
+solution: 0 1 3 2
+
 node: #8
-current_cost: 0
-best_cost: 726
-solution: 6
-lower_bound:726
-node: #9
-current_cost: 0
-best_cost: 726
-solution: 6 0
-lower_bound:826
-node: #10
-current_cost: 4
-best_cost: 726
-solution: 6 1
-lower_bound:822
-node: #11
-current_cost: 0
-best_cost: 726
-solution: 6 2
-lower_bound:814
-node: #12
-current_cost: 4
-best_cost: 726
-solution: 6 3
-lower_bound:762
-node: #13
-current_cost: 0
-best_cost: 726
-solution: 6 4
-lower_bound:832
-node: #14
-current_cost: 10
-best_cost: 726
-solution: 6 5
-lower_bound:790
-node: #15
-current_cost: 20
-best_cost: 726
-solution: 6 7
-lower_bound:666
-node: #16
-current_cost: 32
-best_cost: 726
-solution: 6 7 0
-lower_bound:802
-node: #17
-current_cost: 28
-best_cost: 726
-solution: 6 7 1
-lower_bound:798
-node: #18
-current_cost: 30
-best_cost: 726
-solution: 6 7 2
-lower_bound:758
-node: #19
-current_cost: 48
-best_cost: 726
-solution: 6 7 3
-lower_bound:666
-node: #20
-current_cost: 80
-best_cost: 726
-solution: 6 7 3 0
-lower_bound:666
-node: #21
-current_cost: 124
-best_cost: 726
-solution: 6 7 3 0 1
-lower_bound:746
-node: #22
-current_cost: 116
-best_cost: 726
-solution: 6 7 3 0 2
-lower_bound:694
-node: #23
-current_cost: 160
-best_cost: 726
-solution: 6 7 3 0 2 1
-lower_bound:740
-node: #24
-current_cost: 142
-best_cost: 726
-solution: 6 7 3 0 2 4
-lower_bound:702
-node: #25
-current_cost: 190
-best_cost: 726
-solution: 6 7 3 0 2 4 1
-lower_bound:748
-node: #26
-current_cost: 200
-best_cost: 726
-solution: 6 7 3 0 2 4 5
-lower_bound:712
-node: #27
-current_cost: 256
-best_cost: 726
-solution: 6 7 3 0 2 4 5 1
-lower_bound:714
-node: #28
-current_cost: 344
-best_cost: 726
-solution: 6 7 3 0 2 4 5 1 8
-lower_bound:714
-node: #29
-current_cost: 432
-best_cost: 726
-solution: 6 7 3 0 2 4 5 1 8 9
-lower_bound:736
-node: #30
-current_cost: 466
-best_cost: 726
-solution: 6 7 3 0 2 4 5 1 8 10
-lower_bound:714
-node: #31
-current_cost: 560
-best_cost: 726
-solution: 6 7 3 0 2 4 5 1 8 10 9
-lower_bound:714
-node: #32
-current_cost: 714
-best_cost: 726
-solution: 6 7 3 0 2 4 5 1 8 10 9 11
-node: #33
-current_cost: 576
-best_cost: 714
-solution: 6 7 3 0 2 4 5 1 8 10 11
-lower_bound:696
-node: #34
-current_cost: 696
-best_cost: 714
-solution: 6 7 3 0 2 4 5 1 8 10 11 9
-node: #35
-current_cost: 430
-best_cost: 696
-solution: 6 7 3 0 2 4 5 1 8 11
-lower_bound:688
-node: #36
-current_cost: 514
-best_cost: 696
-solution: 6 7 3 0 2 4 5 1 8 11 9
-lower_bound:734
-node: #37
-current_cost: 578
-best_cost: 696
-solution: 6 7 3 0 2 4 5 1 8 11 10
-lower_bound:688
-node: #38
-current_cost: 688
-best_cost: 696
-solution: 6 7 3 0 2 4 5 1 8 11 10 9
-node: #39
-current_cost: 368
-best_cost: 688
-solution: 6 7 3 0 2 4 5 1 9
-lower_bound:714
-node: #40
-current_cost: 380
-best_cost: 688
-solution: 6 7 3 0 2 4 5 1 10
-lower_bound:736
-node: #41
-current_cost: 326
-best_cost: 688
-solution: 6 7 3 0 2 4 5 1 11
-lower_bound:712
-node: #42
-current_cost: 276
-best_cost: 688
-solution: 6 7 3 0 2 4 5 8
-lower_bound:768
-node: #43
-current_cost: 260
-best_cost: 688
-solution: 6 7 3 0 2 4 5 9
-lower_bound:712
-node: #44
 current_cost: 300
-best_cost: 688
-solution: 6 7 3 0 2 4 5 10
-lower_bound:730
-node: #45
-current_cost: 262
-best_cost: 688
-solution: 6 7 3 0 2 4 5 11
-lower_bound:724
-node: #46
-current_cost: 200
-best_cost: 688
-solution: 6 7 3 0 2 4 8
-lower_bound:770
-node: #47
-current_cost: 176
-best_cost: 688
-solution: 6 7 3 0 2 4 9
-lower_bound:738
-node: #48
-current_cost: 204
-best_cost: 688
-solution: 6 7 3 0 2 4 10
-lower_bound:702
-node: #49
-current_cost: 184
-best_cost: 688
-solution: 6 7 3 0 2 4 11
-lower_bound:732
-node: #50
-current_cost: 146
-best_cost: 688
-solution: 6 7 3 0 2 5
-lower_bound:678
-node: #51
-current_cost: 194
-best_cost: 688
-solution: 6 7 3 0 2 5 1
-lower_bound:704
-node: #52
-current_cost: 180
-best_cost: 688
-solution: 6 7 3 0 2 5 4
-lower_bound:690
-node: #53
-current_cost: 206
-best_cost: 688
-solution: 6 7 3 0 2 5 8
-lower_bound:746
-node: #54
-current_cost: 180
-best_cost: 688
-solution: 6 7 3 0 2 5 9
-lower_bound:702
-node: #55
-current_cost: 214
-best_cost: 688
-solution: 6 7 3 0 2 5 10
-lower_bound:678
-node: #56
-current_cost: 266
-best_cost: 688
-solution: 6 7 3 0 2 5 10 1
-lower_bound:736
-node: #57
-current_cost: 278
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4
-lower_bound:682
-node: #58
-current_cost: 366
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4 1
-lower_bound:716
-node: #59
-current_cost: 392
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4 8
-lower_bound:714
-node: #60
-current_cost: 390
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4 9
-lower_bound:714
-node: #61
-current_cost: 364
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4 11
-lower_bound:682
-node: #62
-current_cost: 444
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4 11 1
-lower_bound:718
-node: #63
-current_cost: 492
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4 11 8
-lower_bound:682
-node: #64
-current_cost: 580
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4 11 8 1
-lower_bound:690
-node: #65
-current_cost: 576
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4 11 8 9
-lower_bound:682
-node: #66
-current_cost: 682
-best_cost: 688
-solution: 6 7 3 0 2 5 10 4 11 8 9 1
-node: #67
-current_cost: 452
-best_cost: 682
-solution: 6 7 3 0 2 5 10 4 11 9
-lower_bound:706
-node: #68
-current_cost: 312
-best_cost: 682
-solution: 6 7 3 0 2 5 10 8
-lower_bound:710
-node: #69
-current_cost: 274
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9
-lower_bound:678
-node: #70
-current_cost: 386
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 1
-lower_bound:728
-node: #71
-current_cost: 410
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 4
-lower_bound:722
-node: #72
-current_cost: 388
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 8
-lower_bound:706
-node: #73
-current_cost: 352
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 11
-lower_bound:678
-node: #74
-current_cost: 450
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 11 1
-lower_bound:726
-node: #75
-current_cost: 446
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 11 4
-lower_bound:694
-node: #76
-current_cost: 480
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 11 8
-lower_bound:678
-node: #77
-current_cost: 580
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 11 8 1
-lower_bound:698
-node: #78
-current_cost: 572
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 11 8 4
-lower_bound:678
-node: #79
-current_cost: 678
-best_cost: 682
-solution: 6 7 3 0 2 5 10 9 11 8 4 1
-node: #80
-current_cost: 276
-best_cost: 678
-solution: 6 7 3 0 2 5 10 11
-lower_bound:734
-node: #81
-current_cost: 186
-best_cost: 678
-solution: 6 7 3 0 2 5 11
-lower_bound:692
-node: #82
-current_cost: 158
-best_cost: 678
-solution: 6 7 3 0 2 8
-lower_bound:672
-node: #83
-current_cost: 210
-best_cost: 678
-solution: 6 7 3 0 2 8 1
-lower_bound:728
-node: #84
-current_cost: 172
-best_cost: 678
-solution: 6 7 3 0 2 8 4
-lower_bound:682
-node: #85
-current_cost: 198
-best_cost: 678
-solution: 6 7 3 0 2 8 5
-lower_bound:680
-node: #86
-current_cost: 182
-best_cost: 678
-solution: 6 7 3 0 2 8 9
-lower_bound:694
-node: #87
-current_cost: 238
-best_cost: 678
-solution: 6 7 3 0 2 8 10
-lower_bound:672
-node: #88
-current_cost: 298
-best_cost: 678
-solution: 6 7 3 0 2 8 10 1
-lower_bound:702
-node: #89
-current_cost: 262
-best_cost: 678
-solution: 6 7 3 0 2 8 10 4
-lower_bound:696
-node: #90
-current_cost: 304
-best_cost: 678
-solution: 6 7 3 0 2 8 10 5
-lower_bound:710
-node: #91
-current_cost: 278
-best_cost: 678
-solution: 6 7 3 0 2 8 10 9
-lower_bound:672
-node: #92
-current_cost: 398
-best_cost: 678
-solution: 6 7 3 0 2 8 10 9 1
-lower_bound:722
-node: #93
-current_cost: 374
-best_cost: 678
-solution: 6 7 3 0 2 8 10 9 4
-lower_bound:716
-node: #94
-current_cost: 388
-best_cost: 678
-solution: 6 7 3 0 2 8 10 9 5
-lower_bound:706
-node: #95
-current_cost: 396
-best_cost: 678
-solution: 6 7 3 0 2 8 10 9 11
-lower_bound:672
-node: #96
-current_cost: 498
-best_cost: 678
-solution: 6 7 3 0 2 8 10 9 11 1
-lower_bound:670
-node: #97
-current_cost: 554
-best_cost: 678
-solution: 6 7 3 0 2 8 10 9 11 1 4
-lower_bound:684
-node: #98
+best_cost: 884
+solution: 0 2
+LAP MATRIX
+0 4 
+4 4 
+lap: 8
+lower_bound:308
+
+node: #9
+current_cost: 842
+best_cost: 884
+solution: 0 2 1
+
+node: #10
+current_cost: 1178
+best_cost: 884
+solution: 0 2 1 3
+
+node: #11
+current_cost: 712
+best_cost: 884
+solution: 0 2 3
+
+node: #12
+current_cost: 1012
+best_cost: 884
+solution: 0 2 3 1
+
+node: #13
+current_cost: 156
+best_cost: 884
+solution: 0 3
+LAP MATRIX
+0 15 
+15 15 
+lap: 30
+lower_bound:186
+
+node: #14
 current_cost: 588
-best_cost: 678
-solution: 6 7 3 0 2 8 10 9 11 1 5
-lower_bound:670
-node: #99
-current_cost: 670
-best_cost: 678
-solution: 6 7 3 0 2 8 10 9 11 1 5 4
-node: #100
-current_cost: 470
-best_cost: 670
-solution: 6 7 3 0 2 8 10 9 11 4
-lower_bound:686
-node: #101
-current_cost: 490
-best_cost: 670
-solution: 6 7 3 0 2 8 10 9 11 5
-lower_bound:672
-node: #102
-current_cost: 340
-best_cost: 670
-solution: 6 7 3 0 2 8 10 11
-lower_bound:668
-node: #103
-current_cost: 420
-best_cost: 670
-solution: 6 7 3 0 2 8 10 11 1
-lower_bound:668
-node: #104
-current_cost: 472
-best_cost: 670
-solution: 6 7 3 0 2 8 10 11 1 4
-lower_bound:686
-node: #105
+best_cost: 884
+solution: 0 3 1
+
+node: #15
+current_cost: 994
+best_cost: 884
+solution: 0 3 1 2
+
+node: #16
+current_cost: 736
+best_cost: 884
+solution: 0 3 2
+
+node: #17
+current_cost: 926
+best_cost: 884
+solution: 0 3 2 1
+
+node: #18
+current_cost: 0
+best_cost: 884
+solution: 1
+LAP MATRIX
+0 0 125 
+73 73 188 
+227 227 227 
+lap: 559
+lower_bound:559
+
+node: #19
+current_cost: 336
+best_cost: 884
+solution: 1 0
+LAP MATRIX
+0 23 
+23 23 
+lap: 46
+lower_bound:382
+
+node: #20
+current_cost: 796
+best_cost: 884
+solution: 1 0 2
+
+node: #21
+current_cost: 1014
+best_cost: 884
+solution: 1 0 2 3
+
+node: #22
+current_cost: 522
+best_cost: 884
+solution: 1 0 3
+
+node: #23
+current_cost: 928
+best_cost: 884
+solution: 1 0 3 2
+
+node: #24
+current_cost: 180
+best_cost: 884
+solution: 1 2
+LAP MATRIX
+0 13 
+13 13 
+lap: 26
+lower_bound:206
+
+node: #25
+current_cost: 822
+best_cost: 884
+solution: 1 2 0
+
+node: #26
+current_cost: 1140
+best_cost: 884
+solution: 1 2 0 3
+
+node: #27
+current_cost: 466
+best_cost: 884
+solution: 1 2 3
+
+node: #28
+current_cost: 904
+best_cost: 884
+solution: 1 2 3 0
+
+node: #29
+current_cost: 48
+best_cost: 884
+solution: 1 3
+LAP MATRIX
+0 25 
+25 25 
+lap: 50
+lower_bound:98
+
+node: #30
+current_cost: 570
+best_cost: 884
+solution: 1 3 0
+
+node: #31
+current_cost: 956
+best_cost: 884
+solution: 1 3 0 2
+
+node: #32
 current_cost: 488
-best_cost: 670
-solution: 6 7 3 0 2 8 10 11 1 5
-lower_bound:668
-node: #106
-current_cost: 548
-best_cost: 670
-solution: 6 7 3 0 2 8 10 11 1 5 4
-lower_bound:668
-node: #107
-current_cost: 668
-best_cost: 670
-solution: 6 7 3 0 2 8 10 11 1 5 4 9
-node: #108
-current_cost: 562
-best_cost: 668
-solution: 6 7 3 0 2 8 10 11 1 5 9
-lower_bound:664
-node: #109
-current_cost: 664
-best_cost: 668
-solution: 6 7 3 0 2 8 10 11 1 5 9 4
-node: #110
-current_cost: 478
-best_cost: 664
-solution: 6 7 3 0 2 8 10 11 1 9
-lower_bound:654
-node: #111
-current_cost: 528
-best_cost: 664
-solution: 6 7 3 0 2 8 10 11 1 9 4
-lower_bound:672
-node: #112
-current_cost: 562
-best_cost: 664
-solution: 6 7 3 0 2 8 10 11 1 9 5
-lower_bound:654
-node: #113
-current_cost: 654
-best_cost: 664
-solution: 6 7 3 0 2 8 10 11 1 9 5 4
-node: #114
-current_cost: 404
-best_cost: 654
-solution: 6 7 3 0 2 8 10 11 4
-lower_bound:680
-node: #115
-current_cost: 410
-best_cost: 654
-solution: 6 7 3 0 2 8 10 11 5
-lower_bound:670
-node: #116
-current_cost: 392
-best_cost: 654
-solution: 6 7 3 0 2 8 10 11 9
-lower_bound:668
-node: #117
-current_cost: 218
-best_cost: 654
-solution: 6 7 3 0 2 8 11
-lower_bound:684
-node: #118
-current_cost: 134
-best_cost: 654
-solution: 6 7 3 0 2 9
-lower_bound:702
-node: #119
-current_cost: 168
-best_cost: 654
-solution: 6 7 3 0 2 10
-lower_bound:694
-node: #120
-current_cost: 158
-best_cost: 654
-solution: 6 7 3 0 2 11
-lower_bound:710
-node: #121
-current_cost: 118
-best_cost: 654
-solution: 6 7 3 0 4
-lower_bound:702
-node: #122
-current_cost: 106
-best_cost: 654
-solution: 6 7 3 0 5
-lower_bound:682
-node: #123
-current_cost: 106
-best_cost: 654
-solution: 6 7 3 0 8
-lower_bound:714
-node: #124
-current_cost: 92
-best_cost: 654
-solution: 6 7 3 0 9
-lower_bound:666
-node: #125
-current_cost: 144
-best_cost: 654
-solution: 6 7 3 0 10
-lower_bound:740
-node: #126
-current_cost: 124
-best_cost: 654
-solution: 6 7 3 0 11
-lower_bound:728
-node: #127
-current_cost: 60
-best_cost: 654
-solution: 6 7 3 1
-lower_bound:742
-node: #128
-current_cost: 68
-best_cost: 654
-solution: 6 7 3 2
-lower_bound:702
-node: #129
-current_cost: 58
-best_cost: 654
-solution: 6 7 3 4
-lower_bound:760
-node: #130
-current_cost: 86
-best_cost: 654
-solution: 6 7 3 5
-lower_bound:784
-node: #131
-current_cost: 78
-best_cost: 654
-solution: 6 7 3 8
-lower_bound:796
-node: #132
-current_cost: 60
-best_cost: 654
-solution: 6 7 3 9
-lower_bound:764
-node: #133
-current_cost: 96
-best_cost: 654
-solution: 6 7 3 10
-lower_bound:750
-node: #134
-current_cost: 76
-best_cost: 654
-solution: 6 7 3 11
-lower_bound:676
-node: #135
-current_cost: 20
-best_cost: 654
-solution: 6 7 4
-lower_bound:772
-node: #136
-current_cost: 42
-best_cost: 654
-solution: 6 7 5
-lower_bound:740
-node: #137
-current_cost: 40
-best_cost: 654
-solution: 6 7 8
-lower_bound:710
-node: #138
-current_cost: 28
-best_cost: 654
-solution: 6 7 9
-lower_bound:800
-node: #139
-current_cost: 42
-best_cost: 654
-solution: 6 7 10
-lower_bound:730
-node: #140
-current_cost: 32
-best_cost: 654
-solution: 6 7 11
-lower_bound:796
-node: #141
-current_cost: 10
-best_cost: 654
-solution: 6 8
-lower_bound:726
-node: #142
-current_cost: 4
-best_cost: 654
-solution: 6 9
-lower_bound:844
-node: #143
-current_cost: 6
-best_cost: 654
-solution: 6 10
-lower_bound:736
-node: #144
-current_cost: 6
-best_cost: 654
-solution: 6 11
-lower_bound:822
-node: #145
+best_cost: 884
+solution: 1 3 2
+
+node: #33
+current_cost: 806
+best_cost: 884
+solution: 1 3 2 0
+
+node: #34
 current_cost: 0
-best_cost: 654
-solution: 7
-lower_bound:714
-node: #146
+best_cost: 806
+solution: 2
+LAP MATRIX
+0 0 140 
+290 290 310 
+321 321 321 
+lap: 323
+lower_bound:323
+
+node: #35
+current_cost: 300
+best_cost: 806
+solution: 2 0
+LAP MATRIX
+0 4 
+4 4 
+lap: 8
+lower_bound:308
+
+node: #36
+current_cost: 790
+best_cost: 806
+solution: 2 0 1
+
+node: #37
+current_cost: 1046
+best_cost: 806
+solution: 2 0 1 3
+
+node: #38
+current_cost: 752
+best_cost: 806
+solution: 2 0 3
+
+node: #39
+current_cost: 1156
+best_cost: 806
+solution: 2 0 3 1
+
+node: #40
+current_cost: 180
+best_cost: 806
+solution: 2 1
+LAP MATRIX
+0 13 
+13 13 
+lap: 26
+lower_bound:206
+
+node: #41
+current_cost: 810
+best_cost: 806
+solution: 2 1 0
+
+node: #42
+current_cost: 976
+best_cost: 806
+solution: 2 1 0 3
+
+node: #43
+current_cost: 542
+best_cost: 806
+solution: 2 1 3
+
+node: #44
+current_cost: 1004
+best_cost: 806
+solution: 2 1 3 0
+
+node: #45
+current_cost: 276
+best_cost: 806
+solution: 2 3
+LAP MATRIX
+0 28 
+28 28 
+lap: 56
+lower_bound:332
+
+node: #46
+current_cost: 756
+best_cost: 806
+solution: 2 3 0
+
+node: #47
+current_cost: 920
+best_cost: 806
+solution: 2 3 0 1
+
+node: #48
+current_cost: 526
+best_cost: 806
+solution: 2 3 1
+
+node: #49
+current_cost: 838
+best_cost: 806
+solution: 2 3 1 0
+
+node: #50
 current_cost: 0
-best_cost: 654
-solution: 8
-lower_bound:778
-node: #147
-current_cost: 0
-best_cost: 654
-solution: 9
-lower_bound:770
-node: #148
-current_cost: 0
-best_cost: 654
-solution: 10
-lower_bound:766
-node: #149
-current_cost: 0
-best_cost: 654
-solution: 11
-lower_bound:746
-149
-6 7 3 0 2 8 10 11 1 9 5 4 
+best_cost: 806
+solution: 3
+LAP MATRIX
+0 0 140 
+252 252 327 
+315 315 315 
+lap: 583
+lower_bound:583
+
+node: #51
+current_cost: 156
+best_cost: 806
+solution: 3 0
+LAP MATRIX
+0 15 
+15 15 
+lap: 30
+lower_bound:186
+
+node: #52
+current_cost: 492
+best_cost: 806
+solution: 3 0 1
+
+node: #53
+current_cost: 914
+best_cost: 806
+solution: 3 0 1 2
+
+node: #54
+current_cost: 728
+best_cost: 806
+solution: 3 0 2
+
+node: #55
+current_cost: 1110
+best_cost: 806
+solution: 3 0 2 1
+
+node: #56
+current_cost: 48
+best_cost: 806
+solution: 3 1
+LAP MATRIX
+0 25 
+25 25 
+lap: 50
+lower_bound:98
+
+node: #57
+current_cost: 510
+best_cost: 806
+solution: 3 1 0
+
+node: #58
+current_cost: 832
+best_cost: 806
+solution: 3 1 0 2
+
+node: #59
+current_cost: 520
+best_cost: 806
+solution: 3 1 2
+
+node: #60
+current_cost: 958
+best_cost: 806
+solution: 3 1 2 0
+
+node: #61
+current_cost: 276
+best_cost: 806
+solution: 3 2
+LAP MATRIX
+0 28 
+28 28 
+lap: 56
+lower_bound:332
+
+node: #62
+current_cost: 708
+best_cost: 806
+solution: 3 2 0
+
+node: #63
+current_cost: 960
+best_cost: 806
+solution: 3 2 0 1
+
+node: #64
+current_cost: 482
+best_cost: 806
+solution: 3 2 1
+
+node: #65
+current_cost: 890
+best_cost: 806
+solution: 3 2 1 0
+65
+1 3 2 0 

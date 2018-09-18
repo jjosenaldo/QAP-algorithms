@@ -88,7 +88,7 @@ private:
 	 *
 	 * @return     the lower bound of the current partial solution
 	 */
-	int lower_bound_for_partial_solution(int partial_solution_size, int* current_solution, bool* already_in_solution, int current_partial_cost);
+	int lower_bound_for_partial_solution(int partial_solution_size, bool* already_in_solution, int current_partial_cost);
 
 	/**
 	 * @brief      Explores a given node of the search tree, corresponding to a
