@@ -1,13 +1,15 @@
-PROG = bin/exe
 CC = g++
 CPPFLAGS = -Wall -W -ansi -pedantic -g -O0 -std=c++11
+BIN_DIR = bin
 INCLUDE_DIR = include
 SRC_DIR = src
 OBJS = hungarian.o branch_and_bound.o main.o
+OUT = qap.out
 
-$(PROG) : $(OBJS)
+$(OUT) : $(OBJS)
 	@echo "\nLinking...\n"
-	$(CC) $(OBJS) -o $(PROG) $(LIBS)
+	@if [ ! -d $(BIN_DIR) ]; then mkdir $(BIN_DIR); fi
+	$(CC) $(OBJS) -o $(BIN_DIR)/$(OUT) $(LIBS)
 	@echo "\nSuccessfully compiled!\n"
 
 branch_and_bound.o : $(INCLUDE_DIR)/branch_and_bound.h $(SRC_DIR)/branch_and_bound.cpp $(SRC_DIR)/hungarian.cpp
