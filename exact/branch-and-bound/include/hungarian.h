@@ -11,4 +11,8 @@ void augment();
 
 int hungarian_least_cost(int n, int** matrix);
 
+void deallocate_global_variables();
+
+void init_global_variables(int n);
+
 #endif 

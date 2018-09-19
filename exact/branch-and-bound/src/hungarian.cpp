@@ -1,6 +1,8 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <algorithm> // std::fill, std::max, std::max_element, std::matching
+#include <iostream> // std::cout, std::endl
+#include "hungarian.h"
 
+// infinity
 #define INF 1e8
 
 int N;
@@ -39,15 +41,15 @@ void add_to_tree(int current, int prev, int** cost)
 
 void init_labels(int** cost)
 {
-	fill(label_y, label_y+N, 0);
-	fill(label_x, label_x+N, -INF);
+	std::fill(label_y, label_y+N, 0);
+	std::fill(label_x, label_x+N, -INF);
 
 	for(int i = 0; i < N; ++i)
 		for(int j = 0; j < N; ++j)
-			label_x[i] = max(label_x[i], cost[i][j]);
+			label_x[i] = std::max(label_x[i], cost[i][j]);
 
-	fill(match_xy, match_xy+N, -1);
-	fill(match_yx, match_yx+N, -1);
+	std::fill(match_xy, match_xy+N, -1);
+	std::fill(match_yx, match_yx+N, -1);
 }
 
 void update_labels()
@@ -59,7 +61,7 @@ void update_labels()
 	{
 		// "i" is in X\T
 		if(!T[i])
-			delta = min(delta, slack[i]);
+			delta = std::min(delta, slack[i]);
 	}
 
 	// update labels
@@ -95,13 +97,13 @@ void augment(int** cost)
 	int queue_reading = 0;
 
 	// clear S and T
-	fill(S, S+N, false);
-	fill(T, T+N, false);
+	std::fill(S, S+N, false);
+	std::fill(T, T+N, false);
 
 	int root;
 
 	// clear alternating tree
-	fill(prev_on_tree, prev_on_tree+N, -1);
+	std::fill(prev_on_tree, prev_on_tree+N, -1);
 
 	// looks for an exposed vertex
 	for(int i = 0; i < N; ++i)
@@ -217,9 +219,62 @@ void augment(int** cost)
 		// try to augment again
 		augment(cost);
 	}
+
+	delete[] bfs_queue;
 }
 
 int hungarian_least_cost(int n, int** matrix)
+{
+	init_global_variables(n);
+
+	int maximum = -INF;
+	for(int i = 0; i < n; ++i)
+		maximum = std::max(*std::max_element(matrix[i], matrix[i]+n), maximum);
+
+	for(int i = 0; i < n; ++i)
+		for(int j = 0; j < n; ++j)
+				matrix[i][j] = maximum - matrix[i][j];
+
+	std::cout << "LAP MATRIX" << std::endl;
+	for(int i = 0; i < n; ++i) {
+		for(int j = 0; j < n; ++j) std::cout << matrix[i][j] << " ";
+		std::cout << std::endl;
+	}
+
+	init_labels(matrix);
+	augment(matrix);
+
+	int cost = 0;
+
+	// print matching
+	for(int i = 0; i < N; ++i)
+	{
+		cost += -(matrix[i][match_xy[i]]-maximum);
+		//cost += matrix[i][match_xy[i]];
+		std::cout << "(" << i << ", " << match_xy[i] << ")\n";
+		
+	}
+
+	deallocate_global_variables();	
+
+	return cost;
+
+}
+
+void deallocate_global_variables()
+{
+	delete[] label_x;
+	delete[] label_y;
+	delete[] match_xy;
+	delete[] match_yx;
+	delete[] S;
+	delete[] T;
+	delete[] slack;
+	delete[] slack_causer;
+	delete[] prev_on_tree;
+}
+
+void init_global_variables(int n)
 {
 	N = n;
 	max_match = 0;
@@ -233,33 +288,6 @@ int hungarian_least_cost(int n, int** matrix)
 	slack_causer = new int[n];
 	prev_on_tree = new int[n];
 
-	fill(match_xy, match_xy+N, -1);
-	fill(match_yx, match_yx+N, -1);
-
-	int maximum = -INF;
-	for(int i = 0; i < n; ++i)
-		maximum = std::max(*std::max_element(matrix[i], matrix[i]+n), maximum);
-
-	for(int i = 0; i < n; ++i)
-		for(int j = 0; j < n; ++j)
-				matrix[i][j] = maximum - matrix[i][j];
-
-	cout << "LAP MATRIX" << endl;
-	for(int i = 0; i < n; ++i) {
-		for(int j = 0; j < n; ++j) cout << matrix[i][j] << " ";
-		cout << endl;
-	}
-
-	init_labels(matrix);
-	augment(matrix);
-
-	int cost = 0;
-
-	// print matching
-	for(int i = 0; i < N; ++i)
-		cost += -(matrix[i][match_xy[i]]-maximum);
-		//cout << "(" << i << ", " << match_xy[i] << ")\n";
-
-	return cost;
-
+	std::fill(match_xy, match_xy+N, -1);
+	std::fill(match_yx, match_yx+N, -1);	
 }

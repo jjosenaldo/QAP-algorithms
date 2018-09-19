@@ -37,5 +37,15 @@ int main()
 	std::cout << qapBranch.get_number_of_nodes() <<  "\n";
 	for(int i = 0; i < n; ++i) std::cout << sol[i] << " ";
 	std::cout << "\n";
+
+	for(int i = 0; i < n; ++i)
+	{
+		delete[] d_mat[i];
+		delete[] f_mat[i];
+	}
+
+	delete[] d_mat;
+	delete[] f_mat;
+
 	return 0;
 }

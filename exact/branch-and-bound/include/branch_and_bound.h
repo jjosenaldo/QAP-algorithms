@@ -41,8 +41,6 @@ class QAPBranch
 {
 
 private:
-	std::pair<int, int>* f_pair_array;
-	std::pair<int, int>* d_pair_array;
 
 	int number_of_nodes;
 	/* Facility matrix as a vector of Edge */
@@ -106,13 +104,6 @@ private:
 	void recursive_search_tree_exploring(int current_cost, int current_solution_size, 
 										 int* current_solution, bool* already_in_solution);
 
-	/**
-	 * @brief      Converts the distance and facility matrices to vector of
-	 *             edges.
-	 */
-	void matrices_to_ordered_edge_vectors();
-
-	void matrices_to_pair_arrays();
 public:
 
 	/**

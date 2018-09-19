@@ -1,49 +1,54 @@
-2 0 1 3 
+3 2 0 1 
 
 node: #1
 current_cost: 0
-best_cost: 1046
+best_cost: 960
 solution:
 
 node: #2
 current_cost: 0
-best_cost: 1046
+best_cost: 960
 solution: 0
 LAP MATRIX
-0 0 75 
-1 1 76 
-127 127 127 
-lap: 319
-lower_bound:319
+0 0 99 
+1 1 99 
+52 52 99 
+(0, 2)
+(1, 0)
+(2, 1)
+lap: 145
+lower_bound:145
 
 node: #3
 current_cost: 336
-best_cost: 1046
+best_cost: 960
 solution: 0 1
 LAP MATRIX
 0 23 
-23 23 
-lap: 46
-lower_bound:382
+0 23 
+(0, 1)
+(1, 0)
+lap: 23
+lower_bound:359
 
 node: #4
 current_cost: 836
-best_cost: 1046
+best_cost: 960
 solution: 0 1 2
 
 node: #5
 current_cost: 982
-best_cost: 1046
+best_cost: 960
 solution: 0 1 2 3
 
 node: #6
 current_cost: 558
-best_cost: 982
+best_cost: 960
 solution: 0 1 3
 
 node: #7
 current_cost: 884
-best_cost: 982
+best_cost: 960
 solution: 0 1 3 2
 
 node: #8
@@ -52,9 +57,11 @@ best_cost: 884
 solution: 0 2
 LAP MATRIX
 0 4 
-4 4 
-lap: 8
-lower_bound:308
+0 4 
+(0, 1)
+(1, 0)
+lap: 4
+lower_bound:304
 
 node: #9
 current_cost: 842
@@ -82,9 +89,11 @@ best_cost: 884
 solution: 0 3
 LAP MATRIX
 0 15 
-15 15 
-lap: 30
-lower_bound:186
+0 15 
+(0, 1)
+(1, 0)
+lap: 15
+lower_bound:171
 
 node: #14
 current_cost: 588
@@ -111,11 +120,14 @@ current_cost: 0
 best_cost: 884
 solution: 1
 LAP MATRIX
-0 0 125 
-73 73 188 
-227 227 227 
-lap: 559
-lower_bound:559
+0 0 203 
+63 63 203 
+102 102 203 
+(0, 2)
+(1, 0)
+(2, 1)
+lap: 241
+lower_bound:241
 
 node: #19
 current_cost: 336
@@ -123,9 +135,11 @@ best_cost: 884
 solution: 1 0
 LAP MATRIX
 0 23 
-23 23 
-lap: 46
-lower_bound:382
+0 23 
+(0, 1)
+(1, 0)
+lap: 23
+lower_bound:359
 
 node: #20
 current_cost: 796
@@ -153,9 +167,11 @@ best_cost: 884
 solution: 1 2
 LAP MATRIX
 0 13 
-13 13 
-lap: 26
-lower_bound:206
+0 13 
+(0, 1)
+(1, 0)
+lap: 13
+lower_bound:193
 
 node: #25
 current_cost: 822
@@ -183,9 +199,11 @@ best_cost: 884
 solution: 1 3
 LAP MATRIX
 0 25 
-25 25 
-lap: 50
-lower_bound:98
+0 25 
+(0, 1)
+(1, 0)
+lap: 25
+lower_bound:73
 
 node: #30
 current_cost: 570
@@ -212,11 +230,14 @@ current_cost: 0
 best_cost: 806
 solution: 2
 LAP MATRIX
-0 0 140 
-290 290 310 
-321 321 321 
-lap: 323
-lower_bound:323
+0 0 218 
+170 170 218 
+181 181 119 
+(0, 2)
+(1, 0)
+(2, 1)
+lap: 85
+lower_bound:85
 
 node: #35
 current_cost: 300
@@ -224,9 +245,11 @@ best_cost: 806
 solution: 2 0
 LAP MATRIX
 0 4 
-4 4 
-lap: 8
-lower_bound:308
+0 4 
+(0, 1)
+(1, 0)
+lap: 4
+lower_bound:304
 
 node: #36
 current_cost: 790
@@ -254,9 +277,11 @@ best_cost: 806
 solution: 2 1
 LAP MATRIX
 0 13 
-13 13 
-lap: 26
-lower_bound:206
+0 13 
+(0, 1)
+(1, 0)
+lap: 13
+lower_bound:193
 
 node: #41
 current_cost: 810
@@ -284,9 +309,11 @@ best_cost: 806
 solution: 2 3
 LAP MATRIX
 0 28 
-28 28 
-lap: 56
-lower_bound:332
+0 28 
+(0, 1)
+(1, 0)
+lap: 28
+lower_bound:304
 
 node: #46
 current_cost: 756
@@ -313,11 +340,14 @@ current_cost: 0
 best_cost: 806
 solution: 3
 LAP MATRIX
-0 0 140 
-252 252 327 
-315 315 315 
-lap: 583
-lower_bound:583
+32619774 32619774 32620064 
+32619961 32619961 0 
+32619949 32619949 32619861 
+(0, 2)
+(1, 0)
+(2, 1)
+lap: 218
+lower_bound:218
 
 node: #51
 current_cost: 156
@@ -325,9 +355,11 @@ best_cost: 806
 solution: 3 0
 LAP MATRIX
 0 15 
-15 15 
-lap: 30
-lower_bound:186
+0 15 
+(0, 1)
+(1, 0)
+lap: 15
+lower_bound:171
 
 node: #52
 current_cost: 492
@@ -355,9 +387,11 @@ best_cost: 806
 solution: 3 1
 LAP MATRIX
 0 25 
-25 25 
-lap: 50
-lower_bound:98
+0 25 
+(0, 1)
+(1, 0)
+lap: 25
+lower_bound:73
 
 node: #57
 current_cost: 510
@@ -385,9 +419,11 @@ best_cost: 806
 solution: 3 2
 LAP MATRIX
 0 28 
-28 28 
-lap: 56
-lower_bound:332
+0 28 
+(0, 1)
+(1, 0)
+lap: 28
+lower_bound:304
 
 node: #62
 current_cost: 708
