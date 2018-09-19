@@ -58,6 +58,8 @@ private:
 	/* Matrix of distances between locations */
 	int** d_mat;
 
+	int* nonvisited_solutions;
+
 	/* Best assignment that the algorithm have found so far. It consists of a
 	 * n-dimensional permutation vector in which the i-th element corresponds
 	 * to the facility assigned to the i-th location */
@@ -140,6 +142,8 @@ public:
 	int get_current_best_cost();
 
 	int get_number_of_nodes();
+
+	int* get_non_visited_nodes();
 
 };
 
