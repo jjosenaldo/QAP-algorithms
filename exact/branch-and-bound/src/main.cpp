@@ -33,6 +33,7 @@ int main()
 			std::cin >> f_mat[i][j];
 	}
 
+	printf("%s\n", "Running QAP..." );
 	QAPBranch qapBranch = QAPBranch( n,  d_mat,  f_mat);
 
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
@@ -56,6 +57,7 @@ int main()
 
 	delete[] d_mat;
 	delete[] f_mat;
+
 
 	return 0;
 }
