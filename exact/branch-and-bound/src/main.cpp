@@ -49,6 +49,14 @@ int main()
 	for(int i = 0; i < n; ++i) std::cout << sol[i] << " ";
 	std::cout << "\n";
 
+	int* non_visited_nodes = qapBranch.get_non_visited_nodes();
+	std::cout << "discarded subsolutions: (size, quantity):\n";
+	
+	for(int i = 0; i < n; ++i)
+	{
+		std::cout << "(" << i << ", " << non_visited_nodes[i] << ")\n";
+	}
+
 	for(int i = 0; i < n; ++i)
 	{
 		delete[] d_mat[i];
