@@ -89,9 +89,9 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 		// branch must be pruned off
 		if(lower_bound_evaluated && lower_bound > this->current_best_cost)
 		{
-			std::cout << "---------------------------------\n";
-			std::cout << "NÃO ABRIU UM NÓ!!!\n";
-			std::cout << "---------------------------------\n";
+			// std::cout << "---------------------------------\n";
+			// std::cout << "NÃO ABRIU UM NÓ!!!\n";
+			// std::cout << "---------------------------------\n";
 			return;
 		}
 
