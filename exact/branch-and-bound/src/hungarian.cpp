@@ -235,12 +235,6 @@ int hungarian_least_cost(int n, int** matrix)
 		for(int j = 0; j < n; ++j)
 				matrix[i][j] = maximum - matrix[i][j];
 
-	std::cout << "LAP MATRIX" << std::endl;
-	for(int i = 0; i < n; ++i) {
-		for(int j = 0; j < n; ++j) std::cout << matrix[i][j] << " ";
-		std::cout << std::endl;
-	}
-
 	init_labels(matrix);
 	augment(matrix);
 
@@ -251,7 +245,7 @@ int hungarian_least_cost(int n, int** matrix)
 	{
 		cost += -(matrix[i][match_xy[i]]-maximum);
 		//cost += matrix[i][match_xy[i]];
-		std::cout << "(" << i << ", " << match_xy[i] << ")\n";
+		//std::cout << "(" << i << ", " << match_xy[i] << ")\n";
 		
 	}
 

@@ -36,7 +36,6 @@ void QAPBranch::solve()
 void QAPBranch::recursive_search_tree_exploring(int current_cost, 
 	int current_solution_size, int* current_solution, bool* already_in_solution)
 {
-	//std::cout << (++this->number_of_nodes) << "\n";
 	++this->number_of_nodes;
 	std::cout << "\nnode: #" << this->number_of_nodes << "\n";
 	std::cout << "current_cost: " << current_cost << std::endl;
@@ -90,6 +89,7 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 		// branch must be pruned off
 		if(lower_bound_evaluated && lower_bound > this->current_best_cost)
 		{
+			std::cout << "O nó morreu. A solução tinha tamanho " << current_solution_size << std::endl;
 			return;
 		}
 
@@ -200,12 +200,17 @@ int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, bool*
 		++pointer_row;
 	}
 
-	int* min_prod = new int[remaining_facilities];
-	std::fill(min_prod, min_prod + remaining_facilities, 0);
+	int** min_prod = new int*[remaining_facilities];
+	for(int i = 0; i < remaining_facilities; ++i)
+	{
+		min_prod[i] = new int[remaining_facilities];
+		std::fill(min_prod[i], min_prod[i] + remaining_facilities, 0);
+	}
 
 	for(int i = 0; i < remaining_facilities; ++i)
-		for(int j = 0; j < remaining_facilities-1; ++j)
-			min_prod[i] += new_d[i][j]*new_f[i][j];
+		for(int j = 0; j < remaining_facilities; ++j)
+			for(int k = 0; k < remaining_facilities-1; ++k)
+				min_prod[i][j] += new_d[j][k]*new_f[i][k];
 
 	int** g = new int*[remaining_facilities];
 
@@ -214,7 +219,7 @@ int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, bool*
 		g[i] = new int[remaining_facilities];
 
 		for(int j = 0; j < remaining_facilities; ++j)
-		 	g[i][j] = f_diagonal[i] * d_diagonal[j] + min_prod[i];
+		 	g[i][j] = f_diagonal[i] * d_diagonal[j] + min_prod[i][j];
 	}
 
 	int lap = hungarian_least_cost(remaining_facilities, g);
@@ -225,6 +230,7 @@ int QAPBranch::lower_bound_for_partial_solution(int partial_solution_size, bool*
 		delete[] new_f[i];
 		delete[] new_d[i];
 		delete[] g[i];
+		delete[] min_prod[i];
 	}
 
 	delete[] new_f;

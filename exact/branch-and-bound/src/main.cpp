@@ -1,8 +1,11 @@
 #include "branch_and_bound.h"
+#include <chrono>
 #include <vector>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+
+using namespace std::chrono;
 
 int main()
 {
@@ -31,10 +34,17 @@ int main()
 	}
 
 	QAPBranch qapBranch = QAPBranch( n,  d_mat,  f_mat);
+
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	qapBranch.solve();
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+
+	int duration_in_milisseconds = duration_cast<milliseconds>(t2 - t1).count();
+
+	std::cout << "\nelapsed time: " << duration_in_milisseconds << " ms\n";
 
 	int* sol = qapBranch.get_current_best_solution();
-	std::cout << qapBranch.get_number_of_nodes() <<  "\n";
+	std::cout << "number of visited nodes: " << qapBranch.get_number_of_nodes() <<  "\nsolution: ";
 	for(int i = 0; i < n; ++i) std::cout << sol[i] << " ";
 	std::cout << "\n";
 
