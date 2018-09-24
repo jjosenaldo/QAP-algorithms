@@ -13,11 +13,15 @@ QAPBranch::QAPBranch(int n, int** d_mat, int** f_mat)
 	this->number_of_nodes = 0;
 
 	this->generate_initial_solution();	
+
+	this->nonvisited_solutions = new int[n];
+	std::fill(nonvisited_solutions, nonvisited_solutions+n, 0);
 }
 
 QAPBranch::~QAPBranch()
 {
 	delete[] this->current_best_solution;
+	delete[] this->nonvisited_solutions;
 }
 
 void QAPBranch::solve()
@@ -89,9 +93,10 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 		// branch must be pruned off
 		if(lower_bound_evaluated && lower_bound > this->current_best_cost)
 		{
-			// std::cout << "---------------------------------\n";
-			// std::cout << "NÃO ABRIU UM NÓ!!!\n";
-			// std::cout << "---------------------------------\n";
+			++this->nonvisited_solutions[current_solution_size];
+			std::cout << "---------------------------------\n";
+			std::cout << "NÃO ABRIU UM NÓ!!!\n";
+			std::cout << "---------------------------------\n";
 			return;
 		}
 
@@ -258,6 +263,11 @@ int QAPBranch::get_current_best_cost()
 int QAPBranch::get_number_of_nodes()
 {
 	return this->number_of_nodes;
+}
+
+int* QAPBranch::get_non_visited_nodes()
+{
+	return this->nonvisited_solutions;
 }
 
 bool greater_edge(Edge e1, Edge e2)
