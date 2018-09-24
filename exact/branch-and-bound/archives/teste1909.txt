@@ -1,0 +1,49 @@
+@ instance uploaded successfully
+../../instances/chr12a.dat
+Running QAP...
+
+elapsed time: 1522 ms
+number of visited nodes: 94376
+solution: 7 5 12 2 1 3 9 11 10 6 8 4 
+
+@ instance uploaded successfully
+../../instances/had12.dat
+Running QAP...
+
+elapsed time: 1465126 ms
+number of visited nodes: 1302061345
+solution: 3 10 11 2 12 5 6 7 8 1 4 9 
+
+@ instance uploaded successfully
+../../instances/nug12.dat
+Running QAP...
+
+elapsed time: 1375932 ms
+number of visited nodes: 1094107415
+solution: 2 10 6 5 1 11 8 4 3 9 7 12 
+
+@ instance uploaded successfully
+../../instances/rou12.dat
+Running QAP...
+
+elapsed time: 1444070 ms
+number of visited nodes: 1128104083
+solution: 6 5 11 9 2 8 3 1 12 7 4 10 
+
+@ instance uploaded successfully
+../../instances/scr12.dat
+Running QAP...
+
+elapsed time: 110246 ms
+number of visited nodes: 12513446
+solution: 2 7 10 11 3 12 8 4 9 6 1 5 
+
+@ instance uploaded successfully
+../../instances/tai12.dat
+Running QAP...
+
+elapsed time: 1457370 ms
+number of visited nodes: 1162379384
+solution: 8 1 6 2 11 10 3 5 9 7 12 4 
+
+

@@ -97,7 +97,7 @@ void runQAP ( std::string instance )
 	int* sol = qapBranch.get_current_best_solution();
 	std::cout << "number of visited nodes: " << qapBranch.get_number_of_nodes() <<  "\nsolution: ";
 	for(int i = 0; i < n; ++i) std::cout << sol[i] + 1 << " ";
-	std::cout << "\n";
+	std::cout << "\n\n";
 
 	int* non_visited_nodes = qapBranch.get_non_visited_nodes();
 	std::cout << "discarded subsolutions: (size, quantity):\n";
