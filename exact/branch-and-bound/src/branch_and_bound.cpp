@@ -94,9 +94,9 @@ void QAPBranch::recursive_search_tree_exploring(int current_cost,
 		if(lower_bound_evaluated && lower_bound > this->current_best_cost)
 		{
 			++this->nonvisited_solutions[current_solution_size];
-			std::cout << "---------------------------------\n";
-			std::cout << "NÃO ABRIU UM NÓ!!!\n";
-			std::cout << "---------------------------------\n";
+			// std::cout << "---------------------------------\n";
+			// std::cout << "NÃO ABRIU UM NÓ!!!\n";
+			// std::cout << "---------------------------------\n";
 			return;
 		}
 
