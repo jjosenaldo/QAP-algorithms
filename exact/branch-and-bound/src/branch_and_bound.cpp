@@ -270,6 +270,31 @@ int* QAPBranch::get_non_visited_nodes()
 	return this->nonvisited_solutions;
 }
 
+void QAPBranch::calculate_non_visited_nodes()
+{
+	this->total_non_visited_nodes = 0;
+
+	for(int p = n-2; p >= 0; --p)
+	{
+		int total_per_node = 0;
+		int parcel = p+1;
+		int factor = p;
+
+		for(int i = 1; i <= p+1; ++i)
+		{
+			total_per_node += parcel;
+			parcel *= (factor--);
+		}
+
+		this->total_non_visited_nodes += total_per_node * this->nonvisited_solutions[p];
+	}
+}
+
+int QAPBranch::get_total_non_visited_nodes()
+{
+	return this->total_non_visited_nodes;
+}
+
 bool greater_edge(Edge e1, Edge e2)
 {
 	return e2 < e1;

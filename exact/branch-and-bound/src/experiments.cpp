@@ -96,11 +96,8 @@ void runQAP ( std::string instance_name )
 		std::cout << std::endl;
 	}
 
-	int* non_visited_nodes = qap_branch.get_non_visited_nodes();
-	std::cout << "Discarded subsolutions <size quantity>:" << std::endl; 
-	
-	for(int i = 0; i < n; ++i)
-		std::cout << i << " " << non_visited_nodes[i] << std::endl;
+	qap_branch.calculate_non_visited_nodes();
+	std::cout << "Total of non-visited nodes: " << qap_branch.get_total_non_visited_nodes() << std::endl;
 
 	std::cout << "--------------------------------------------------" << std::endl;
 

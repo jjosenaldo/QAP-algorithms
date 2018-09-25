@@ -68,6 +68,8 @@ private:
 	/* Cost associated to the best assignment encountered so far  */
 	int current_best_cost;
 
+	int total_non_visited_nodes;
+
 	/**
 	 * @brief      Generates a initial solution (i.e., a permutation vector),
 	 *             that will define the first upper bound used in the main
@@ -144,6 +146,10 @@ public:
 	int get_number_of_nodes();
 
 	int* get_non_visited_nodes();
+
+	int get_total_non_visited_nodes();
+
+	void calculate_non_visited_nodes();
 
 };
 
