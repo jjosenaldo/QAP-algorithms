@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 		while (!instanceFile.eof())
 		{
 			std::getline(instanceFile, instance);
-			printf("%s\n", "@ instance uploaded successfully" );
-			std::cout << instance << std::endl;
+			std::cout << "@ instance uploaded successfully: " << instance << std::endl;
+
 			runQAP(instance);
 		}
 
