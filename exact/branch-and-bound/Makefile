@@ -3,7 +3,7 @@ CPPFLAGS = -Wall -W -ansi -pedantic -g -O0 -std=c++11
 BIN_DIR = bin
 INCLUDE_DIR = include
 SRC_DIR = src
-OBJS = hungarian.o branch_and_bound.o main.o
+OBJS = hungarian.o branch_and_bound.o experiments.o main.o
 OUT = qap.out
 
 $(OUT) : $(OBJS)
@@ -14,6 +14,9 @@ $(OUT) : $(OBJS)
 
 branch_and_bound.o : $(INCLUDE_DIR)/branch_and_bound.h $(SRC_DIR)/branch_and_bound.cpp $(SRC_DIR)/hungarian.cpp
 	$(CC) $(CPPFLAGS) -I $(INCLUDE_DIR) -c $(SRC_DIR)/branch_and_bound.cpp
+
+experiments.o : $(INCLUDE_DIR)/experiments.h $(SRC_DIR)/experiments.cpp
+	$(CC) $(CPPFLAGS) -I $(INCLUDE_DIR) -c $(SRC_DIR)/experiments.cpp
 
 hungarian.o : $(INCLUDE_DIR)/hungarian.h $(SRC_DIR)/hungarian.cpp
 	$(CC) $(CPPFLAGS) -I $(INCLUDE_DIR) -c $(SRC_DIR)/hungarian.cpp
