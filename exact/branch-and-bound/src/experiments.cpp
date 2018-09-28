@@ -61,18 +61,26 @@ void runQAP ( std::string instance_name )
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	qap_branch.solve();
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
-	std::cout << " execution finished!" << std::endl << std::endl << "REPORT\n--------------------------------------------------";
+	
+
+	std::ofstream out("archives/resultExecution.txt", std::ofstream::app);
+	if (!out.is_open()) std::cout << "\nNão abriu o arquivo!\n";
+
+	std::cout << " execution finished!" << "\n\n";
+	
+	out << instance_name << "\n";
+	out << "REPORT\n--------------------------------------------------";
 
 	int duration_in_milisseconds = duration_cast<milliseconds>(t2 - t1).count();
-	std::cout << std::endl << "Elapsed time: " << duration_in_milisseconds << " ms" << std::endl;
+	out << std::endl << "Elapsed time: " << duration_in_milisseconds << " ms" << std::endl;
 
 	int* sol = qap_branch.get_current_best_solution();
-	std::cout << "Number of visited nodes: " << qap_branch.get_number_of_nodes() << std::endl << "Solution found: ";
+	out << "Number of visited nodes: " << qap_branch.get_number_of_nodes() << std::endl << "Solution found: ";
 
 	for(int i = 0; i < n; ++i)
-		std::cout << sol[i] + 1 << " ";
+		out << sol[i] + 1 << " ";
 
-	std::cout << std::endl << "Cost found: " << qap_branch.get_current_best_cost() << std::endl;
+	out << std::endl << "Cost found: " << qap_branch.get_current_best_cost() << std::endl;
 
 	std::ifstream opt_solution_stream(PATH_INSTANCE_PREFIX + FILE_OPT_PREFIX +  instance_name + FILE_OPT_SUFFIX);
 
@@ -84,22 +92,29 @@ void runQAP ( std::string instance_name )
 		opt_solution_stream >> opt_solution[i];
 
 	if(qap_branch.get_current_best_cost() == opt_cost)
-		std::cout << "The cost found is optimal! =)" << std::endl;
+	{
+		std::cout << "The cost found is optimal! =)\n";
+		out << "The cost found is optimal! =)\n";
+	}
 
 	else
 	{
 		std::cout << "The cost found is not optimal. =(" << std::endl;
-		std::cout << "The optimal cost is actually: " << opt_cost << ", and the optimal solution is: " << std::endl; 
+		std::cout << "The optimal cost is actually: " << opt_cost /** << ", and the optimal solution is: "*/ << std::endl; 
+		
+		out << "The cost found is not optimal. =(" << std::endl;
+		out << "The optimal cost is actually: " << opt_cost  << std::endl; 
 
-		for(int i = 0; i < n; ++i)
-			std::cout << opt_solution[i] << " ";
-		std::cout << std::endl;
+		// for(int i = 0; i < n; ++i)
+		// 	std::cout << opt_solution[i] << " ";
+		// std::cout << std::endl;
 	}
 
 	qap_branch.calculate_non_visited_nodes();
-	std::cout << "Total of non-visited nodes: " << qap_branch.get_total_non_visited_nodes() << std::endl;
+	out << "Total of non-visited nodes: " << qap_branch.get_total_non_visited_nodes() << std::endl;
 
-	std::cout << "--------------------------------------------------" << std::endl;
+	out << "-------------------------------------------------" << std::endl;
+	out.close();
 
 	for(int i = 0; i < n; ++i)
 	{

@@ -3,7 +3,6 @@ esc8b
 esc8c
 esc8d
 esc8e
-esc8f
 lipa10a
 lipa10b
 rou10
