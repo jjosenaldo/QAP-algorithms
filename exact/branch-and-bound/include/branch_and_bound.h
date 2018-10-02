@@ -42,6 +42,8 @@ class QAPBranch
 
 private:
 
+	long long number_total_of_nodes;
+
 	int number_of_nodes;
 	/* Facility matrix as a vector of Edge */
 	std::vector<Edge> f_edge_vector;
@@ -150,6 +152,10 @@ public:
 	int get_total_non_visited_nodes();
 
 	void calculate_non_visited_nodes();
+
+	void calculate_total_nodes();
+
+	double percential_non_visited_node ();
 
 };
 

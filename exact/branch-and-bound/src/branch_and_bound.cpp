@@ -13,6 +13,7 @@ QAPBranch::QAPBranch(int n, int** d_mat, int** f_mat)
 	this->number_of_nodes = 0;
 
 	this->generate_initial_solution();	
+	this->calculate_total_nodes();
 
 	this->nonvisited_solutions = new int[n];
 	std::fill(nonvisited_solutions, nonvisited_solutions+n, 0);
@@ -298,4 +299,36 @@ int QAPBranch::get_total_non_visited_nodes()
 bool greater_edge(Edge e1, Edge e2)
 {
 	return e2 < e1;
+}
+
+void QAPBranch::calculate_total_nodes()
+{
+	long long fator_n = n;
+	for (int i=n-1; i >= 1; i--)
+		fator_n *= i;
+
+	long long total_nodes = 0;
+	long long fator_i;
+	for (int i=0; i <= n; i++)
+	{
+		if ( i == 0 ) fator_i = 1;
+		else
+		{
+			fator_i = i;
+			for (int j=i-1; j >= 1; j--)
+				fator_i *= j;
+		}
+		
+		total_nodes += fator_n/fator_i;
+	}
+
+	this->number_total_of_nodes = total_nodes;
+}
+
+double QAPBranch::percential_non_visited_node ()
+{
+	double percential;
+
+	percential = 100.00 - (100.00 * number_of_nodes)/number_total_of_nodes;
+	return percential;
 }
