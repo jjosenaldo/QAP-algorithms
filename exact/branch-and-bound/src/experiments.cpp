@@ -57,21 +57,20 @@ void runQAP ( std::string instance_name )
 
 	QAPBranch qap_branch = QAPBranch( n,  d_mat,  f_mat);
 
-	std::cout << "Running QAP...";
+	std::cout << "Running QAP...\n";
+
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	qap_branch.solve();
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
-	
+	int duration_in_milisseconds = duration_cast<milliseconds>(t2 - t1).count();
+
+	std::cout << "Execution finished!" << "\n\n";
 
 	std::ofstream out("archives/resultExecution.txt", std::ofstream::app);
 	if (!out.is_open()) std::cout << "\nNão abriu o arquivo!\n";
-
-	std::cout << " execution finished!" << "\n\n";
 	
 	out << instance_name << "\n";
 	out << "REPORT\n--------------------------------------------------";
-
-	int duration_in_milisseconds = duration_cast<milliseconds>(t2 - t1).count();
 	out << std::endl << "Elapsed time: " << duration_in_milisseconds << " ms" << std::endl;
 
 	int* sol = qap_branch.get_current_best_solution();
@@ -104,14 +103,9 @@ void runQAP ( std::string instance_name )
 		
 		out << "The cost found is not optimal. =(" << std::endl;
 		out << "The optimal cost is actually: " << opt_cost  << std::endl; 
-
-		// for(int i = 0; i < n; ++i)
-		// 	std::cout << opt_solution[i] << " ";
-		// std::cout << std::endl;
 	}
 
-	qap_branch.calculate_non_visited_nodes();
-	out << "Total of non-visited nodes: " << qap_branch.get_total_non_visited_nodes() << std::endl;
+	out << "Percential of non-visited nodes: " << qap_branch.percential_non_visited_node() << " %\n";
 
 	out << "-------------------------------------------------" << std::endl;
 	out.close();
