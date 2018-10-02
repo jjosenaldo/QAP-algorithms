@@ -332,7 +332,7 @@ void QAPBranch::las_vegas_recursive_search_tree_exploring(int current_cost, int 
 			current_solution[0] = i;
 			already_in_solution[i] = true;
 
-			this->recursive_search_tree_exploring(0, 1, current_solution, already_in_solution);
+			this->las_vegas_recursive_search_tree_exploring(0, 1, current_solution, already_in_solution);
 
 			already_in_solution[i] = false;
 		}
@@ -400,7 +400,6 @@ void QAPBranch::las_vegas_recursive_search_tree_exploring(int current_cost, int 
 
 			for(std::pair<int, int> child : cost_increases)
 			{
-
 				// the i-th facility is assigned to the (current_solution_size)-th location
 				current_solution[current_solution_size] = child.first;
 				already_in_solution[child.first] = true;
