@@ -1,4 +1,4 @@
-#include <algorithm> // std::copy, std::fill, std::random_shuffle, std::sort
+#include <algorithm> // std::copy, std::fill, std::iter_swap, std::random_shuffle, std::sort
 #include <climits> // std:;INT_MAX
 #include <iostream> // std::cout 
 #include <functional> // std::greater<int>
@@ -31,7 +31,7 @@ void QAPBranch::solve()
 	bool* already_in_solution = new bool[n];
 	std::fill(already_in_solution, already_in_solution+n, false);
 
-	this->recursive_search_tree_exploring(0, 0, current_solution, already_in_solution);
+	this->las_vegas_recursive_search_tree_exploring(0, 0, current_solution, already_in_solution);
 
 	delete[] current_solution;
 	delete[] already_in_solution;
@@ -298,4 +298,118 @@ int QAPBranch::get_total_non_visited_nodes()
 bool greater_edge(Edge e1, Edge e2)
 {
 	return e2 < e1;
+}
+
+void QAPBranch::las_vegas_recursive_search_tree_exploring(int current_cost, int current_solution_size, 
+										 int* current_solution, bool* already_in_solution)
+{
+	++this->number_of_nodes;
+	// std::cout << "\nnode: #" << this->number_of_nodes << "\n";
+	// std::cout << "current_cost: " << current_cost << std::endl;
+	// std::cout << "best_cost: " << this->current_best_cost << std::endl;
+	// std::cout << "solution:";
+	// for(int i = 0; i < current_solution_size; ++i) std::cout << " " <<current_solution[i];
+	// std::cout << "\n";
+
+	// full solution (leaf): check if it is better than the best already found
+	if(current_solution_size == n)
+	{
+		// current solution is better: update best solution
+		if(current_cost < this->current_best_cost)
+		{
+			this->current_best_cost = current_cost;
+
+			std::copy(current_solution, current_solution+n, this->current_best_solution);
+		}
+	}
+
+	// empty partial solution: no need for analyzing solution feasibility
+	else if(current_solution_size == 0)
+	{
+		for(int i = 0; i < this->n; ++i)
+		{
+			current_solution[0] = i;
+			already_in_solution[i] = true;
+
+			this->recursive_search_tree_exploring(0, 1, current_solution, already_in_solution);
+
+			already_in_solution[i] = false;
+		}
+		
+	}
+
+	// non-empty partial solution
+	else
+	{
+		int lower_bound;
+		bool lower_bound_evaluated = false;
+
+		if(current_solution_size < this->n-1)
+		{
+			// analyze solution feasibility
+			lower_bound = this->lower_bound_for_partial_solution(current_solution_size, already_in_solution, current_cost);
+			// std::cout << "lower_bound:" << lower_bound << std::endl;
+			lower_bound_evaluated = true;
+		}
+
+		// current solution can't get better than the best known so far: its
+		// branch must be pruned off
+		if(lower_bound_evaluated && lower_bound > this->current_best_cost)
+		{
+			++this->nonvisited_solutions[current_solution_size];
+			// std::cout << "---------------------------------\n";
+			// std::cout << "NÃO ABRIU UM NÓ!!!\n";
+			// std::cout << "---------------------------------\n";
+			return;
+		}
+
+		// explore the current node's children
+		else
+		{	
+			std::vector<std::pair<int, int>> cost_increases;
+
+			for(int i = 0; i < this->n; ++i)
+			{
+				if(!already_in_solution[i])
+				{
+					// compute the cost increase, i.e., the product d_{a,b}*f_{pi(a), pi(b)}
+					// for all 0 <= a,b < n such that a,b<=current_solution_size
+					int cost_increase = 0;
+					for(int j = 0; j < current_solution_size; ++j)
+						cost_increase += d_mat[j][current_solution_size]*f_mat[current_solution[j]][i]
+									   + d_mat[current_solution_size][j]*f_mat[i][current_solution[j]];
+
+					cost_increases.push_back(std::make_pair(i, cost_increase));
+				}
+			}
+
+			// order children by cost_increase
+			std::sort(cost_increases.begin(), cost_increases.end(), [](auto& p1, auto& p2){
+				return p1.second < p2.second;
+			});
+
+			int remaining_facilities = this->n - current_solution_size;
+			int first_child;
+
+			if(remaining_facilities > 3)
+			{
+				first_child = rand() % (remaining_facilities / 3);
+				std::iter_swap(cost_increases.begin(), cost_increases.begin() + first_child);
+			}
+
+			for(std::pair<int, int> child : cost_increases)
+			{
+
+				// the i-th facility is assigned to the (current_solution_size)-th location
+				current_solution[current_solution_size] = child.first;
+				already_in_solution[child.first] = true;
+
+				// explore the subsolution branch
+				this->las_vegas_recursive_search_tree_exploring(current_cost + child.second, current_solution_size+1, current_solution, already_in_solution);
+
+				// removes the element of the solution to analyze its siblings
+				already_in_solution[child.first] = false;
+			}
+		}	
+	}
 }

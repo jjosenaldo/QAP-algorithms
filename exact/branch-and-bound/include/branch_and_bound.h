@@ -108,6 +108,9 @@ private:
 	void recursive_search_tree_exploring(int current_cost, int current_solution_size, 
 										 int* current_solution, bool* already_in_solution);
 
+	void las_vegas_recursive_search_tree_exploring(int current_cost, int current_solution_size, 
+										 int* current_solution, bool* already_in_solution);
+
 public:
 
 	/**

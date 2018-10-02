@@ -1,5 +1,5 @@
 CC = g++
-CPPFLAGS = -Wall -W -ansi -pedantic -g -O0 -std=c++11
+CPPFLAGS = -Wall -W -ansi -pedantic -g -O0 -std=c++14
 BIN_DIR = bin
 INCLUDE_DIR = include
 SRC_DIR = src

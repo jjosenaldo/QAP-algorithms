@@ -1,0 +1,50 @@
+esc8a
+REPORT
+--------------------------------------------------
+Elapsed time: 93 ms
+Number of visited nodes: 59393
+Solution found: 3 7 6 4 8 1 2 5 
+Cost found: 2
+The cost found is optimal! =)
+Total of non-visited nodes: 118359480
+-------------------------------------------------
+esc8b
+REPORT
+--------------------------------------------------
+Elapsed time: 31 ms
+Number of visited nodes: 12545
+Solution found: 1 2 3 4 5 6 8 7 
+Cost found: 8
+The cost found is optimal! =)
+Total of non-visited nodes: 26964576
+-------------------------------------------------
+esc8c
+REPORT
+--------------------------------------------------
+Elapsed time: 58 ms
+Number of visited nodes: 36207
+Solution found: 1 4 5 2 7 8 6 3 
+Cost found: 32
+The cost found is optimal! =)
+Total of non-visited nodes: 71829857
+-------------------------------------------------
+esc8d
+REPORT
+--------------------------------------------------
+Elapsed time: 42 ms
+Number of visited nodes: 23872
+Solution found: 1 2 3 5 4 8 7 6 
+Cost found: 6
+The cost found is optimal! =)
+Total of non-visited nodes: 40643230
+-------------------------------------------------
+esc8e
+REPORT
+--------------------------------------------------
+Elapsed time: 58 ms
+Number of visited nodes: 35849
+Solution found: 1 2 4 5 3 7 6 8 
+Cost found: 2
+The cost found is optimal! =)
+Total of non-visited nodes: 84477018
+-------------------------------------------------
