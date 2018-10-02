@@ -1,15 +1,9 @@
 esc8a
 REPORT
 --------------------------------------------------
-Elapsed time: 93 ms
+Elapsed time: 139 ms
 Number of visited nodes: 59393
-Solution found: 3 7 6 4 8 1 2 5 
-Cost found: 2
-The cost found is optimal! =)
-Total of non-visited nodes: 118359480
-Elapsed time: 66 ms
-Number of visited nodes: 59393
-Solution found: 6 8 4 1 7 2 3 5 
+Solution found: 3 2 6 5 7 4 8 1 
 Cost found: 2
 The cost found is optimal! =)
 Percential of non-visited nodes: 45.8098 %
@@ -17,188 +11,9 @@ Percential of non-visited nodes: 45.8098 %
 esc8b
 REPORT
 --------------------------------------------------
-Elapsed time: 31 ms
-Elapsed time: 16 ms
+Elapsed time: 34 ms
 Number of visited nodes: 12545
-Solution found: 1 2 3 4 5 6 8 7 
-Cost found: 8
-The cost found is optimal! =)
-Total of non-visited nodes: 26964576
-Percential of non-visited nodes: 88.5539 %
--------------------------------------------------
-esc8c
-REPORT
---------------------------------------------------
-Elapsed time: 58 ms
-Elapsed time: 36 ms
-Number of visited nodes: 36207
-Solution found: 1 4 5 2 7 8 6 3 
-Cost found: 32
-The cost found is optimal! =)
-Total of non-visited nodes: 71829857
-Percential of non-visited nodes: 66.9647 %
--------------------------------------------------
-esc8d
-REPORT
---------------------------------------------------
-Elapsed time: 42 ms
-Elapsed time: 28 ms
-Number of visited nodes: 23872
-Solution found: 1 2 3 5 4 8 7 6 
-Cost found: 6
-The cost found is optimal! =)
-Total of non-visited nodes: 40643230
-Percential of non-visited nodes: 78.2192 %
--------------------------------------------------
-esc8e
-REPORT
---------------------------------------------------
-<<<<<<< HEAD
-Elapsed time: 58 ms
-=======
-Elapsed time: 36 ms
-Number of visited nodes: 35849
-Solution found: 1 2 4 5 3 7 6 8 
-Cost found: 2
-The cost found is optimal! =)
-Percential of non-visited nodes: 67.2914 %
--------------------------------------------------
-lipa10a
-REPORT
---------------------------------------------------
-Elapsed time: 5982 ms
-Number of visited nodes: 9864101
-Solution found: 4 9 2 1 8 5 10 7 6 3 
-Cost found: 473
-The cost found is optimal! =)
-Percential of non-visited nodes: 0 %
--------------------------------------------------
-lipa10b
-REPORT
---------------------------------------------------
-Elapsed time: 6333 ms
-Number of visited nodes: 9859805
-Solution found: 1 2 3 4 5 6 7 8 9 10 
-Cost found: 2008
-The cost found is optimal! =)
-Percential of non-visited nodes: 0.0435519 %
--------------------------------------------------
-rou10
-REPORT
---------------------------------------------------
-Elapsed time: 6297 ms
-Number of visited nodes: 9430361
-Solution found: 3 10 8 2 6 7 9 5 1 4 
-Cost found: 174220
-The cost found is optimal! =)
-Percential of non-visited nodes: 4.39716 %
--------------------------------------------------
-scr10
-REPORT
---------------------------------------------------
-Elapsed time: 3066 ms
-Number of visited nodes: 1436907
-Solution found: 8 6 3 2 10 1 5 9 4 7 
-Cost found: 26992
-The cost found is optimal! =)
-Percential of non-visited nodes: 85.433 %
--------------------------------------------------
-tai10a
-REPORT
---------------------------------------------------
-Elapsed time: 6261 ms
-Number of visited nodes: 9344745
-Solution found: 9 1 8 6 10 5 4 3 7 2 
-Cost found: 135028
-The cost found is optimal! =)
-Percential of non-visited nodes: 5.26511 %
--------------------------------------------------
-tai10b
-REPORT
---------------------------------------------------
-Elapsed time: 4397 ms
-Number of visited nodes: 3935661
-Solution found: 5 6 1 4 7 8 9 3 2 10 
-Cost found: 1183760
-The cost found is optimal! =)
-Percential of non-visited nodes: 60.1012 %
--------------------------------------------------
-chr12a
-REPORT
---------------------------------------------------
-Elapsed time: 887 ms
-Number of visited nodes: 94376
-Solution found: 7 5 12 2 1 3 9 11 10 6 8 4 
-Cost found: 9552
-The cost found is optimal! =)
-Percential of non-visited nodes: 99.9928 %
--------------------------------------------------
-had12
-REPORT
---------------------------------------------------
-Elapsed time: 853880 ms
-Number of visited nodes: 1302061345
-Solution found: 3 10 11 2 12 5 6 7 8 1 4 9 
-Cost found: 1652
-The cost found is optimal! =)
-Percential of non-visited nodes: 0 %
--------------------------------------------------
-nug12
-REPORT
---------------------------------------------------
-Elapsed time: 802812 ms
-Number of visited nodes: 1094107415
-Solution found: 2 10 6 5 1 11 8 4 3 9 7 12 
-Cost found: 578
-The cost found is optimal! =)
-Percential of non-visited nodes: 15.9711 %
--------------------------------------------------
-rou12
-REPORT
---------------------------------------------------
-Elapsed time: 840351 ms
-Number of visited nodes: 1128104083
-Solution found: 6 5 11 9 2 8 3 1 12 7 4 10 
-Cost found: 235528
-The cost found is optimal! =)
-Percential of non-visited nodes: 13.3601 %
--------------------------------------------------
-scr12
-REPORT
---------------------------------------------------
-Elapsed time: 63842 ms
-Number of visited nodes: 12513446
-Solution found: 2 7 10 11 3 12 8 4 9 6 1 5 
-Cost found: 31410
-The cost found is optimal! =)
-Percential of non-visited nodes: 99.039 %
--------------------------------------------------
-tai12
-REPORT
---------------------------------------------------
-Elapsed time: 848690 ms
-Number of visited nodes: 1162379384
-Solution found: 8 1 6 2 11 10 3 5 9 7 12 4 
-Cost found: 224416
-The cost found is optimal! =)
-Percential of non-visited nodes: 10.7278 %
--------------------------------------------------
-esc8a
-REPORT
---------------------------------------------------
-Elapsed time: 58 ms
-Number of visited nodes: 59393
-Solution found: 7 5 2 6 4 3 8 1 
-Cost found: 2
-The cost found is optimal! =)
-Percential of non-visited nodes: 45.8098 %
--------------------------------------------------
-esc8b
-REPORT
---------------------------------------------------
-Elapsed time: 16 ms
-Number of visited nodes: 12545
-Solution found: 1 2 3 4 5 6 8 7 
+Solution found: 1 2 4 3 5 6 8 7 
 Cost found: 8
 The cost found is optimal! =)
 Percential of non-visited nodes: 88.5539 %
@@ -206,112 +21,30 @@ Percential of non-visited nodes: 88.5539 %
 esc8c
 REPORT
 --------------------------------------------------
-Elapsed time: 37 ms
-Number of visited nodes: 36207
+Elapsed time: 75 ms
+Number of visited nodes: 36199
 Solution found: 1 4 5 2 7 8 6 3 
 Cost found: 32
 The cost found is optimal! =)
-Percential of non-visited nodes: 66.9647 %
+Percential of non-visited nodes: 66.972 %
 -------------------------------------------------
 esc8d
 REPORT
 --------------------------------------------------
-Elapsed time: 26 ms
-Number of visited nodes: 23872
-Solution found: 1 2 3 5 4 8 7 6 
+Elapsed time: 52 ms
+Number of visited nodes: 23864
+Solution found: 1 3 2 5 4 8 6 7 
 Cost found: 6
 The cost found is optimal! =)
-Percential of non-visited nodes: 78.2192 %
+Percential of non-visited nodes: 78.2265 %
 -------------------------------------------------
 esc8e
 REPORT
 --------------------------------------------------
-Elapsed time: 35 ms
->>>>>>> 03c9affa3265903143efa6fdafc5743af3985013
-Number of visited nodes: 35849
-Solution found: 1 2 4 5 3 7 6 8 
+Elapsed time: 73 ms
+Number of visited nodes: 35649
+Solution found: 1 3 4 5 2 6 7 8 
 Cost found: 2
 The cost found is optimal! =)
-Total of non-visited nodes: 84477018
-Percential of non-visited nodes: 67.2914 %
--------------------------------------------------
-chr15a
-REPORT
---------------------------------------------------
-Elapsed time: 18571 ms
-Number of visited nodes: 3110136
-Solution found: 5 10 8 13 12 11 14 2 4 6 7 15 3 1 9 
-Cost found: 9896
-The cost found is optimal! =)
-Percential of non-visited nodes: 99.9999 %
--------------------------------------------------
-chr15b
-REPORT
---------------------------------------------------
-Elapsed time: 106841 ms
-Number of visited nodes: 22478478
-Solution found: 4 13 15 1 9 2 5 12 6 14 7 3 10 11 8 
-Cost found: 7990
-The cost found is optimal! =)
-Percential of non-visited nodes: 99.9994 %
--------------------------------------------------
-chr15c
-REPORT
---------------------------------------------------
-Elapsed time: 7701 ms
-Number of visited nodes: 909316
-Solution found: 13 2 5 7 8 1 14 6 4 3 15 9 12 11 10 
-Cost found: 9504
-The cost found is optimal! =)
-Percential of non-visited nodes: 100 %
--------------------------------------------------
-esc8a
-REPORT
---------------------------------------------------
-Elapsed time: 78 ms
-Number of visited nodes: 59393
-Solution found: 6 2 1 7 5 8 4 3 
-Cost found: 2
-The cost found is optimal! =)
-Percential of non-visited nodes: 45.8098 %
--------------------------------------------------
-esc8b
-REPORT
---------------------------------------------------
-Elapsed time: 28 ms
-Number of visited nodes: 12545
-Solution found: 1 2 3 4 5 6 8 7 
-Cost found: 8
-The cost found is optimal! =)
-Percential of non-visited nodes: 88.5539 %
--------------------------------------------------
-esc8c
-REPORT
---------------------------------------------------
-Elapsed time: 56 ms
-Number of visited nodes: 36207
-Solution found: 1 4 5 2 7 8 6 3 
-Cost found: 32
-The cost found is optimal! =)
-Percential of non-visited nodes: 66.9647 %
--------------------------------------------------
-esc8d
-REPORT
---------------------------------------------------
-Elapsed time: 40 ms
-Number of visited nodes: 23872
-Solution found: 1 2 3 5 4 8 7 6 
-Cost found: 6
-The cost found is optimal! =)
-Percential of non-visited nodes: 78.2192 %
--------------------------------------------------
-esc8e
-REPORT
---------------------------------------------------
-Elapsed time: 55 ms
-Number of visited nodes: 35849
-Solution found: 1 2 4 5 3 7 6 8 
-Cost found: 2
-The cost found is optimal! =)
-Percential of non-visited nodes: 67.2914 %
+Percential of non-visited nodes: 67.4738 %
 -------------------------------------------------
