@@ -1,0 +1,46 @@
+instancia | variável | média | variância | Desvio padrão
+esc8a | tempo | 0.0875 | 0.000105667 | 0.0102794
+esc8a | nós não visitados | 45.8098 | 0 | 0
+esc8b | tempo | 0.0225 | 3.33333e-07 | 0.00057735
+esc8b | nós não visitados | 88.5539 | 0 | 0
+esc8c | tempo | 0.05275 | 8.25e-06 | 0.00287228
+esc8c | nós não visitados | 66.972 | 0 | 0
+esc8d | tempo | 0.0365 | 3e-06 | 0.00173205
+esc8d | nós não visitados | 78.234 | 2.5e-05 | 0.005
+esc8e | tempo | 0.051 | 8e-06 | 0.00282843
+esc8e | nós não visitados | 67.4738 | 0 | 0
+lipa10a | tempo | 10.0435 | 0.323778 | 0.569015
+lipa10a | nós não visitados | 0 | 0 | 0
+lipa10b | tempo | 10.3953 | 0.314261 | 0.56059
+lipa10b | nós não visitados | 0.0416455 | 1.7e-11 | 4.12311e-06
+rou10 | tempo | 10.2222 | 0.288126 | 0.536774
+rou10 | nós não visitados | 4.45415 | 4.49667e-06 | 0.00212053
+scr10 | tempo | 3.699 | 0.0397453 | 0.199362
+scr10 | nós não visitados | 85.4918 | 0.00104186 | 0.0322778
+tai10a | tempo | 10.1502 | 0.306163 | 0.55332
+tai10a | nós não visitados | 5.35321 | 0.000131012 | 0.011446
+tai10b | tempo | 6.06475 | 0.102131 | 0.319579
+tai10b | nós não visitados | 59.993 | 0.00646259 | 0.0803902
+chr12a | tempo | 0.746 | 0.000412667 | 0.0203142
+chr12a | nós não visitados | 89.9759 | 401.536 | 20.0384
+had12 | tempo | 1386.76 | 5059.38 | 71.1293
+had12 | nós não visitados | 0 | 0 | 0
+nug12 | tempo | 1250.22 | 4126.01 | 64.234
+nug12 | nós não visitados | 15.91 | 5.159e-05 | 0.00718262
+rou12 | tempo | 1309.35 | 4218.12 | 64.9471
+rou12 | nós não visitados | 13.4523 | 0.000515429 | 0.0227031
+scr12 | tempo | 69.9333 | 3.02308 | 1.7387
+scr12 | nós não visitados | 99.0382 | 6.5625e-06 | 0.00256174
+tai12 | tempo | 1330.81 | 4641.44 | 68.1281
+tai12 | nós não visitados | 10.5588 | 0.000408967 | 0.0202229
+chr15a | tempo | 15.0653 | 0.676431 | 0.822454
+chr15a | nós não visitados | 99.9999 | 0 | 0
+chr15b | tempo | 83.2767 | 59.1127 | 7.68848
+chr15b | nós não visitados | 99.9996 | 6.66667e-09 | 8.16497e-05
+chr15c | tempo | 5.83175 | 0.375394 | 0.612694
+chr15c | nós não visitados | 100 | 0 | 0
+chr15c | tempo | 100 | 0 | 0
+chr15c | nós não visitados | 100 | 0 | 0
+
+
+ 
