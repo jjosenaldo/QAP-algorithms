@@ -18,5 +18,3 @@ tai12
 chr15a
 chr15b
 chr15c
-scr15
-nug15
