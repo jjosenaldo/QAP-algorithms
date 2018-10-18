@@ -22,7 +22,7 @@ tai10a | nós não visitados | 5.35321 | 0.000131012 | 0.011446
 tai10b | tempo | 6.06475 | 0.102131 | 0.319579
 tai10b | nós não visitados | 59.993 | 0.00646259 | 0.0803902
 chr12a | tempo | 0.746 | 0.000412667 | 0.0203142
-chr12a | nós não visitados | 89.9759 | 401.536 | 20.0384
+chr12a | nós não visitados | 99.9952 | 1e-08 | 0.0001
 had12 | tempo | 1386.76 | 5059.38 | 71.1293
 had12 | nós não visitados | 0 | 0 | 0
 nug12 | tempo | 1250.22 | 4126.01 | 64.234
@@ -41,6 +41,7 @@ chr15c | tempo | 5.83175 | 0.375394 | 0.612694
 chr15c | nós não visitados | 100 | 0 | 0
 chr15c | tempo | 100 | 0 | 0
 chr15c | nós não visitados | 100 | 0 | 0
+
 
 
  
