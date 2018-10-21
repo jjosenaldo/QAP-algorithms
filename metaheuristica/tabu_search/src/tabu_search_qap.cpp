@@ -22,9 +22,35 @@ void TsQAP::generate_inicial_solution (int size_solution)
 
 std::vector<int*> TsQAP::get_neighbors(int* solution)
 {
-	std::vector<int*> vector;
-	vector.push_back(solution);
-	return vector;
+	std::vector<int*> neighbors;
+	int n = this->problem->get_number_of_facilities();
+
+	int* mutation = 0;
+	for (int i = 0; i < n; i++)
+		mutation[i] = i;
+
+	std::random_shuffle(mutation, mutation + n);
+	
+	Pair op;
+	int aux;
+	for (int i = 0; i < n/2; i+=2)
+	{
+		op.i = mutation[i];
+		op.j = mutation[i+1];
+
+		if ( not isForbidden(op) )
+		{
+			// realize mutation
+			int* new_solution = solution;
+			aux = new_solution[op.i];
+			new_solution[op.i] = new_solution[op.j];
+			new_solution[op.j] = aux;
+		
+			neighbors.push_back(new_solution);
+		} 
+	}
+
+	return neighbors;
 }
 
 int TsQAP::calculate_fitness (int* solution)
@@ -32,10 +58,25 @@ int TsQAP::calculate_fitness (int* solution)
 	return solution[0]*10;
 }
 
+bool TsQAP::isForbidden(Pair operation)
+{
+	for (unsigned int i=0; i < this->tabu_list.size(); i++)
+		if (tabu_list[i] == operation)
+			return true;
+	return false;
+}
+
 void TsQAP::run()
 {
 	this->generate_inicial_solution(this->get_instance_qap()->get_number_of_facilities());
 	this->set_best_candidate(this->get_current_best_solution());
+
+	bool stoppingCondition = false;
+	
+	while (not stoppingCondition)
+	{
+
+	}
 
 }
 

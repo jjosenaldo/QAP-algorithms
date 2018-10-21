@@ -7,6 +7,19 @@
 #include <ctime> 
 #include "qap.h"
 
+struct Pair
+{
+	int i;
+	int j;
+
+	bool operator==(const Pair& rhs)
+	{
+		if (rhs.i == this->i and rhs.j == this->j)
+			return true;
+		return false;
+	}
+};
+
 class TsQAP
 {
 
@@ -25,8 +38,11 @@ private:
 	/**
 	 * The tabu list
 	 */
-	// std::vector<int*> tabu_list;
+	std::vector<Pair> tabu_list;
 
+	/**
+	 * Max size of tabu list
+	 */
 	int max_size_tabu_list;
 
 	/**
@@ -77,6 +93,14 @@ public:
 	 */
 	int calculate_fitness (int* solution);
 
+	/**
+	 * @brief      Determines if forbidden.
+	 *
+	 * @param[in]  operation  The operation
+	 *
+	 * @return     True if forbidden, False otherwise.
+	 */
+	bool isForbidden(Pair operation);
 
 	/**
 	 * @brief      run tabu search
@@ -136,6 +160,7 @@ public:
 	 */
 	QAP* get_instance_qap ();
 
+	
 };
 
 #endif
