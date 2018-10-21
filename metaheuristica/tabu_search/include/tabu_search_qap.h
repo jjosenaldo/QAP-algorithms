@@ -29,11 +29,15 @@ private:
 	 * which the i-th element corresponds to the facility assigned to the
 	 * i-th location */
 	int* current_best_solution;
+
+	int fitness_current_best_solution;
 	
 	/**
 	 * The candidate for a best solution
 	 */
 	int* best_candidate;
+
+	int fitness_best_candidate;
 
 	/**
 	 * The tabu list
@@ -160,6 +164,13 @@ public:
 	 */
 	QAP* get_instance_qap ();
 
+
+	/**
+	 * @brief      Gets the fitness best candidate.
+	 *
+	 * @return     The fitness best candidate.
+	 */
+	int get_fitness_best_candidate();
 	
 };
 

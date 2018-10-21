@@ -72,10 +72,20 @@ void TsQAP::run()
 	this->set_best_candidate(this->get_current_best_solution());
 
 	bool stoppingCondition = false;
-	
+	int cont = 0;
+
 	while (not stoppingCondition)
 	{
+		std::vector<int*> neighbors = this->get_neighbors(this->best_candidate);
+		for (unsigned int i=0; i < neighbors.size(); i++)
+			if ( this->calculate_fitness(neighbors[i]) > this->fitness_best_candidate )
+				this->set_best_candidate(neighbors[i]);
 
+		if (this->fitness_best_candidate > this->fitness_current_best_solution)
+			this->set_current_best_solution(this->best_candidate);
+		else cont++;
+
+		if (cont == 30) stoppingCondition = true;
 	}
 
 }
@@ -90,6 +100,7 @@ int* TsQAP::get_current_best_solution()
 void TsQAP::set_current_best_solution(int* new_best_solution)
 {
 	this->current_best_solution = new_best_solution;
+	this->fitness_current_best_solution = this->calculate_fitness(new_best_solution);
 }
 
 int* TsQAP::get_best_candidate()
@@ -100,6 +111,7 @@ int* TsQAP::get_best_candidate()
 void TsQAP::set_best_candidate(int* new_best_candidate)
 {
 	this->best_candidate = new_best_candidate;
+	this->fitness_best_candidate = this->calculate_fitness(new_best_candidate);
 }
 
 int TsQAP::get_max_size_tabu_list()
@@ -115,4 +127,9 @@ void TsQAP::set_max_size_tabu_list(int new_max_size)
 QAP* TsQAP::get_instance_qap ()
 {
 	return this->problem;
+}
+
+int TsQAP::get_fitness_best_candidate()
+{
+	return this->fitness_best_candidate;
 }
