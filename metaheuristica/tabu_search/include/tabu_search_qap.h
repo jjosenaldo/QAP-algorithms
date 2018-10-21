@@ -1,7 +1,11 @@
 #ifndef _TABU_SEARCH_QAP_
 #define _TABU_SEARCH_QAP_
 
-#include<vector>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+#include <ctime> 
+#include "qap.h"
 
 class TsQAP
 {
@@ -25,19 +29,61 @@ private:
 
 	int max_size_tabu_list;
 
+	/**
+	 * The instance QAP
+	 */
+	QAP *problem;
+
 public:
 
 	/**
 	 * @brief      Constructs the object.
 	 *
-	 * @param      current_best_solution  The current best solution
+	 * @param[in]  instance  The instance qap
+	 * @param[in]  max_size  The maximum size of tabu list
 	 */
-	TsQAP(int* current_best_solution, int max_size);
+	TsQAP(QAP *instance, int max_size);
 
 	/**
 	 * @brief      Destroys the object.
 	 */
 	~TsQAP();
+
+	/**
+	 * @brief      Generates a initial solution (i.e., a permutation vector),
+	 *             that will define the first upper bound used in the main
+	 *             algorithm
+	 *
+	 * @param      size_solution    the size problem          
+	 */
+	void generate_inicial_solution (int size_solution);
+
+
+	/**
+	 * @brief      Gets the neighbors.
+	 *
+	 * @param      solution  The solution
+	 *
+	 * @return     The neighbors of the informed solution.
+	 */
+	std::vector<int*> get_neighbors(int* solution);
+
+	/**
+	 * @brief      Calculates the fitness.
+	 *
+	 * @param      solution  The solution
+	 *
+	 * @return     The fitness of solution.
+	 */
+	int calculate_fitness (int* solution);
+
+
+	/**
+	 * @brief      run tabu search
+	 *
+	 * @param[in]  qap  The instance QAP 
+	 */
+	void run();
 
 	/**
 	 * @brief      Gets the current best solution.
@@ -84,22 +130,11 @@ public:
 	// std::vector<int*> get_tabu_list();
 
 	/**
-	 * @brief      Gets the neighbors.
+	 * @brief      Gets the instance qap.
 	 *
-	 * @param      solution  The solution
-	 *
-	 * @return     The neighbors of the informed solution.
+	 * @return     The instance qap.
 	 */
-	std::vector<int*> get_neighbors(int* solution);
-
-	/**
-	 * @brief      Calculates the fitness.
-	 *
-	 * @param      solution  The solution
-	 *
-	 * @return     The fitness of solution.
-	 */
-	int calculate_fitness (int* solution);
+	QAP* get_instance_qap ();
 
 };
 

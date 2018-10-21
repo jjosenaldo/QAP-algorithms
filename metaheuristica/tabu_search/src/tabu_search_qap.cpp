@@ -1,10 +1,45 @@
 #include "tabu_search_qap.h"
 
-TsQAP::TsQAP(int* current_best_solution, int max_size)
+/*Constructor*/
+
+TsQAP::TsQAP(QAP *instance, int max_size)
 {
-	this->current_best_solution = current_best_solution;
+	this->problem = instance;
 	this->max_size_tabu_list = max_size;
 }
+
+/*Principal methods*/
+
+void TsQAP::generate_inicial_solution (int size_solution)
+{
+	int* solution = this->get_current_best_solution();
+	for (int i=0; i < size_solution; i++)
+		solution[i] = i;
+
+	std::random_shuffle(solution, solution + size_solution);
+	this->set_current_best_solution(solution);
+}
+
+std::vector<int*> TsQAP::get_neighbors(int* solution)
+{
+	std::vector<int*> vector;
+	vector.push_back(solution);
+	return vector;
+}
+
+int TsQAP::calculate_fitness (int* solution)
+{	
+	return solution[0]*10;
+}
+
+void TsQAP::run()
+{
+	this->generate_inicial_solution(this->get_instance_qap()->get_number_of_facilities());
+	this->set_best_candidate(this->get_current_best_solution());
+
+}
+
+/*Getters and Setters*/
 
 int* TsQAP::get_current_best_solution()
 {
@@ -36,14 +71,7 @@ void TsQAP::set_max_size_tabu_list(int new_max_size)
 	this->max_size_tabu_list = new_max_size;
 }
 
-std::vector<int*> TsQAP::get_neighbors(int* solution)
+QAP* TsQAP::get_instance_qap ()
 {
-	std::vector<int*> vector;
-	vector.push_back(solution);
-	return vector;
-}
-
-int TsQAP::calculate_fitness (int* solution)
-{	
-	return solution[0]*10;
+	return this->problem;
 }

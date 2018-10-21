@@ -61,6 +61,9 @@ public:
 	 */
 	QAP(int n, int** d_mat, int** f_mat, int* best_solution, int best_cost);
 
+	
+	QAP();
+
 	/**
 	 * @brief      Destroys the object.
 	 */
