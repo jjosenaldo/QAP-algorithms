@@ -10,7 +10,7 @@ BUILD_PATH = build
 BIN_PATH = $(BUILD_PATH)
 
 # executable #
-BIN_NAME = exe
+BIN_NAME = exe.out
 
 # extensions #
 SRC_EXT = cpp
