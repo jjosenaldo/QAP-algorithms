@@ -118,6 +118,14 @@ public:
 	 */
 	void set_best_cost(int new_best_cost);
 
+
+	/**
+	 * @brief      Gets the number of facilities/locations.
+	 *
+	 * @return     The number of facilities/locations.
+	 */
+	int get_n();
+
 };
 
 #endif
