@@ -20,7 +20,7 @@ void TsQAP::generate_inicial_solution (int size_solution)
 	this->set_current_best_solution(solution);
 }
 
-std::vector<int*> TsQAP::get_neighbors(int* solution)
+std::vector<int*> TsQAP::get_unforbidden_neighbors(int* solution)
 {
 	std::vector<int*> neighbors;
 	int n = this->problem->get_number_of_facilities();
@@ -76,7 +76,7 @@ void TsQAP::run()
 
 	while (not stoppingCondition)
 	{
-		std::vector<int*> neighbors = this->get_neighbors(this->best_candidate);
+		std::vector<int*> neighbors = this->get_unforbidden_neighbors(this->best_candidate);
 		for (unsigned int i=0; i < neighbors.size(); i++)
 			if ( this->calculate_fitness(neighbors[i]) > this->fitness_best_candidate )
 				this->set_best_candidate(neighbors[i]);
