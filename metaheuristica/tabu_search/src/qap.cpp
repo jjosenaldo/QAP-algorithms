@@ -63,8 +63,3 @@ void QAP::set_best_cost(int new_best_cost)
 {
 	this->best_cost = new_best_cost;
 }
-
-int QAP::get_n()
-{
-	return this->n;
-}

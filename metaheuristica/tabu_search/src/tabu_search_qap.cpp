@@ -8,6 +8,41 @@ TsQAP::TsQAP(QAP *instance, int max_size)
 	this->max_size_tabu_list = max_size;
 }
 
+void TsQAP::init_delta_matrix()
+{
+	int n = this->problem->get_number_of_facilities();
+	int** f = this->problem->get_matrix_of_flows();
+	int** d = this->problem->get_matrix_of_distances();
+	int* pi = this->best_candidate;
+
+	this->delta_matrix = new int*[n];
+
+	for(int i = 0; i < n; ++i)
+	{
+		this->delta_matrix[i] = new int[n];
+
+		for(int j = 0; j < n; ++j)
+		{
+			int delta_ij = 0;
+
+			for(int k = 0; k < n; ++k)
+			{
+				if(k != i and k != j)
+				{
+					delta_ij += (d[k][i]-d[k][j]) * (f[pi[k]][pi[j]] - f[pi[k]][pi[i]])
+						+ (d[i][k] - d[j][k]) * (f[pi[j]][pi[k]] - f[pi[i]][pi[k]]);
+				}
+			}
+
+			delta_ij += (d[i][i]-d[j][j]) * (f[pi[j]][pi[j]] - f[pi[i]][pi[i]])
+						+ (d[i][j] - d[j][i]) * (f[pi[j]][pi[i]] - f[pi[i]][pi[j]]);
+
+			this->delta_matrix[i][j] = delta_ij;
+		}
+	}
+
+}
+
 /*Principal methods*/
 
 void TsQAP::generate_inicial_solution (int size_solution)
@@ -70,6 +105,7 @@ void TsQAP::run()
 {
 	this->generate_inicial_solution(this->get_instance_qap()->get_number_of_facilities());
 	this->set_best_candidate(this->get_current_best_solution());
+	this->init_delta_matrix();
 
 	bool stoppingCondition = false;
 	int cont = 0;

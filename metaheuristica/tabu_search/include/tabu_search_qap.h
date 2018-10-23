@@ -54,6 +54,10 @@ private:
 	 */
 	QAP *problem;
 
+	int** delta_matrix;
+
+	void init_delta_matrix();
+
 public:
 
 	/**
