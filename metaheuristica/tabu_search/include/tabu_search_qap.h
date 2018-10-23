@@ -58,6 +58,8 @@ private:
 
 	void init_delta_matrix();
 
+	void delta_value_linear(int i, int j);
+
 public:
 
 	/**
