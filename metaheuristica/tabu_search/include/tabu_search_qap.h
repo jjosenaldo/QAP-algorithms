@@ -58,7 +58,11 @@ private:
 
 	void init_delta_matrix();
 
-	void delta_value_linear(int i, int j);
+	int delta_value_linear(int i, int j);
+
+	int delta_value_constant(int i, int j, int p, int q);
+
+	void update_delta_matrix(Pair op);
 
 public:
 
@@ -92,7 +96,7 @@ public:
 	 *
 	 * @return     The neighbors of the informed solution.
 	 */
-	std::vector<int*> get_neighbors(int* solution);
+	std::vector<int*> get_unforbidden_neighbors(int* solution);
 
 	/**
 	 * @brief      Calculates the fitness.

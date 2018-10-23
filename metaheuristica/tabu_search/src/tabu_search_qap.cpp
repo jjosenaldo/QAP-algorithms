@@ -16,9 +16,9 @@ int TsQAP::delta_value_constant(int i, int j, int p, int q)
 	int* pi = this->best_candidate;
 
 	int value = old_delta + (d[p][i] - d[p][j] + d[q][j] - d[q][i]) *
-		(f[pi[p]][[j]] - f[pi[p]][[i]] + f[pi[q]][[i]] - f[pi[q]][[j]])
+		(f[pi[p]][pi[j]] - f[pi[p]][pi[i]] + f[pi[q]][pi[i]] - f[pi[q]][pi[j]])
 		+ (d[i][p] - d[j][p] + d[j][q] - d[i][q]) *
-		(f[pi[j]][[p]] - f[pi[i]][[p]] + f[pi[i]][[q]] - f[pi[j]][[q]]);
+		(f[pi[j]][pi[p]] - f[pi[i]][pi[p]] + f[pi[i]][pi[q]] - f[pi[j]][pi[q]]);
 
 	return value;
 }
@@ -28,6 +28,7 @@ int TsQAP::delta_value_linear(int i, int j)
 	int** f = this->problem->get_matrix_of_flows();
 	int** d = this->problem->get_matrix_of_distances();
 	int* pi = this->best_candidate;
+	int n = this->problem->get_number_of_facilities();
 	
 	int value = 0;
 
