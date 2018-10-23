@@ -8,6 +8,21 @@ TsQAP::TsQAP(QAP *instance, int max_size)
 	this->max_size_tabu_list = max_size;
 }
 
+int TsQAP::delta_value_constant(int i, int j, int p, int q)
+{
+	int old_delta = this->delta_matrix[i][j];
+	int** f = this->problem->get_matrix_of_flows();
+	int** d = this->problem->get_matrix_of_distances();
+	int* pi = this->best_candidate;
+
+	int value = old_delta + (d[p][i] - d[p][j] + d[q][j] - d[q][i]) *
+		(f[pi[p]][[j]] - f[pi[p]][[i]] + f[pi[q]][[i]] - f[pi[q]][[j]])
+		+ (d[i][p] - d[j][p] + d[j][q] - d[i][q]) *
+		(f[pi[j]][[p]] - f[pi[i]][[p]] + f[pi[i]][[q]] - f[pi[j]][[q]]);
+
+	return value;
+}
+
 int TsQAP::delta_value_linear(int i, int j)
 {
 	int** f = this->problem->get_matrix_of_flows();
@@ -29,6 +44,30 @@ int TsQAP::delta_value_linear(int i, int j)
 				+ (d[i][j] - d[j][i]) * (f[pi[j]][pi[i]] - f[pi[i]][pi[j]]);
 
 	return value;
+}
+
+void TsQAP::update_delta_matrix(Pair op)
+{
+	int n = this->problem->get_number_of_facilities();
+	int p = op.i, q = op.j;
+
+	this->delta_matrix[p][q] = -this->delta_matrix[p][q];
+
+	for(int i = 0; i < n; ++i)
+	{
+		for(int j = 0; j < n; ++j)
+		{
+			if(i == p and j == q)
+				continue;
+
+			else if(i == p or j == q)
+				this->delta_value_linear(i, j);
+
+			else
+				this->delta_value_constant(i, j, p, q);
+		}	
+		
+	}
 }
 
 void TsQAP::init_delta_matrix()
