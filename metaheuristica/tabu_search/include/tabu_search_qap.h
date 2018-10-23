@@ -7,18 +7,7 @@
 #include <ctime> 
 #include "qap.h"
 
-struct Pair
-{
-	int i;
-	int j;
-
-	bool operator==(const Pair& rhs)
-	{
-		if (rhs.i == this->i and rhs.j == this->j)
-			return true;
-		return false;
-	}
-};
+bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2);
 
 class TsQAP
 {
@@ -42,7 +31,7 @@ private:
 	/**
 	 * The tabu list
 	 */
-	std::vector<Pair> tabu_list;
+	std::unordered_map<std::pair<int,int>, int> tabu_list;
 
 	/**
 	 * Max size of tabu list
@@ -56,13 +45,17 @@ private:
 
 	int** delta_matrix;
 
-	void init_delta_matrix();
+	std::pair<int, int> init_delta_matrix();
 
 	int delta_value_linear(int i, int j);
 
 	int delta_value_constant(int i, int j, int p, int q);
 
-	void update_delta_matrix(Pair op);
+	void update_delta_matrix(std::pair<int,int> op);
+
+	void set_best_candidate(std::pair<int, int> perturbation);
+
+	void add_swap_to_tabu_list(std::pair<int, int> perturbation);
 
 public:
 
@@ -114,7 +107,7 @@ public:
 	 *
 	 * @return     True if forbidden, False otherwise.
 	 */
-	bool isForbidden(Pair operation);
+	bool isForbidden(std::pair<int,int> operation);
 
 	/**
 	 * @brief      run tabu search
