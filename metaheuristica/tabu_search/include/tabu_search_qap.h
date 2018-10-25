@@ -10,6 +10,18 @@
 
 bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2);
 
+// based on Casey's answer on https://stackoverflow.com/questions/20590656/error-for-hash-function-of-pair-of-ints
+struct pair_hash {
+    std::size_t operator () (const std::pair<int,int> &p) const {
+        auto h1 = std::hash<int>{}(p.first);
+        auto h2 = std::hash<int>{}(p.second);
+
+        // Mainly for demonstration purposes, i.e. works but is overly simple
+        // In the real world, use sth. like boost.hash_combine
+        return h1 ^ h2;  
+    }
+};
+
 class TsQAP
 {
 
@@ -32,7 +44,7 @@ private:
 	/**
 	 * The tabu list
 	 */
-	std::unordered_map<std::pair<int,int>, int> tabu_list;
+	std::unordered_map<std::pair<int,int>, int, pair_hash> tabu_list;
 
 	/**
 	 * Max size of tabu list

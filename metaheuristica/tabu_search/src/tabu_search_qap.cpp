@@ -156,7 +156,7 @@ int TsQAP::calculate_fitness (int* solution)
 
 bool TsQAP::isForbidden(std::pair<int,int> operation)
 {
-	std::unordered_map<std::pair<int,int>, int>::const_iterator got = this->tabu_list.find(operation);
+	std::unordered_map<std::pair<int,int>, int, pair_hash>::const_iterator got = this->tabu_list.find(operation);
 
 	return !(got == this->tabu_list.end());
 }
