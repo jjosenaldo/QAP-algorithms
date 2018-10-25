@@ -6,6 +6,7 @@
 #include <ctime> 
 #include <unordered_map>
 #include <vector>
+#include <iostream>
 #include "qap.h"
 
 bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2);

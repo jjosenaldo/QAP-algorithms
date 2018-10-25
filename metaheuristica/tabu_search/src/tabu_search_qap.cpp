@@ -14,7 +14,7 @@ TsQAP::~TsQAP()
 	delete[] this->best_candidate;
 	delete[] this->problem;
 	delete[] this->delta_matrix;
-	
+
 }
 
 int TsQAP::delta_value_constant(int i, int j, int p, int q)
@@ -58,6 +58,7 @@ int TsQAP::delta_value_linear(int i, int j)
 
 void TsQAP::update_delta_matrix(std::pair<int,int> op)
 {
+	std::cout << "entrou em update delta\n";
 	int n = this->problem->get_number_of_facilities();
 	int p = op.first, q = op.second;
 
@@ -116,12 +117,13 @@ std::pair<int, int> TsQAP::init_delta_matrix()
 
 void TsQAP::generate_inicial_solution (int size_solution)
 {
-	int* solution = this->get_current_best_solution();
-	for (int i=0; i < size_solution; i++)
-		solution[i] = i;
+	this->current_best_solution = new int[size_solution];
 
-	std::random_shuffle(solution, solution + size_solution);
-	this->set_current_best_solution(solution);
+	for(int i = 0; i < size_solution; ++i)
+		this->current_best_solution[i] = i;
+
+	std::random_shuffle(this->current_best_solution, this->current_best_solution + size_solution);
+
 }
 
 std::vector<int*> TsQAP::get_unforbidden_neighbors(int* solution)
@@ -267,7 +269,7 @@ void TsQAP::run()
 	this->generate_inicial_solution(this->get_instance_qap()->get_number_of_facilities());
 	this->set_best_candidate(this->current_best_solution);
 	std::pair<int, int> best_neighbor_swap = this->init_delta_matrix();
-	
+
 	this->set_best_candidate(best_neighbor_swap);
 
 	// Se o primeiro melhor vizinho é melhor que a soulução inicial,
