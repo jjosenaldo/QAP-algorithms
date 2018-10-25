@@ -59,6 +59,7 @@ int TsQAP::delta_value_linear(int i, int j)
 void TsQAP::update_delta_matrix(std::pair<int,int> op)
 {
 	std::cout << "entrou em update delta\n";
+	std::cout << "par recebido: (" << op.first << "," << op.second << ")\n";
 	int n = this->problem->get_number_of_facilities();
 	int p = op.first, q = op.second;
 
@@ -286,12 +287,19 @@ void TsQAP::run()
 
 	while (not stoppingCondition)
 	{
-		update_delta_matrix(best_neighbor_swap);
+		// não encontrou solução
+		if(not (best_neighbor_swap.first == -1 || best_neighbor_swap.second == -1))
+			update_delta_matrix(best_neighbor_swap);
+		
 		best_neighbor_swap = get_best_neighbor();
 
-		if (this->fitness_best_candidate > this->fitness_current_best_solution)
+		if (this->fitness_best_candidate < this->fitness_current_best_solution)
 			this->set_current_best_solution(best_neighbor_swap); 
 		else cont++;
+
+		std::cout << this->fitness_best_candidate << "\n";
+		std::cout << this->fitness_current_best_solution << "\n";
+		std::cout << "cont " << cont << "\n";
 
 		if (cont == 30) stoppingCondition = true;
 	}

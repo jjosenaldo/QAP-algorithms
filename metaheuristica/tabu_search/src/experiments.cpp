@@ -50,32 +50,38 @@ void run_tabu_search( std::string instance_name )
 	TsQAP ts = TsQAP(&qap, n);
 
 	std::cout << "Running Tabu Search in QAP...\n";
+	for(int i=0; i<10; i++){
+		high_resolution_clock::time_point t1 = high_resolution_clock::now();
+		ts.run();
+		high_resolution_clock::time_point t2 = high_resolution_clock::now();
+		int duration_in_milisseconds = duration_cast<milliseconds>(t2 - t1).count();
 
-	high_resolution_clock::time_point t1 = high_resolution_clock::now();
-	ts.run();
-	high_resolution_clock::time_point t2 = high_resolution_clock::now();
-	int duration_in_milisseconds = duration_cast<milliseconds>(t2 - t1).count();
+		std::cout << "Execution finished!" << "\n\n";
 
-	std::cout << "Execution finished!" << "\n\n";
+		std::ofstream out("archives/resultExecution.txt", std::ofstream::app);
+		if (!out.is_open()) std::cout << "\nNão abriu o arquivo!\n";
 
-	std::ofstream out("archives/resultExecution.txt", std::ofstream::app);
-	if (!out.is_open()) std::cout << "\nNão abriu o arquivo!\n";
+		out << instance_name << "\n";
+		out << "REPORT\n--------------------------------------------------";
+		out << std::endl << "Elapsed time: " << duration_in_milisseconds << " ms" << std::endl;
 
-	out << instance_name << "\n";
-	out << "REPORT\n--------------------------------------------------";
-	out << std::endl << "Elapsed time: " << duration_in_milisseconds << " ms" << std::endl;
+		int* sol = ts.get_current_best_solution();
+		out << "Best solution found: ";
+		for(int i = 0; i < n; ++i)
+			out << sol[i] + 1 << " ";
 
-	int* sol = ts.get_current_best_solution();
-	out << "Best solution found: ";
-	for(int i = 0; i < n; ++i)
-		out << sol[i] + 1 << " ";
+		std::ifstream opt_solution_stream(PATH_INSTANCE_PREFIX + FILE_OPT_PREFIX +  instance_name + FILE_OPT_SUFFIX);
+		int opt_cost;
+		opt_solution_stream >> opt_cost;
 
-	int cost_solution_found = qap.calculate_cost_of_solution(sol);
-	out << "\nCostof best solution found: " << cost_solution_found;
-	out << "\nDiference of best cost: " << qap.get_best_cost() - cost_solution_found;
+		int cost_solution_found = qap.calculate_cost_of_solution(sol);
+		out << "\nCost of best solution found: " << cost_solution_found;
+		out << "\nReal best cost: " << opt_cost;
+		out << "\nDiference of best cost: " << opt_cost - cost_solution_found;
 
-	out << "-------------------------------------------------" << std::endl;
-	out.close();
+		out << "\n-------------------------------------------------" << std::endl;
+		out.close();
+	}
 
 	for(int i = 0; i < n; ++i)
 	{
