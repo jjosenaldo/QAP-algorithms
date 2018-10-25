@@ -115,3 +115,93 @@ Cost of best solution found: 79442
 Real best cost: 51140
 Diference of best cost: -28302
 -------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 12 4 5 8 15 3 7 6 13 14 1 10 2 11 9 
+Cost of best solution found: 78430
+Real best cost: 51140
+Diference of best cost: -27290
+-------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 1 8 11 10 15 9 14 2 4 6 13 5 12 7 3 
+Cost of best solution found: 87276
+Real best cost: 51140
+Diference of best cost: -36136
+-------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 7 9 13 11 5 2 3 4 10 12 1 8 14 15 6 
+Cost of best solution found: 86018
+Real best cost: 51140
+Diference of best cost: -34878
+-------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 13 5 6 1 4 11 3 8 2 9 12 7 15 10 14 
+Cost of best solution found: 75190
+Real best cost: 51140
+Diference of best cost: -24050
+-------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 15 8 10 4 1 14 9 13 12 7 6 3 2 11 5 
+Cost of best solution found: 76914
+Real best cost: 51140
+Diference of best cost: -25774
+-------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 7 1 4 2 6 9 5 13 14 10 8 11 12 3 15 
+Cost of best solution found: 82560
+Real best cost: 51140
+Diference of best cost: -31420
+-------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 3 1 4 6 8 2 5 14 7 13 12 10 11 15 9 
+Cost of best solution found: 90426
+Real best cost: 51140
+Diference of best cost: -39286
+-------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 10 3 9 4 1 14 7 13 8 5 12 2 15 6 11 
+Cost of best solution found: 86796
+Real best cost: 51140
+Diference of best cost: -35656
+-------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 15 12 7 4 14 9 2 1 8 3 11 10 5 6 13 
+Cost of best solution found: 85994
+Real best cost: 51140
+Diference of best cost: -34854
+-------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Elapsed time: 1 ms
+Best solution found: 7 10 8 14 4 1 2 3 9 11 13 15 5 6 12 
+Cost of best solution found: 73558
+Real best cost: 51140
+Diference of best cost: -22418
+-------------------------------------------------
