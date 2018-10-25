@@ -1,13 +1,26 @@
 #ifndef _TABU_SEARCH_QAP_
 #define _TABU_SEARCH_QAP_
 
-#include <vector>
 #include <algorithm>
 #include <cstdlib>
 #include <ctime> 
+#include <unordered_map>
+#include <vector>
 #include "qap.h"
 
 bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2);
+
+// based on Casey's answer on https://stackoverflow.com/questions/20590656/error-for-hash-function-of-pair-of-ints
+struct pair_hash {
+    std::size_t operator () (const std::pair<int,int> &p) const {
+        auto h1 = std::hash<int>{}(p.first);
+        auto h2 = std::hash<int>{}(p.second);
+
+        // Mainly for demonstration purposes, i.e. works but is overly simple
+        // In the real world, use sth. like boost.hash_combine
+        return h1 ^ h2;  
+    }
+};
 
 class TsQAP
 {
@@ -31,7 +44,7 @@ private:
 	/**
 	 * The tabu list
 	 */
-	std::unordered_map<std::pair<int,int>, int> tabu_list;
+	std::unordered_map<std::pair<int,int>, int, pair_hash> tabu_list;
 
 	/**
 	 * Max size of tabu list
@@ -56,6 +69,21 @@ private:
 	void set_best_candidate(std::pair<int, int> perturbation);
 
 	void add_swap_to_tabu_list(std::pair<int, int> perturbation);
+
+	std::pair<int, int> get_best_neighbor();
+
+	/**
+	 * @brief      Determines if forbidden.
+	 *
+	 * @param[in]  operation  The operation
+	 *
+	 * @return     True if forbidden, False otherwise.
+	 */
+	bool isForbidden(std::pair<int,int> operation);
+
+	bool isForbidden(int i, int j);
+
+	bool satisfies_aspiration_criteria1(int cost);
 
 public:
 
@@ -100,14 +128,7 @@ public:
 	 */
 	int calculate_fitness (int* solution);
 
-	/**
-	 * @brief      Determines if forbidden.
-	 *
-	 * @param[in]  operation  The operation
-	 *
-	 * @return     True if forbidden, False otherwise.
-	 */
-	bool isForbidden(std::pair<int,int> operation);
+	
 
 	/**
 	 * @brief      run tabu search

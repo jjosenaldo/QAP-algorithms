@@ -156,20 +156,108 @@ int TsQAP::calculate_fitness (int* solution)
 
 bool TsQAP::isForbidden(std::pair<int,int> operation)
 {
-	for (unsigned int i=0; i < this->tabu_list.size(); i++)
-		if (tabu_list[i] == operation)
-			return true;
-	return false;
+	std::unordered_map<std::pair<int,int>, int, pair_hash>::const_iterator got = this->tabu_list.find(operation);
+
+	return !(got == this->tabu_list.end());
+}
+
+bool TsQAP::isForbidden(int i, int j)
+{
+	std::pair<int, int> op = std::make_pair(i, j);
+
+	return this->isForbidden(op);
+}
+
+std::pair<int, int> TsQAP::get_best_neighbor()
+{
+	bool better_non_tabu_found = false;
+	int n = this->problem->get_number_of_facilities();
+	int best_non_tabu_cost_found = INT_MAX;
+	int best_tabu_cost_found = INT_MAX;
+	std::pair<int, int> best_tabu_neighbor = std::make_pair<int,int>(-1,-1);
+	std::pair<int, int> best_non_tabu_neighbor = std::make_pair<int,int>(-1,-1);
+
+	for(int i = 0; i < n; ++i)
+	{
+		for(int j = 0; j < n; ++j)
+		{
+			int neighbor_cost = this->delta_matrix[i][j];
+
+			// já encontramos um vizinho não-tabu melhor que a solução atual:
+			// não precisa analisar os vizinhos tabu
+			if(better_non_tabu_found)
+			{
+				// se o vizinho é o melhor não-tabu já visto
+				if(neighbor_cost < best_non_tabu_cost_found)
+				{
+					best_non_tabu_cost_found = neighbor_cost;
+					best_non_tabu_neighbor.first = i;
+					best_non_tabu_neighbor.second = j;
+				}
+			}
+
+			else
+			{
+				// verifica se o vizinho é tabu: ele só é analisado se satisfazer o critério de aspiração
+				if(this->isForbidden(i, j))
+				{
+					// o vizinho tabu satisfaz o critério de aspiração
+					if(this->satisfies_aspiration_criteria1(neighbor_cost))
+					{
+						// se o vizinho tabu é melhor do que o melhor vizinho tabu já visto
+						if(neighbor_cost < best_tabu_cost_found)
+						{
+							best_tabu_neighbor.first = i;
+							best_tabu_neighbor.second = j;	
+							best_tabu_cost_found = neighbor_cost;
+						}
+						
+					}
+				}
+
+				// o vizinho não é tabu
+				else
+				{
+					// se o vizinho é o melhor não-tabu já visto
+					if(neighbor_cost < best_non_tabu_cost_found)
+					{
+						best_non_tabu_cost_found = neighbor_cost;
+						best_non_tabu_neighbor.first = i;
+						best_non_tabu_neighbor.second = j;
+
+						// se o vizinho é melhor que a solução atual: não precisamos mais olhar
+						// para os vizinhos tabu
+						if(neighbor_cost < fitness_best_candidate)
+							better_non_tabu_found = true;
+					}
+				}
+			}
+
+		}
+	}
+
+	if(better_non_tabu_found)
+		return best_non_tabu_neighbor;
+
+	else
+		return best_tabu_neighbor;
+}
+
+bool TsQAP::satisfies_aspiration_criteria1(int cost)
+{
+	return cost < this->fitness_current_best_solution;
 }
 
 void TsQAP::run()
 {
 	this->generate_inicial_solution(this->get_instance_qap()->get_number_of_facilities());
 	this->set_best_candidate(this->current_best_solution);
-	pair<int, int> best_neighbor_swap = this->init_delta_matrix();
+	std::pair<int, int> best_neighbor_swap = this->init_delta_matrix();
 	
 	this->set_best_candidate(best_neighbor_swap);
 
+	// Se o primeiro melhor vizinho é melhor que a soulução inicial,
+	// então a solução melhor é setada com esse vizinho. 
 	if(this->delta_matrix[best_neighbor_swap.first][best_neighbor_swap.second] < 0)
 	{
 		this->set_current_best_solution(this->best_candidate);
@@ -186,7 +274,10 @@ void TsQAP::run()
 		// for (unsigned int i=0; i < neighbors.size(); i++)
 		// 	if ( this->calculate_fitness(neighbors[i]) > this->fitness_best_candidate )
 		// 		this->set_best_candidate(neighbors[i]);
-		add_solution_to_tabu_list();
+		// add_solution_to_tabu_list();
+
+		update_delta_matrix(best_neighbor_swap);
+
 
 		if (this->fitness_best_candidate > this->fitness_current_best_solution)
 			this->set_current_best_solution(this->best_candidate);
@@ -199,14 +290,14 @@ void TsQAP::run()
 
 void TsQAP::add_swap_to_tabu_list(std::pair<int, int> perturbation)
 {
-	for(std::unordered_map<std::pair<int, int>, int>::iterator it = tabu_list.begin(); 
-		it != tabu_list.end(); ++it)
+	for(std::unordered_map<std::pair<int, int>, int, pair_hash>::iterator it = this->tabu_list.begin(); 
+		it != this->tabu_list.end(); ++it)
 	{
 		if(--it->second == 0)
-			tabu_list.erase(it);
+			this->tabu_list.erase(it);
 	}
 
-	tabu_list[perturbation] = this->max_size_tabu_list;
+	this->tabu_list[perturbation] = this->max_size_tabu_list;
 }
 
 /*Getters and Setters*/
