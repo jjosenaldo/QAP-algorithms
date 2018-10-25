@@ -117,6 +117,15 @@ public:
 	 * @param[in]  new_best_cost  The new best cost
 	 */
 	void set_best_cost(int new_best_cost);
+
+	/**
+	 * @brief      Calculates the cost of solution.
+	 *
+	 * @param      solution  The solution
+	 *
+	 * @return     The cost of solution.
+	 */
+	int calculate_cost_of_solution(int* solution);
 };
 
 #endif

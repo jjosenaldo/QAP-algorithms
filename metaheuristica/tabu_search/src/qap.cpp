@@ -63,3 +63,11 @@ void QAP::set_best_cost(int new_best_cost)
 {
 	this->best_cost = new_best_cost;
 }
+
+int QAP::calculate_cost_of_solution(int* solution)
+{
+	int cost = 0;
+	for (int i=0; i < this->n; i++)
+		cost += d_mat[i][solution[i]]*f_mat[i][solution[i]];
+	return cost;
+}

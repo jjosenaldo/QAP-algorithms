@@ -8,6 +8,14 @@ TsQAP::TsQAP(QAP *instance, int max_size)
 	this->problem = instance;
 	this->max_size_tabu_list = max_size;
 }
+TsQAP::~TsQAP()
+{
+	delete[] this->current_best_solution;
+	delete[] this->best_candidate;
+	delete[] this->problem;
+	delete[] this->delta_matrix;
+	
+}
 
 int TsQAP::delta_value_constant(int i, int j, int p, int q)
 {
@@ -237,10 +245,16 @@ std::pair<int, int> TsQAP::get_best_neighbor()
 	}
 
 	if(better_non_tabu_found)
+	{
+		this->fitness_best_candidate = best_non_tabu_cost_found;
 		return best_non_tabu_neighbor;
+	}
 
 	else
+	{
+		this->fitness_best_candidate = best_tabu_cost_found;
 		return best_tabu_neighbor;
+	}
 }
 
 bool TsQAP::satisfies_aspiration_criteria1(int cost)
@@ -270,17 +284,11 @@ void TsQAP::run()
 
 	while (not stoppingCondition)
 	{
-		// std::vector<int*> neighbors = this->get_unforbidden_neighbors(this->best_candidate);
-		// for (unsigned int i=0; i < neighbors.size(); i++)
-		// 	if ( this->calculate_fitness(neighbors[i]) > this->fitness_best_candidate )
-		// 		this->set_best_candidate(neighbors[i]);
-		// add_solution_to_tabu_list();
-
 		update_delta_matrix(best_neighbor_swap);
-
+		best_neighbor_swap = get_best_neighbor();
 
 		if (this->fitness_best_candidate > this->fitness_current_best_solution)
-			this->set_current_best_solution(this->best_candidate);
+			this->set_current_best_solution(best_neighbor_swap); 
 		else cont++;
 
 		if (cont == 30) stoppingCondition = true;
@@ -310,6 +318,11 @@ int* TsQAP::get_current_best_solution()
 void TsQAP::set_current_best_solution(int* new_best_solution)
 {
 	this->current_best_solution = new_best_solution;
+}
+
+void TsQAP::set_current_best_solution(std::pair<int, int> perturbation)
+{
+	std::iter_swap(this->current_best_solution + perturbation.first, this->current_best_solution + perturbation.second);
 }
 
 int* TsQAP::get_best_candidate()

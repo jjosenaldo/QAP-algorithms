@@ -151,6 +151,8 @@ public:
 	 */
 	void set_current_best_solution(int* new_best_solution);
 
+	void set_current_best_solution(std::pair<int, int> perturbation);
+
 	/**
 	 * @brief      Gets the best candidate.
 	 *
