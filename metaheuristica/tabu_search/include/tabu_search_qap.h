@@ -1,10 +1,11 @@
 #ifndef _TABU_SEARCH_QAP_
 #define _TABU_SEARCH_QAP_
 
-#include <vector>
 #include <algorithm>
 #include <cstdlib>
 #include <ctime> 
+#include <unordered_map>
+#include <vector>
 #include "qap.h"
 
 bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2);
@@ -57,6 +58,21 @@ private:
 
 	void add_swap_to_tabu_list(std::pair<int, int> perturbation);
 
+	std::pair<int, int> get_best_neighbor();
+
+	/**
+	 * @brief      Determines if forbidden.
+	 *
+	 * @param[in]  operation  The operation
+	 *
+	 * @return     True if forbidden, False otherwise.
+	 */
+	bool isForbidden(std::pair<int,int> operation);
+
+	bool isForbidden(int i, int j);
+
+	bool satisfies_aspiration_criteria1(int cost);
+
 public:
 
 	/**
@@ -100,14 +116,7 @@ public:
 	 */
 	int calculate_fitness (int* solution);
 
-	/**
-	 * @brief      Determines if forbidden.
-	 *
-	 * @param[in]  operation  The operation
-	 *
-	 * @return     True if forbidden, False otherwise.
-	 */
-	bool isForbidden(std::pair<int,int> operation);
+	
 
 	/**
 	 * @brief      run tabu search
