@@ -292,6 +292,7 @@ void TsQAP::run()
 			update_delta_matrix(best_neighbor_swap);
 		
 		best_neighbor_swap = get_best_neighbor();
+		this->add_swap_to_tabu_list(best_neighbor_swap);
 
 		if (this->fitness_best_candidate < this->fitness_current_best_solution)
 			this->set_current_best_solution(best_neighbor_swap); 
