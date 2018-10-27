@@ -25,11 +25,6 @@ QAP::QAP(int n, int** d_mat, int** f_mat, int* best_solution, int best_cost)
 	this->best_cost = best_cost;
 }
 
-QAP::~QAP()
-{
-	delete[] this->best_solution;
-}
-
 int QAP::get_number_of_facilities()
 {
 	return this->n;

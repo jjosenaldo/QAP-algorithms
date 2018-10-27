@@ -1,4 +1,5 @@
 #include "tabu_search_qap.h"
+#include <algorithm> // copy(), 
 #include <climits> // INT_MAX
 
 /*Constructor*/
@@ -6,15 +7,25 @@
 TsQAP::TsQAP(QAP *instance, int max_size)
 {
 	this->problem = instance;
+	this->n = instance->get_number_of_facilities();
 	this->max_size_tabu_list = max_size;
+
+	this->delta_matrix = new int*[n];
+	for(int i = 0; i < n; ++i)
+		this->delta_matrix[i] = new int[n];
+
+	this->current_solution = new int[n];
+	this->current_best_solution = new int[n];
 }
 TsQAP::~TsQAP()
 {
 	delete[] this->current_best_solution;
 	delete[] this->current_solution;
-	delete[] this->problem;
-	delete[] this->delta_matrix;
 
+	for(int i = 0; i < this->n; ++i)
+		delete[] this->delta_matrix[i];
+
+	delete[] this->delta_matrix;
 }
 
 int TsQAP::delta_value_constant(int i, int j, int p, int q)
@@ -89,12 +100,8 @@ std::pair<int, int> TsQAP::init_delta_matrix()
 	int least_delta = INT_MAX;
 	std::pair<int, int> least_neighbor = std::make_pair<int, int>(-1, -1);
 
-	this->delta_matrix = new int*[n];
-
 	for(int i = 0; i < n; ++i)
 	{
-		this->delta_matrix[i] = new int[n];
-
 		for(int j = 0; j < n; ++j)
 		{
 			int delta = this->delta_value_linear(i, j);
@@ -118,8 +125,6 @@ std::pair<int, int> TsQAP::init_delta_matrix()
 
 void TsQAP::generate_initial_solution (int size_solution)
 {
-	this->current_best_solution = new int[size_solution];
-
 	for(int i = 0; i < size_solution; ++i)
 		this->current_best_solution[i] = i;
 
@@ -284,8 +289,9 @@ void TsQAP::run()
 
 	bool stoppingCondition = false;
 	int cont = 0;
+	int debug_test = 0;
 
-	while (not stoppingCondition)
+	while (not stoppingCondition && ++debug_test < 10)
 	{
 		// não encontrou solução
 		if(not (best_neighbor_swap.first == -1 || best_neighbor_swap.second == -1))
@@ -328,7 +334,7 @@ int* TsQAP::get_current_best_solution()
 
 void TsQAP::set_current_best_solution(int* new_best_solution)
 {
-	this->current_best_solution = new_best_solution;
+	std::copy(new_best_solution, new_best_solution+this->n, this->current_best_solution);
 }
 
 void TsQAP::set_current_best_solution(std::pair<int, int> perturbation)
@@ -343,7 +349,7 @@ int* TsQAP::get_current_solution()
 
 void TsQAP::set_current_solution(int* new_current_solution)
 {
-	this->current_solution = new_current_solution;
+	std::copy(new_current_solution, new_current_solution+this->n, this->current_solution);
 }
 
 void TsQAP::set_current_solution(std::pair<int, int> perturbation)

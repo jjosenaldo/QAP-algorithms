@@ -28,6 +28,8 @@ class TsQAP
 
 private:
 
+	int n;
+
 	/* It consists of the current best n-dimensional permutation vector in 
 	 * which the i-th element corresponds to the facility assigned to the
 	 * i-th location */

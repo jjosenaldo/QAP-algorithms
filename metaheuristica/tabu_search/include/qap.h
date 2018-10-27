@@ -65,11 +65,6 @@ public:
 	QAP();
 
 	/**
-	 * @brief      Destroys the object.
-	 */
-	~QAP();
-
-	/**
 	 * @brief      Gets the number of facilities.
 	 *
 	 * @return     The number of facilities.
