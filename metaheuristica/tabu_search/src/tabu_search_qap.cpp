@@ -135,10 +135,10 @@ void TsQAP::generate_initial_solution()
 	this->set_fitness_current_solution(initial_fitness);
 	this->set_fitness_current_best_solution(initial_fitness);
 
-	std::cout << "Solução inicial, que tem custo " << initial_fitness << ":\n";
+	std::cout << "Initial solutioh, with fitness = " << initial_fitness << ":\n";
 	for(int i = 0; i < this->n; ++i)
 		std::cout << this->current_solution[i] << " ";
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
 }
 
 std::vector<int*> TsQAP::get_unforbidden_neighbors(int* solution)
@@ -223,7 +223,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 
 			else
 			{
-				// verifica se o vizinho é tabu: ele só é analisado se satisfazer o critério de aspiração
+				// verifica se o vizinho é tabu
 				if(this->is_forbidden(i, j))
 				{
 					// o vizinho tabu satisfaz o critério de aspiração
@@ -252,7 +252,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 
 						// se o vizinho é melhor que a solução atual: não precisamos mais olhar
 						// para os vizinhos tabu
-						if(neighbor_cost < fitness_current_solution)
+						if(neighbor_cost < this->fitness_current_solution)
 							better_non_tabu_found = true;
 					}
 				}
@@ -301,17 +301,32 @@ void TsQAP::run()
 
 	this->add_swap_to_tabu_list(best_neighbor_swap.first);
 
-	int max_iterations = 10;
+	const int MAX_ITERATIONS = 10;
+	const int MAX_ITERATIONS_NOT_IMPROVED = 5;
+	int current_iteration = 0;
 	int iterations_not_improved = 0;
 
-	while (max_iterations-- < 10 && iterations_not_improved >= 5)
+	while (++current_iteration < MAX_ITERATIONS && iterations_not_improved++ < MAX_ITERATIONS_NOT_IMPROVED)
 	{
+		std::cout << "Current iteration: " << current_iteration << std::endl;
+		std::cout << "Current solution: ";
+		for(int i = 0; i < this->n; ++i) std::cout << this->current_solution[i] <<" ";
+		std::cout << "\nFitness of the best solution: " << this->fitness_current_best_solution << std::endl;
+		std::cout << "Fitness of the current solution: " << this->fitness_current_solution << std::endl;
+
 		// evaluates the neighborhood
 		this->update_delta_matrix(best_neighbor_swap.first);
-		
+
 		best_neighbor_swap = this->get_best_neighbor();
 
-		this->set_fitness_current_solution(best_neighbor_swap.second);
+		std::cout << "Best swap: <" << best_neighbor_swap.first.first 
+			<< ", " << best_neighbor_swap.first.second << ">, with delta = "
+			<< best_neighbor_swap.second << " and new fitness = " 
+			<< (best_neighbor_swap.second+this->fitness_current_solution) << std::endl;
+
+		// updates current solution
+		this->set_current_solution(best_neighbor_swap.first);
+		this->increment_fitness_current_solution(best_neighbor_swap.second);
 
 		if(this->fitness_current_solution < this->fitness_current_best_solution)
 		{
@@ -324,6 +339,8 @@ void TsQAP::run()
 			++iterations_not_improved;
 
 		this->add_swap_to_tabu_list(best_neighbor_swap.first);
+		this->print_tabu_list();
+		std::cout << std::endl;
 	}
 
 }
@@ -414,7 +431,7 @@ void TsQAP::set_fitness_current_best_solution(int new_fitness)
 
 void TsQAP::print_tabu_list()
 {
-	std::cout << "LISTA TABU\n";
+	std::cout << "Tabu list: ";
 	for(std::unordered_map<std::pair<int, int>, int, pair_hash>::iterator it = this->tabu_list.begin(); 
 		it != this->tabu_list.end(); ++it)
 		std::cout << "<" << it->first.first << ", " << it->first.second << "> : " << it->second << std::endl;
