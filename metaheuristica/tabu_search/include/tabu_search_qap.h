@@ -38,9 +38,9 @@ private:
 	/**
 	 * The candidate for a best solution
 	 */
-	int* best_candidate;
+	int* current_solution;
 
-	int fitness_best_candidate;
+	int fitness_current_solution;
 
 	/**
 	 * The tabu list
@@ -67,7 +67,7 @@ private:
 
 	void update_delta_matrix(std::pair<int,int> op);
 
-	void set_best_candidate(std::pair<int, int> perturbation);
+	void set_current_solution(std::pair<int, int> perturbation);
 
 	void add_swap_to_tabu_list(std::pair<int, int> perturbation);
 
@@ -80,9 +80,9 @@ private:
 	 *
 	 * @return     True if forbidden, False otherwise.
 	 */
-	bool isForbidden(std::pair<int,int> operation);
+	bool is_forbidden(std::pair<int,int> operation);
 
-	bool isForbidden(int i, int j);
+	bool is_forbidden(int i, int j);
 
 	bool satisfies_aspiration_criteria1(int cost);
 
@@ -108,7 +108,7 @@ public:
 	 *
 	 * @param      size_solution    the size problem          
 	 */
-	void generate_inicial_solution (int size_solution);
+	void generate_initial_solution (int size_solution);
 
 
 	/**
@@ -159,14 +159,14 @@ public:
 	 *
 	 * @return     The best candidate.
 	 */
-	int* get_best_candidate();
+	int* get_current_solution();
 
 	/**
 	 * @brief      Sets the best candidate.
 	 *
-	 * @param      new_best_candidate  The new best candidate
+	 * @param      new_current_solution  The new best candidate
 	 */
-	void set_best_candidate(int* new_best_candidate);
+	void set_current_solution(int* new_current_solution);
 
 	/**
 	 * @brief      Gets the maximum size tabu list.
@@ -197,7 +197,7 @@ public:
 	 *
 	 * @return     The fitness best candidate.
 	 */
-	int get_fitness_best_candidate();
+	int get_fitness_current_solution();
 	
 };
 
