@@ -10,6 +10,7 @@ const std::string FILE_OPT_SUFFIX =  ".dat";
 
 int main()
 {
+	std::srand(std::time(0));
 	int n;
 	int** d_mat;
 	int** f_mat;

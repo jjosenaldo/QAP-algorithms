@@ -1,5 +1,4 @@
 #include "qap.h"
-#include <iostream>
 
 QAP::QAP(int n, int** d_mat, int** f_mat)
 {
@@ -63,7 +62,6 @@ void QAP::set_best_cost(int new_best_cost)
 int QAP::calculate_cost_of_solution(int* solution)
 {
 	int cost = 0;
-	std::cout << "valor de n: " << n << "\n";
 	
 	for(int i = 0; i < this->n; ++i)
 	{

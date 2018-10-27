@@ -61,7 +61,7 @@ private:
 
 	int** delta_matrix;
 
-	std::pair<int, int> init_delta_matrix();
+	std::pair<std::pair<int, int>, int> init_delta_matrix();
 
 	int delta_value_linear(int i, int j);
 
@@ -100,6 +100,10 @@ private:
 	void set_fitness_current_solution(int new_cost);
 
 	void set_fitness_current_best_solution(int new_cost);
+
+	void increment_fitness_current_best_solution(int delta);
+
+	void increment_fitness_current_solution(int delta);
 
 public:
 
@@ -211,6 +215,8 @@ public:
 	void add_swap_to_tabu_list(int i, int j);
 
 	void print_delta_matrix();
+
+	void print_naive_delta_matrix();
 };
 
 #endif

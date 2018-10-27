@@ -49,21 +49,19 @@ int TsQAP::delta_value_linear(int i, int j)
 	int** f = this->problem->get_matrix_of_flows();
 	int** d = this->problem->get_matrix_of_distances();
 	int* pi = this->current_solution;
-	int n = this->problem->get_number_of_facilities();
 	
 	int value = 0;
 
-	for(int k = 0; k < n; ++k)
+	for(int k = 0; k < this->n; ++k)
 	{
-		if(k != i and k != j)
+		if(k != i && k != j)
 		{
 			value += (d[k][i]-d[k][j]) * (f[pi[k]][pi[j]] - f[pi[k]][pi[i]])
 				+ (d[i][k] - d[j][k]) * (f[pi[j]][pi[k]] - f[pi[i]][pi[k]]);
 		}
 	}
 
-	value += (d[i][i]-d[j][j]) * (f[pi[j]][pi[j]] - f[pi[i]][pi[i]])
-				+ (d[i][j] - d[j][i]) * (f[pi[j]][pi[i]] - f[pi[i]][pi[j]]);
+	value += (d[i][j] - d[j][i]) * (f[pi[j]][pi[i]] - f[pi[i]][pi[j]]);
 
 	return value;
 }
@@ -95,15 +93,14 @@ void TsQAP::update_delta_matrix(std::pair<int,int> op)
 	}
 }
 
-std::pair<int, int> TsQAP::init_delta_matrix()
+std::pair<std::pair<int, int>, int> TsQAP::init_delta_matrix()
 {
-	int n = this->problem->get_number_of_facilities();
 	int least_delta = INT_MAX;
 	std::pair<int, int> least_neighbor = std::make_pair<int, int>(-1, -1);
 
-	for(int i = 0; i < n; ++i)
+	for(int i = 0; i < this->n; ++i)
 	{
-		for(int j = 0; j < n; ++j)
+		for(int j = 0; j < this->n; ++j)
 		{
 			int delta = this->delta_value_linear(i, j);
 			this->delta_matrix[i][j] = delta;
@@ -118,7 +115,7 @@ std::pair<int, int> TsQAP::init_delta_matrix()
 		}
 	}
 
-	return least_neighbor;
+	return std::make_pair(least_neighbor, least_delta);
 
 }
 
@@ -140,6 +137,10 @@ void TsQAP::generate_initial_solution()
 	this->set_fitness_current_solution(initial_fitness);
 	this->set_fitness_current_best_solution(initial_fitness);
 
+	std::cout << "Solução inicial, que tem custo " << initial_fitness << ":\n";
+	for(int i = 0; i < this->n; ++i)
+		std::cout << this->current_solution[i] << " ";
+	std::cout << std::endl;
 }
 
 std::vector<int*> TsQAP::get_unforbidden_neighbors(int* solution)
@@ -283,16 +284,22 @@ bool TsQAP::satisfies_aspiration_criteria1(int cost)
 void TsQAP::run()
 {
 	this->generate_initial_solution();
-	this->set_current_solution(this->current_best_solution);
-	std::pair<int, int> best_neighbor_swap = this->init_delta_matrix();
+	std::pair<std::pair<int, int>, int> initial_best_swap = this->init_delta_matrix();
+
+	this->print_delta_matrix();
+	this->print_naive_delta_matrix();
+
+	std::pair<int, int> best_neighbor_swap = initial_best_swap.first;
 
 	this->set_current_solution(best_neighbor_swap);
+	this->increment_fitness_current_solution(initial_best_swap.second);
 
 	// Se o primeiro melhor vizinho é melhor que a soulução inicial,
 	// então a solução melhor é setada com esse vizinho. 
-	if(this->delta_matrix[best_neighbor_swap.first][best_neighbor_swap.second] < 0)
+	if(initial_best_swap.second < 0)
 	{
-		this->set_current_best_solution(this->current_solution);
+		this->set_current_best_solution(best_neighbor_swap);
+		this->increment_fitness_current_best_solution(initial_best_swap.second);
 	}
 
 	this->add_swap_to_tabu_list(best_neighbor_swap);
@@ -301,7 +308,6 @@ void TsQAP::run()
 	int cont = 0;
 	int debug_test = 0;
 
-	print_delta_matrix();
 
 	while (not stoppingCondition && ++debug_test < 10)
 	{
@@ -336,6 +342,16 @@ void TsQAP::add_swap_to_tabu_list(std::pair<int, int> perturbation)
 	this->tabu_list[perturbation] = this->max_size_tabu_list;
 }
 
+void TsQAP::increment_fitness_current_solution(int delta)
+{
+	this->fitness_current_solution += delta;
+}
+
+void TsQAP::increment_fitness_current_best_solution(int delta)
+{
+	this->fitness_current_solution += delta;
+}
+
 /*Getters and Setters*/
 
 int* TsQAP::get_current_best_solution()
@@ -346,11 +362,6 @@ int* TsQAP::get_current_best_solution()
 void TsQAP::set_current_best_solution(int* new_best_solution)
 {
 	std::copy(new_best_solution, new_best_solution+this->n, this->current_best_solution);
-}
-
-void TsQAP::set_current_best_solution(std::pair<int, int> perturbation)
-{
-	std::iter_swap(this->current_best_solution + perturbation.first, this->current_best_solution + perturbation.second);
 }
 
 int* TsQAP::get_current_solution()
@@ -366,6 +377,11 @@ void TsQAP::set_current_solution(int* new_current_solution)
 void TsQAP::set_current_solution(std::pair<int, int> perturbation)
 {
 	std::iter_swap(this->current_solution + perturbation.first, this->current_solution + perturbation.second);
+}
+
+void TsQAP::set_current_best_solution(std::pair<int, int> perturbation)
+{
+	std::iter_swap(this->current_best_solution + perturbation.first, this->current_best_solution + perturbation.second);
 }
 
 int TsQAP::get_max_size_tabu_list()
@@ -414,6 +430,22 @@ void TsQAP::print_delta_matrix()
 	{
 		for(int j = 0; j < this->n; ++j)
 			std::cout << this->delta_matrix[i][j] << " ";
+		std::cout << std::endl;
+	}
+}
+
+void TsQAP::print_naive_delta_matrix()
+{
+	std::cout << "NAIVE DELTA_MATRIX (but the correct one)\n";
+	for(int i = 0; i < this->n; ++i)
+	{
+		for(int j = 0; j < this->n; ++j)
+		{
+			std::iter_swap(this->current_solution + i, this->current_solution + j);
+			std::cout << (this->problem->calculate_cost_of_solution(this->current_solution)-this->fitness_current_solution) << " ";
+			std::iter_swap(this->current_solution + i, this->current_solution + j);
+		}
+
 		std::cout << std::endl;
 	}
 }
