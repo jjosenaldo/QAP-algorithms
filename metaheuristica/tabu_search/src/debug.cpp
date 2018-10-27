@@ -49,6 +49,7 @@ int main()
 
 	QAP qap = QAP( n, d_mat, f_mat);
 	TsQAP ts = TsQAP(&qap, n);
+	
 	ts.run();
 
 	for(int i = 0; i < n; ++i)

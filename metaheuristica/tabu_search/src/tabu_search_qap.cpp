@@ -1,6 +1,7 @@
 #include "tabu_search_qap.h"
 #include <algorithm> // copy(), 
 #include <climits> // INT_MAX
+#include <iostream>
 
 /*Constructor*/
 
@@ -123,12 +124,21 @@ std::pair<int, int> TsQAP::init_delta_matrix()
 
 /*Principal methods*/
 
-void TsQAP::generate_initial_solution (int size_solution)
+void TsQAP::generate_initial_solution()
 {
-	for(int i = 0; i < size_solution; ++i)
-		this->current_best_solution[i] = i;
+	// generate initial "current solution" randomly
+	for(int i = 0; i < this->n; ++i)
+		this->current_solution[i] = i;
 
-	std::random_shuffle(this->current_best_solution, this->current_best_solution + size_solution);
+	std::random_shuffle(this->current_solution, this->current_solution + this->n);
+
+	// copies the initial solution into the best one
+	std::copy(this->current_solution, this->current_solution+this->n, this->current_best_solution);
+
+	// sets the fitnesses
+	int initial_fitness = this->problem->calculate_cost_of_solution(this->current_solution);
+	this->set_fitness_current_solution(initial_fitness);
+	this->set_fitness_current_best_solution(initial_fitness);
 
 }
 
@@ -272,7 +282,7 @@ bool TsQAP::satisfies_aspiration_criteria1(int cost)
 
 void TsQAP::run()
 {
-	this->generate_initial_solution(this->get_instance_qap()->get_number_of_facilities());
+	this->generate_initial_solution();
 	this->set_current_solution(this->current_best_solution);
 	std::pair<int, int> best_neighbor_swap = this->init_delta_matrix();
 
@@ -291,11 +301,12 @@ void TsQAP::run()
 	int cont = 0;
 	int debug_test = 0;
 
+	print_delta_matrix();
+
 	while (not stoppingCondition && ++debug_test < 10)
 	{
 		// não encontrou solução
-		if(not (best_neighbor_swap.first == -1 || best_neighbor_swap.second == -1))
-			update_delta_matrix(best_neighbor_swap);
+		update_delta_matrix(best_neighbor_swap);
 		
 		best_neighbor_swap = get_best_neighbor();
 		this->add_swap_to_tabu_list(best_neighbor_swap);
@@ -375,6 +386,41 @@ QAP* TsQAP::get_instance_qap ()
 int TsQAP::get_fitness_current_solution()
 {
 	return this->fitness_current_solution;
+}
+
+void TsQAP::set_fitness_current_solution(int new_fitness)
+{
+	this->fitness_current_solution = new_fitness;
+}
+
+void TsQAP::set_fitness_current_best_solution(int new_fitness)
+{
+	this->fitness_current_best_solution = new_fitness;	
+}
+
+void TsQAP::print_tabu_list()
+{
+	std::cout << "LISTA TABU\n";
+	for(std::unordered_map<std::pair<int, int>, int, pair_hash>::iterator it = this->tabu_list.begin(); 
+		it != this->tabu_list.end(); ++it)
+		std::cout << "<" << it->first.first << ", " << it->first.second << "> : " << it->second << std::endl;
+	std::cout << std::endl;
+}
+
+void TsQAP::print_delta_matrix()
+{
+	std::cout << "DELTA_MATRIX\n";
+	for(int i = 0; i < this->n; ++i)
+	{
+		for(int j = 0; j < this->n; ++j)
+			std::cout << this->delta_matrix[i][j] << " ";
+		std::cout << std::endl;
+	}
+}
+
+void TsQAP::add_swap_to_tabu_list(int i, int j)
+{
+	this->add_swap_to_tabu_list(std::make_pair(i, j));
 }
 
 bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2)

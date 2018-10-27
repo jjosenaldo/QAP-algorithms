@@ -76,6 +76,15 @@ private:
 	std::pair<int, int> get_best_neighbor();
 
 	/**
+	 * @brief      Generates a initial solution (i.e., a permutation vector),
+	 *             that will define the first upper bound used in the main
+	 *             algorithm
+	 *
+	 * @param      size_solution    the size problem          
+	 */
+	void generate_initial_solution();
+
+	/**
 	 * @brief      Determines if forbidden.
 	 *
 	 * @param[in]  operation  The operation
@@ -87,6 +96,10 @@ private:
 	bool is_forbidden(int i, int j);
 
 	bool satisfies_aspiration_criteria1(int cost);
+
+	void set_fitness_current_solution(int new_cost);
+
+	void set_fitness_current_best_solution(int new_cost);
 
 public:
 
@@ -103,14 +116,6 @@ public:
 	 */
 	~TsQAP();
 
-	/**
-	 * @brief      Generates a initial solution (i.e., a permutation vector),
-	 *             that will define the first upper bound used in the main
-	 *             algorithm
-	 *
-	 * @param      size_solution    the size problem          
-	 */
-	void generate_initial_solution (int size_solution);
 
 
 	/**
@@ -201,6 +206,11 @@ public:
 	 */
 	int get_fitness_current_solution();
 	
+	void print_tabu_list();
+
+	void add_swap_to_tabu_list(int i, int j);
+
+	void print_delta_matrix();
 };
 
 #endif
