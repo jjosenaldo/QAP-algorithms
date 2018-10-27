@@ -73,7 +73,7 @@ private:
 
 	void add_swap_to_tabu_list(std::pair<int, int> perturbation);
 
-	std::pair<int, int> get_best_neighbor();
+	std::pair<std::pair<int, int>, int> get_best_neighbor();
 
 	/**
 	 * @brief      Generates a initial solution (i.e., a permutation vector),

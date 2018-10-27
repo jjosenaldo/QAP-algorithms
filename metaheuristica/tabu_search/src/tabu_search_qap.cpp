@@ -68,8 +68,6 @@ int TsQAP::delta_value_linear(int i, int j)
 
 void TsQAP::update_delta_matrix(std::pair<int,int> op)
 {
-	std::cout << "entrou em update delta\n";
-	std::cout << "par recebido: (" << op.first << "," << op.second << ")\n";
 	int n = this->problem->get_number_of_facilities();
 	int p = op.first, q = op.second;
 
@@ -195,7 +193,7 @@ bool TsQAP::is_forbidden(int i, int j)
 	return this->is_forbidden(op);
 }
 
-std::pair<int, int> TsQAP::get_best_neighbor()
+std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 {
 	bool better_non_tabu_found = false;
 	int n = this->problem->get_number_of_facilities();
@@ -263,17 +261,21 @@ std::pair<int, int> TsQAP::get_best_neighbor()
 		}
 	}
 
+	std::pair<std::pair<int, int>, int> result = std::make_pair(std::make_pair(-1, -1), -1);
+
 	if(better_non_tabu_found)
 	{
-		this->fitness_current_solution = best_non_tabu_cost_found;
-		return best_non_tabu_neighbor;
+		result.first = best_non_tabu_neighbor;
+		result.second = best_non_tabu_cost_found;
 	}
 
 	else
 	{
-		this->fitness_current_solution = best_tabu_cost_found;
-		return best_tabu_neighbor;
+		result.first = best_tabu_neighbor;
+		result.second = best_tabu_cost_found;	
 	}
+
+	return result;
 }
 
 bool TsQAP::satisfies_aspiration_criteria1(int cost)
@@ -284,48 +286,44 @@ bool TsQAP::satisfies_aspiration_criteria1(int cost)
 void TsQAP::run()
 {
 	this->generate_initial_solution();
-	std::pair<std::pair<int, int>, int> initial_best_swap = this->init_delta_matrix();
+	std::pair<std::pair<int, int>, int> best_neighbor_swap = this->init_delta_matrix();
 
-	this->print_delta_matrix();
-	this->print_naive_delta_matrix();
-
-	std::pair<int, int> best_neighbor_swap = initial_best_swap.first;
-
-	this->set_current_solution(best_neighbor_swap);
-	this->increment_fitness_current_solution(initial_best_swap.second);
+	this->set_current_solution(best_neighbor_swap.first);
+	this->increment_fitness_current_solution(best_neighbor_swap.second);
 
 	// Se o primeiro melhor vizinho é melhor que a soulução inicial,
 	// então a solução melhor é setada com esse vizinho. 
-	if(initial_best_swap.second < 0)
+	if(best_neighbor_swap.second < 0)
 	{
-		this->set_current_best_solution(best_neighbor_swap);
-		this->increment_fitness_current_best_solution(initial_best_swap.second);
+		this->set_current_best_solution(best_neighbor_swap.first);
+		this->increment_fitness_current_best_solution(best_neighbor_swap.second);
 	}
 
-	this->add_swap_to_tabu_list(best_neighbor_swap);
+	this->add_swap_to_tabu_list(best_neighbor_swap.first);
 
-	bool stoppingCondition = false;
-	int cont = 0;
-	int debug_test = 0;
+	int max_iterations = 10;
+	int iterations_not_improved = 0;
 
-
-	while (not stoppingCondition && ++debug_test < 10)
+	while (max_iterations-- < 10 && iterations_not_improved >= 5)
 	{
-		// não encontrou solução
-		update_delta_matrix(best_neighbor_swap);
+		// evaluates the neighborhood
+		this->update_delta_matrix(best_neighbor_swap.first);
 		
-		best_neighbor_swap = get_best_neighbor();
-		this->add_swap_to_tabu_list(best_neighbor_swap);
+		best_neighbor_swap = this->get_best_neighbor();
 
-		if (this->fitness_current_solution < this->fitness_current_best_solution)
-			this->set_current_best_solution(best_neighbor_swap); 
-		else cont++;
+		this->set_fitness_current_solution(best_neighbor_swap.second);
 
-		std::cout << this->fitness_current_solution << "\n";
-		std::cout << this->fitness_current_best_solution << "\n";
-		std::cout << "cont " << cont << "\n";
+		if(this->fitness_current_solution < this->fitness_current_best_solution)
+		{
+			this->set_current_best_solution(best_neighbor_swap.first); 
+			this->set_fitness_current_best_solution(this->fitness_current_solution);
+			iterations_not_improved = 0;
+		}
 
-		if (cont == 30) stoppingCondition = true;
+		else 
+			++iterations_not_improved;
+
+		this->add_swap_to_tabu_list(best_neighbor_swap.first);
 	}
 
 }
