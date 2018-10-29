@@ -251,6 +251,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 				// verifica se o vizinho é tabu
 				if(this->is_forbidden(i, j))
 				{
+					std::cout << "neighbor <"<<i << ", "<<j<<"> is tabu\n";
 					// o vizinho tabu satisfaz o critério de aspiração
 					if(this->satisfies_aspiration_criteria1(neighbor_cost))
 					{
@@ -268,6 +269,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 				// o vizinho não é tabu
 				else
 				{
+					std::cout << "neighbor <"<<i << ", "<<j<<"> is NOT tabu\n";
 					// se o vizinho é o melhor não-tabu já visto
 					if(neighbor_cost < best_non_tabu_cost_found)
 					{
@@ -277,7 +279,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 
 						// se o vizinho é melhor que a solução atual: não precisamos mais olhar
 						// para os vizinhos tabu
-						if(neighbor_cost < this->fitness_current_solution)
+						if(neighbor_cost < 0)
 							better_non_tabu_found = true;
 					}
 				}
@@ -288,7 +290,10 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 
 	std::pair<std::pair<int, int>, int> result = std::make_pair(std::make_pair(-1, -1), -1);
 
-	if(better_non_tabu_found)
+	// a non-tabu neighbor is the best if: 
+	// 1: it improves the current solution or
+	// 2: no tabu neighbors satisfy the aspiration criteria
+	if(better_non_tabu_found || !this->satisfies_aspiration_criteria1(best_tabu_cost_found))
 	{
 		result.first = best_non_tabu_neighbor;
 		result.second = best_non_tabu_cost_found;
