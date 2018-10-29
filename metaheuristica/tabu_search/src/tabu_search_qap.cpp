@@ -209,7 +209,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 
 	for(int i = 0; i < n; ++i)
 	{
-		for(int j = 0; j < n; ++j)
+		for(int j = 0; j < n && j != i; ++j)
 		{
 			int neighbor_cost = this->delta_matrix[i][j];
 
