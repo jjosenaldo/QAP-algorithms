@@ -107,7 +107,7 @@ std::pair<std::pair<int, int>, int> TsQAP::init_delta_matrix()
 
 	for(int i = 0; i < this->n; ++i)
 	{
-		for(int j = 0; j < this->n; ++j)
+		for(int j = 0; j < i; ++j)
 		{
 			int delta = this->delta_value_linear(i, j);
 			this->delta_matrix[i][j] = delta;
@@ -121,6 +121,10 @@ std::pair<std::pair<int, int>, int> TsQAP::init_delta_matrix()
 
 		}
 	}
+
+	for(int i = 0; i < this->n; ++i)
+		for(int j = i+1; j < this->n; ++j)
+			this->delta_matrix[i][j] = this->delta_matrix[j][i];
 
 	return std::make_pair(least_neighbor, least_delta);
 
@@ -140,10 +144,10 @@ void TsQAP::generate_initial_solution()
 	std::copy(this->current_solution, this->current_solution+this->n, this->current_best_solution);
 
 	int* hardcoded = new int[this->n];
-	hardcoded[0] = 0;
-	hardcoded[1] = 2;
+	hardcoded[0] = 1;
+	hardcoded[1] = 0;
 	hardcoded[2] = 3;
-	hardcoded[3] = 1;
+	hardcoded[3] = 2;
 	this->hardcode_solution(hardcoded);
 
 	// sets the fitnesses
@@ -325,8 +329,8 @@ void TsQAP::run()
 
 	this->add_swap_to_tabu_list(best_neighbor_swap.first);
 
-	const int MAX_ITERATIONS = 10;
-	const int MAX_ITERATIONS_NOT_IMPROVED = 5;
+	const int MAX_ITERATIONS = 20;
+	const int MAX_ITERATIONS_NOT_IMPROVED = 10;
 	int current_iteration = 0;
 	int iterations_not_improved = 0;
 
@@ -337,6 +341,7 @@ void TsQAP::run()
 		for(int i = 0; i < this->n; ++i) std::cout << this->current_solution[i] <<" ";
 		std::cout << "\nFitness of the best solution: " << this->fitness_current_best_solution << std::endl;
 		std::cout << "Fitness of the current solution: " << this->fitness_current_solution << std::endl;
+		this->print_tabu_list();
 
 		// evaluates the neighborhood
 		this->update_delta_matrix(best_neighbor_swap.first);
@@ -366,7 +371,6 @@ void TsQAP::run()
 			++iterations_not_improved;
 
 		this->add_swap_to_tabu_list(best_neighbor_swap.first);
-		this->print_tabu_list();
 		std::cout << std::endl;
 	}
 
@@ -374,14 +378,37 @@ void TsQAP::run()
 
 void TsQAP::add_swap_to_tabu_list(std::pair<int, int> perturbation)
 {
+	bool swap_already_found_in_list = false;
+
 	for(std::unordered_map<std::pair<int, int>, int, pair_hash>::iterator it = this->tabu_list.begin(); 
 		it != this->tabu_list.end(); ++it)
 	{
-		if(--it->second == 0)
-			this->tabu_list.erase(it);
+		if(!swap_already_found_in_list)
+		{
+			if(it->first == perturbation)
+			{
+				this->tabu_list[perturbation] = this->max_size_tabu_list;				
+				swap_already_found_in_list = true;		
+			}
+
+			else
+			{
+				if(--it->second == 0)
+					this->tabu_list.erase(it);		
+			}
+		}
+
+		else
+		{
+			it->second -= 2;
+
+			if(it->second == 0)
+				this->tabu_list.erase(it);		
+		}
 	}
 
-	this->tabu_list[perturbation] = this->max_size_tabu_list;
+	if(!swap_already_found_in_list)
+		this->tabu_list[perturbation] = this->max_size_tabu_list;
 }
 
 void TsQAP::hardcode_solution(int* solution)
