@@ -198,24 +198,12 @@ int TsQAP::calculate_fitness (int* solution)
 bool TsQAP::is_forbidden(std::pair<int,int> operation)
 {
 	std::unordered_map<std::pair<int,int>, int, pair_hash>::const_iterator got = this->tabu_list.find(operation);
-
-	if(got == this->tabu_list.end())
-		return false;
-
-	else
-	{
-		std::pair<int, int> reverse_op = std::make_pair(operation.first, operation.second);
-		got = this->tabu_list.find(reverse_op);
-
-		return !(got == this->tabu_list.end());
-	}
+	return !(got == this->tabu_list.end());
 }
 
 bool TsQAP::is_forbidden(int i, int j)
 {
-	std::pair<int, int> op = std::make_pair(i, j);
-
-	return this->is_forbidden(op);
+	return this->is_forbidden(std::make_pair(i, j)) || this->is_forbidden(std::make_pair(j, i));
 }
 
 std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
@@ -253,7 +241,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 				{
 					std::cout << "neighbor <"<<i << ", "<<j<<"> is tabu\n";
 					// o vizinho tabu satisfaz o critério de aspiração
-					if(this->satisfies_aspiration_criteria1(neighbor_cost))
+					if(this->satisfies_aspiration_criteria1(this->fitness_current_solution + neighbor_cost))
 					{
 						// se o vizinho tabu é melhor do que o melhor vizinho tabu já visto
 						if(neighbor_cost < best_tabu_cost_found)
