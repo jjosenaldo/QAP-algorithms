@@ -140,6 +140,13 @@ void TsQAP::generate_initial_solution()
 	this->set_fitness_current_solution(initial_fitness);
 	this->set_fitness_current_best_solution(initial_fitness);
 
+	{
+		this->current_solution[0] = 0;
+		this->current_solution[1] = 3;
+		this->current_solution[2] = 2;
+		this->current_solution[3] = 1;
+	}
+
 	std::cout << "Initial solutioh, with fitness = " << initial_fitness << ":\n";
 	for(int i = 0; i < this->n; ++i)
 		std::cout << this->current_solution[i] << " ";
@@ -301,6 +308,12 @@ void TsQAP::run()
 {
 	this->generate_initial_solution();
 	std::pair<std::pair<int, int>, int> best_neighbor_swap = this->init_delta_matrix();
+
+	this->print_delta_matrix();std::cout << std::endl;
+	std::cout << "Best swap: <" << best_neighbor_swap.first.first 
+			<< ", " << best_neighbor_swap.first.second << ">, with delta = "
+			<< best_neighbor_swap.second << " and new fitness = " 
+			<< (best_neighbor_swap.second+this->fitness_current_solution) << std::endl;
 
 	this->set_current_solution(best_neighbor_swap.first);
 	this->increment_fitness_current_solution(best_neighbor_swap.second);
