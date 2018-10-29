@@ -144,7 +144,7 @@ void TsQAP::generate_initial_solution()
 	hardcoded[1] = 2;
 	hardcoded[2] = 3;
 	hardcoded[3] = 1;
-	//this->hardcode_solution(hardcoded);
+	this->hardcode_solution(hardcoded);
 
 	// sets the fitnesses
 	int initial_fitness = this->problem->calculate_cost_of_solution(this->current_solution);
@@ -229,7 +229,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 
 	for(int i = 0; i < n; ++i)
 	{
-		for(int j = 0; j < n && j != i; ++j)
+		for(int j = 0; j < i && j != i; ++j)
 		{
 			int neighbor_cost = this->delta_matrix[i][j];
 
