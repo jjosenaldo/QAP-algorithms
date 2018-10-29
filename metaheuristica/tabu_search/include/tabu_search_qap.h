@@ -105,6 +105,8 @@ private:
 
 	void increment_fitness_current_solution(int delta);
 
+	void hardcode_solution(int* solution);
+
 public:
 
 	/**

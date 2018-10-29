@@ -135,17 +135,17 @@ void TsQAP::generate_initial_solution()
 	// copies the initial solution into the best one
 	std::copy(this->current_solution, this->current_solution+this->n, this->current_best_solution);
 
+	int* hardcoded = new int[this->n];
+	hardcoded[0] = 3;
+	hardcoded[1] = 2;
+	hardcoded[2] = 1;
+	hardcoded[3] = 0;
+	this->hardcode_solution(hardcoded);
+
 	// sets the fitnesses
 	int initial_fitness = this->problem->calculate_cost_of_solution(this->current_solution);
 	this->set_fitness_current_solution(initial_fitness);
 	this->set_fitness_current_best_solution(initial_fitness);
-
-	{
-		this->current_solution[0] = 0;
-		this->current_solution[1] = 3;
-		this->current_solution[2] = 2;
-		this->current_solution[3] = 1;
-	}
 
 	std::cout << "Initial solutioh, with fitness = " << initial_fitness << ":\n";
 	for(int i = 0; i < this->n; ++i)
@@ -313,7 +313,7 @@ void TsQAP::run()
 	std::cout << "Best swap: <" << best_neighbor_swap.first.first 
 			<< ", " << best_neighbor_swap.first.second << ">, with delta = "
 			<< best_neighbor_swap.second << " and new fitness = " 
-			<< (best_neighbor_swap.second+this->fitness_current_solution) << std::endl;
+			<< (best_neighbor_swap.second+this->fitness_current_solution) << std::endl << std::endl;
 
 	this->set_current_solution(best_neighbor_swap.first);
 	this->increment_fitness_current_solution(best_neighbor_swap.second);
@@ -386,6 +386,11 @@ void TsQAP::add_swap_to_tabu_list(std::pair<int, int> perturbation)
 	this->tabu_list[perturbation] = this->max_size_tabu_list;
 }
 
+void TsQAP::hardcode_solution(int* solution)
+{
+	std::copy(solution, solution+n, this->current_solution);
+}
+
 void TsQAP::increment_fitness_current_solution(int delta)
 {
 	this->fitness_current_solution += delta;
@@ -393,7 +398,7 @@ void TsQAP::increment_fitness_current_solution(int delta)
 
 void TsQAP::increment_fitness_current_best_solution(int delta)
 {
-	this->fitness_current_solution += delta;
+	this->fitness_current_best_solution += delta;
 }
 
 /*Getters and Setters*/
