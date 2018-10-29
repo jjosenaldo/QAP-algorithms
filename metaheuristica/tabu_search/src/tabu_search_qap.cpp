@@ -72,21 +72,25 @@ void TsQAP::update_delta_matrix(std::pair<int,int> op)
 	int p = op.first, q = op.second;
 
 	this->delta_matrix[p][q] = -this->delta_matrix[p][q];
-	this->delta_matrix[q][p] = -this->delta_matrix[p][q];
+	this->delta_matrix[q][p] = this->delta_matrix[p][q];
+	int new_value;
 
 	for(int i = 0; i < n; ++i)
 	{
 		for(int j = 0; j < i; ++j)
 		{
-			if(i == p and j == q)
-				continue;
+			if((i == p && j == q) || (i == q && j == p))
+				new_value = this->delta_matrix[i][j];
 
-			else if(i == p or j == q)
-				this->delta_value_linear(i, j);
+			else if(i == p || j == q || i == q || j == p)
+				new_value = this->delta_value_linear(i, j);
 
 			else
-				this->delta_value_constant(i, j, p, q);
+				new_value = this->delta_value_constant(i, j, p, q);
+
+			this->delta_matrix[i][j] = new_value;
 		}	
+
 		
 	}
 
@@ -136,11 +140,11 @@ void TsQAP::generate_initial_solution()
 	std::copy(this->current_solution, this->current_solution+this->n, this->current_best_solution);
 
 	int* hardcoded = new int[this->n];
-	hardcoded[0] = 3;
+	hardcoded[0] = 0;
 	hardcoded[1] = 2;
-	hardcoded[2] = 1;
-	hardcoded[3] = 0;
-	this->hardcode_solution(hardcoded);
+	hardcoded[2] = 3;
+	hardcoded[3] = 1;
+	//this->hardcode_solution(hardcoded);
 
 	// sets the fitnesses
 	int initial_fitness = this->problem->calculate_cost_of_solution(this->current_solution);
@@ -335,7 +339,7 @@ void TsQAP::run()
 
 	while (++current_iteration < MAX_ITERATIONS && iterations_not_improved++ < MAX_ITERATIONS_NOT_IMPROVED)
 	{
-		std::cout << "Current iteration: " << current_iteration << std::endl;
+		std::cout << "Current iteration: " << current_iteration << " ####################################################################### " << std::endl;
 		std::cout << "Current solution: ";
 		for(int i = 0; i < this->n; ++i) std::cout << this->current_solution[i] <<" ";
 		std::cout << "\nFitness of the best solution: " << this->fitness_current_best_solution << std::endl;
@@ -346,7 +350,8 @@ void TsQAP::run()
 
 		best_neighbor_swap = this->get_best_neighbor();
 
-		this->print_delta_matrix();
+		this->print_delta_matrix();std::cout << std::endl;
+		this->print_naive_delta_matrix();std::cout << std::endl;
 
 		std::cout << "Best swap: <" << best_neighbor_swap.first.first 
 			<< ", " << best_neighbor_swap.first.second << ">, with delta = "
