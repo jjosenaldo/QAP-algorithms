@@ -76,7 +76,7 @@ void TsQAP::update_delta_matrix(std::pair<int,int> op)
 
 	for(int i = 0; i < n; ++i)
 	{
-		for(int j = 0; j < n; ++j)
+		for(int j = 0; j < i; ++j)
 		{
 			if(i == p and j == q)
 				continue;
@@ -89,6 +89,11 @@ void TsQAP::update_delta_matrix(std::pair<int,int> op)
 		}	
 		
 	}
+
+	for(int i = 0; i < n; ++i)
+		for(int j = i+1; j < n; ++j)
+			this->delta_matrix[i][j] = this->delta_matrix[j][i];
+
 }
 
 std::pair<std::pair<int, int>, int> TsQAP::init_delta_matrix()
