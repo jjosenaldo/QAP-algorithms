@@ -188,7 +188,16 @@ bool TsQAP::is_forbidden(std::pair<int,int> operation)
 {
 	std::unordered_map<std::pair<int,int>, int, pair_hash>::const_iterator got = this->tabu_list.find(operation);
 
-	return !(got == this->tabu_list.end());
+	if(got == this->tabu_list.end())
+		return false;
+
+	else
+	{
+		std::pair<int, int> reverse_op = std::make_pair(operation.first, operation.second);
+		got = this->tabu_list.find(reverse_op);
+
+		return !(got == this->tabu_list.end());
+	}
 }
 
 bool TsQAP::is_forbidden(int i, int j)
@@ -323,6 +332,8 @@ void TsQAP::run()
 		this->update_delta_matrix(best_neighbor_swap.first);
 
 		best_neighbor_swap = this->get_best_neighbor();
+
+		this->print_delta_matrix();
 
 		std::cout << "Best swap: <" << best_neighbor_swap.first.first 
 			<< ", " << best_neighbor_swap.first.second << ">, with delta = "
