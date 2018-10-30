@@ -8,6 +8,11 @@ double calcVariancia ( std::vector<int> valores, double media )
 	return var/(valores.size()-1);
 }
 
+double calcDistanciamento ( int valor, int referencia )
+{
+	return ( (valor*100.00)/referencia )-100.00;
+}
+
 void calcEstatisticas ( Dados dados )
 {
 	std::sort(dados.custos.begin(), dados.custos.end());
@@ -16,6 +21,13 @@ void calcEstatisticas ( Dados dados )
 	int min_cost = dados.custos[0];
 	int max_cost = dados.custos[size_cost-1];
 	int mediana = 0;
+	int solucoes_otimas_encontrada = 0;
+
+	for (unsigned int i=0; i < dados.custos.size(); i++)
+		if (dados.custos[i] == dados.optimal_cost) 
+			solucoes_otimas_encontrada++;
+
+	double percentual_optimal_solutions_found = (solucoes_otimas_encontrada*100.00)/dados.custos.size(); 
 
 	if ( size_cost%2 == 0)
 	{
@@ -32,12 +44,15 @@ void calcEstatisticas ( Dados dados )
 	if (!out.is_open()) std::cout << "\nNão abriu o arquivo!\n";
 
 	out << dados.instance << "\n";
-	out << "REPORT\n--------------------------------------------------";
-	out << std::endl << "Average elapsed time: " << media_tempo << " ms" << std::endl;
-	out << "min found cost: " << min_cost << std::endl;
-	out << "max found cost: " << max_cost << std::endl;
-	out << "Average found cost: " << media_custo << std::endl; 
-	out << "Median: " << mediana << std::endl;
+	out << "REPORT\n--------------------------------------------------\n";
+	out << "Instance size: " << dados.tamanho << std::endl;
+	out << "Average elapsed time: " << media_tempo << " ms" << std::endl;
+	out << "Best solution: " << dados.optimal_cost << std::endl;
+	out << "Percentual of optimal solutions found: " << percentual_optimal_solutions_found << "%" << std::endl;
+	out << "Min found cost: " << calcDistanciamento(min_cost, dados.optimal_cost) << "%" << std::endl;
+	out << "Max found cost: " << calcDistanciamento(max_cost, dados.optimal_cost) << "%" << std::endl;
+	out << "Average found cost: " << calcDistanciamento(media_custo, dados.optimal_cost) << "%" << std::endl; 
+	out << "Median: " << calcDistanciamento(mediana, dados.optimal_cost) << "%" << std::endl;
 	out << "Standard deviation of cost: " << dp_custo << std::endl;
 	out << "--------------------------------------------------\n";
 	out.close();

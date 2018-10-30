@@ -1,240 +1,312 @@
 esc8a
 REPORT
 --------------------------------------------------
+Instance size: 8
 Average elapsed time: 0 ms
-min found cost: 2
-max found cost: 2
-Average found cost: 2
-Median: 2
+Best solution: 2
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
 Standard deviation of cost: 0
 --------------------------------------------------
 esc8b
 REPORT
 --------------------------------------------------
+Instance size: 8
 Average elapsed time: 0 ms
-min found cost: 8
-max found cost: 8
-Average found cost: 8
-Median: 8
+Best solution: 8
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
 Standard deviation of cost: 0
 --------------------------------------------------
 esc8c
 REPORT
 --------------------------------------------------
+Instance size: 8
 Average elapsed time: 0 ms
-min found cost: 32
-max found cost: 32
-Average found cost: 32
-Median: 32
+Best solution: 32
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
 Standard deviation of cost: 0
 --------------------------------------------------
 esc8d
 REPORT
 --------------------------------------------------
+Instance size: 8
 Average elapsed time: 0 ms
-min found cost: 6
-max found cost: 6
-Average found cost: 6
-Median: 6
+Best solution: 6
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
 Standard deviation of cost: 0
 --------------------------------------------------
 esc8e
 REPORT
 --------------------------------------------------
+Instance size: 8
 Average elapsed time: 0 ms
-min found cost: 2
-max found cost: 2
-Average found cost: 2
-Median: 2
+Best solution: 2
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
 Standard deviation of cost: 0
 --------------------------------------------------
 rou10
 REPORT
 --------------------------------------------------
+Instance size: 10
 Average elapsed time: 0 ms
-min found cost: 174220
-max found cost: 175892
-Average found cost: 174275
-Median: 174220
-Standard deviation of cost: 305.265
+Best solution: 174220
+Percentual of optimal solutions found: 86.6667%
+Min found cost: 0%
+Max found cost: 3.81357%
+Average found cost: 0.222707%
+Median: 0%
+Standard deviation of cost: 1286.5
 --------------------------------------------------
 lipa10a
 REPORT
 --------------------------------------------------
+Instance size: 10
 Average elapsed time: 0 ms
-min found cost: 473
-max found cost: 473
-Average found cost: 473
-Median: 473
+Best solution: 473
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
 Standard deviation of cost: 0
 --------------------------------------------------
 lipa10b
 REPORT
 --------------------------------------------------
+Instance size: 10
 Average elapsed time: 0 ms
-min found cost: 2008
-max found cost: 2008
-Average found cost: 2008
-Median: 2008
+Best solution: 2008
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
 Standard deviation of cost: 0
 --------------------------------------------------
 scr10
 REPORT
 --------------------------------------------------
+Instance size: 10
 Average elapsed time: 0 ms
-min found cost: 26992
-max found cost: 29360
-Average found cost: 27558
-Median: 27409
-Standard deviation of cost: 684.822
+Best solution: 26992
+Percentual of optimal solutions found: 56.6667%
+Min found cost: 0%
+Max found cost: 7.55779%
+Average found cost: 1.61529%
+Median: 0%
+Standard deviation of cost: 548.095
 --------------------------------------------------
 tai10a
 REPORT
 --------------------------------------------------
+Instance size: 10
 Average elapsed time: 0 ms
-min found cost: 135028
-max found cost: 138130
-Average found cost: 135496
-Median: 135028
-Standard deviation of cost: 860.772
+Best solution: 135028
+Percentual of optimal solutions found: 66.6667%
+Min found cost: 0%
+Max found cost: 0.453239%
+Average found cost: 0.15108%
+Median: 0%
+Standard deviation of cost: 293.432
 --------------------------------------------------
 tai10b
 REPORT
 --------------------------------------------------
+Instance size: 10
 Average elapsed time: 0 ms
-min found cost: 1183760
-max found cost: 1347679
-Average found cost: 1.19057e+06
-Median: 1183760
-Standard deviation of cost: 29719.4
+Best solution: 1183760
+Percentual of optimal solutions found: 63.3333%
+Min found cost: 0%
+Max found cost: 0.284348%
+Average found cost: 0.104244%
+Median: 0%
+Standard deviation of cost: 1649.79
 --------------------------------------------------
 tai12
 REPORT
 --------------------------------------------------
+Instance size: 12
 Average elapsed time: 0 ms
-min found cost: 224416
-max found cost: 230704
-Average found cost: 225931
-Median: 224416
-Standard deviation of cost: 2588.96
+Best solution: 224416
+Percentual of optimal solutions found: 73.3333%
+Min found cost: 0%
+Max found cost: 3.84286%
+Average found cost: 0.709842%
+Median: 0%
+Standard deviation of cost: 2766.49
 --------------------------------------------------
 chr12a
 REPORT
 --------------------------------------------------
+Instance size: 12
 Average elapsed time: 0 ms
-min found cost: 9552
-max found cost: 12050
-Average found cost: 10453
-Median: 10096
-Standard deviation of cost: 886.767
+Best solution: 9552
+Percentual of optimal solutions found: 40%
+Min found cost: 0%
+Max found cost: 40.5988%
+Average found cost: 8.74162%
+Median: 5.69514%
+Standard deviation of cost: 1016.41
 --------------------------------------------------
 had12
 REPORT
 --------------------------------------------------
+Instance size: 12
 Average elapsed time: 0 ms
-min found cost: 1652
-max found cost: 1660
-Average found cost: 1656
-Median: 1660
-Standard deviation of cost: 4.06838
+Best solution: 1652
+Percentual of optimal solutions found: 53.3333%
+Min found cost: 0%
+Max found cost: 0.484262%
+Average found cost: 0.181598%
+Median: 0%
+Standard deviation of cost: 4.12729
 --------------------------------------------------
 nug12
 REPORT
 --------------------------------------------------
+Instance size: 12
 Average elapsed time: 0 ms
-min found cost: 578
-max found cost: 586
-Average found cost: 580
-Median: 578
+Best solution: 578
+Percentual of optimal solutions found: 60%
+Min found cost: 0%
+Max found cost: 1.38408%
+Average found cost: 0.346021%
+Median: 0%
 Standard deviation of cost: 3.44414
 --------------------------------------------------
 rou12
 REPORT
 --------------------------------------------------
+Instance size: 12
 Average elapsed time: 1 ms
-min found cost: 235528
-max found cost: 240652
-Average found cost: 236634
-Median: 235852
-Standard deviation of cost: 1760.84
+Best solution: 235528
+Percentual of optimal solutions found: 63.3333%
+Min found cost: 0%
+Max found cost: 1.10645%
+Average found cost: 0.244132%
+Median: 0%
+Standard deviation of cost: 1039.67
 --------------------------------------------------
 scr12
 REPORT
 --------------------------------------------------
+Instance size: 12
 Average elapsed time: 0 ms
-min found cost: 31410
-max found cost: 32696
-Average found cost: 31548
-Median: 31410
-Standard deviation of cost: 367.743
+Best solution: 31410
+Percentual of optimal solutions found: 76.6667%
+Min found cost: 0%
+Max found cost: 5.04935%
+Average found cost: 0.900987%
+Median: 0%
+Standard deviation of cost: 531.334
 --------------------------------------------------
 chr15a
 REPORT
 --------------------------------------------------
-Average elapsed time: 2 ms
-min found cost: 9896
-max found cost: 11942
-Average found cost: 10564
-Median: 10366
-Standard deviation of cost: 598.958
+Instance size: 15
+Average elapsed time: 3 ms
+Best solution: 9896
+Percentual of optimal solutions found: 3.33333%
+Min found cost: 0%
+Max found cost: 21.1601%
+Average found cost: 7.85166%
+Median: 5.81043%
+Standard deviation of cost: 678.436
 --------------------------------------------------
 chr15b
 REPORT
 --------------------------------------------------
+Instance size: 15
 Average elapsed time: 2 ms
-min found cost: 7990
-max found cost: 11148
-Average found cost: 9246
-Median: 9206
-Standard deviation of cost: 691.077
+Best solution: 7990
+Percentual of optimal solutions found: 10%
+Min found cost: 0%
+Max found cost: 39.0238%
+Average found cost: 16.9462%
+Median: 16.2703%
+Standard deviation of cost: 794.388
 --------------------------------------------------
 chr15c
 REPORT
 --------------------------------------------------
+Instance size: 15
 Average elapsed time: 2 ms
-min found cost: 9504
-max found cost: 12696
-Average found cost: 11195
-Median: 11174
-Standard deviation of cost: 709.138
+Best solution: 9504
+Percentual of optimal solutions found: 3.33333%
+Min found cost: 0%
+Max found cost: 31.4184%
+Average found cost: 19.213%
+Median: 23.1587%
+Standard deviation of cost: 820.724
 --------------------------------------------------
 scr15
 REPORT
 --------------------------------------------------
+Instance size: 15
 Average elapsed time: 2 ms
-min found cost: 51140
-max found cost: 54232
-Average found cost: 52035
-Median: 51140
-Standard deviation of cost: 1228.37
+Best solution: 51140
+Percentual of optimal solutions found: 56.6667%
+Min found cost: 0%
+Max found cost: 6.93%
+Average found cost: 2.27806%
+Median: 0%
+Standard deviation of cost: 1393.59
 --------------------------------------------------
 nug15
 REPORT
 --------------------------------------------------
-Average elapsed time: 2 ms
-min found cost: 1150
-max found cost: 1160
-Average found cost: 1152
-Median: 1152
-Standard deviation of cost: 3.34252
+Instance size: 15
+Average elapsed time: 1 ms
+Best solution: 1150
+Percentual of optimal solutions found: 30%
+Min found cost: 0%
+Max found cost: 0.869565%
+Average found cost: 0.173913%
+Median: 0.173913%
+Standard deviation of cost: 2.70376
 --------------------------------------------------
 rou15
 REPORT
 --------------------------------------------------
+Instance size: 15
 Average elapsed time: 2 ms
-min found cost: 354210
-max found cost: 364132
-Average found cost: 357724
-Median: 356874
-Standard deviation of cost: 3009.09
+Best solution: 354210
+Percentual of optimal solutions found: 33.3333%
+Min found cost: 0%
+Max found cost: 3.17439%
+Average found cost: 1.36557%
+Median: 1.63829%
+Standard deviation of cost: 3966.91
 --------------------------------------------------
 nug25
 REPORT
 --------------------------------------------------
-Average elapsed time: 12 ms
-min found cost: 3744
-max found cost: 3778
-Average found cost: 3750
-Median: 3747
-Standard deviation of cost: 8.34597
+Instance size: 25
+Average elapsed time: 13 ms
+Best solution: 3744
+Percentual of optimal solutions found: 20%
+Min found cost: 0%
+Max found cost: 0.587607%
+Average found cost: 0.160256%
+Median: 0.160256%
+Standard deviation of cost: 5.57086
 --------------------------------------------------

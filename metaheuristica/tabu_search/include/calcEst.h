@@ -18,6 +18,8 @@ struct Dados {
 
 double calcVariancia ( std::vector<double> valores, double media);
 
+double calcDistanciamento ( int valor, int referencia );
+
 template <typename T>
 T calcMedia ( std::vector<T> valores )
 {
