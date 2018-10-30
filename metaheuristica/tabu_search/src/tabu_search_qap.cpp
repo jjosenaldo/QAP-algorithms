@@ -332,8 +332,8 @@ void TsQAP::run()
 
 	this->add_swap_to_tabu_list(best_neighbor_swap.first);
 
-	const int MAX_ITERATIONS = 20;
-	const int MAX_ITERATIONS_NOT_IMPROVED = 10;
+	const int MAX_ITERATIONS = 100;
+	const int MAX_ITERATIONS_NOT_IMPROVED = 50;
 	int current_iteration = 0;
 	int iterations_not_improved = 0;
 
