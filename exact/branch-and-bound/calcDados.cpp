@@ -13,7 +13,7 @@ double calcVariancia ( std::vector<double> valores, double media )
 	return var/(valores.size()-1);
 }
 
-double calcMedia ( std::vector<double> valores )
+double calcMedia ( std::vector<int> valores )
 {
 	double media = 0;
 	for (unsigned int i=0; i < valores.size(); i++)

@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
 		{
 			std::getline(instanceFile, instance);
 			std::cout << "@ instance uploaded successfully: " << instance << std::endl;
-
 			run_tabu_search(instance);
 		}
 

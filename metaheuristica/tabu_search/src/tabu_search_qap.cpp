@@ -5,8 +5,9 @@
 
 /*Constructor*/
 
-TsQAP::TsQAP(QAP *instance, int max_size)
+TsQAP::TsQAP(QAP *instance, int max_size, std::string instance_name)
 {
+	this->instance_name = instance_name;
 	this->problem = instance;
 	this->n = instance->get_number_of_facilities();
 	this->max_size_tabu_list = max_size;
@@ -159,10 +160,10 @@ void TsQAP::generate_initial_solution()
 	this->set_fitness_current_solution(initial_fitness);
 	this->set_fitness_current_best_solution(initial_fitness);
 
-	std::cout << "Initial solutioh, with fitness = " << initial_fitness << ":\n";
-	for(int i = 0; i < this->n; ++i)
-		std::cout << this->current_solution[i] << " ";
-	std::cout << std::endl << std::endl;
+	// std::cout << "Initial solutioh, with fitness = " << initial_fitness << ":\n";
+	// for(int i = 0; i < this->n; ++i)
+	// 	std::cout << this->current_solution[i] << " ";
+	// std::cout << std::endl << std::endl;
 }
 
 std::vector<int*> TsQAP::get_unforbidden_neighbors(int* solution)
@@ -317,7 +318,7 @@ void TsQAP::run()
 	this->generate_initial_solution();
 	std::pair<std::pair<int, int>, int> best_neighbor_swap = this->init_delta_matrix();
 
-	this->print_delta_matrix();std::cout << std::endl;
+	// this->print_delta_matrix();std::cout << std::endl;
 	// std::cout << "Best swap: <" << best_neighbor_swap.first.first 
 	// 		<< ", " << best_neighbor_swap.first.second << ">, with delta = "
 	// 		<< best_neighbor_swap.second << " and new fitness = " 
@@ -336,32 +337,32 @@ void TsQAP::run()
 
 	this->add_swap_to_tabu_list(best_neighbor_swap.first);
 
-	const int MAX_ITERATIONS = 100;
-	const int MAX_ITERATIONS_NOT_IMPROVED = 50;
+	const int MAX_ITERATIONS = 100*this->n;
+	const int MAX_ITERATIONS_NOT_IMPROVED = 30*this->n;
 	int current_iteration = 0;
 	int iterations_not_improved = 0;
 
 	while (++current_iteration < MAX_ITERATIONS && iterations_not_improved++ < MAX_ITERATIONS_NOT_IMPROVED)
 	{
-		std::cout << "Current iteration: " << current_iteration << "\n####################################################################### " << std::endl;
-		std::cout << "Current solution: ";
-		for(int i = 0; i < this->n; ++i) std::cout << this->current_solution[i] <<" ";
-		std::cout << "\nFitness of the best solution: " << this->fitness_current_best_solution << std::endl;
-		std::cout << "Fitness of the current solution: " << this->fitness_current_solution << std::endl;
-		// this->print_tabu_list();
+		// std::cout << "Current iteration: " << current_iteration << "\n####################################################################### " << std::endl;
+		// std::cout << "Current solution: ";
+		// for(int i = 0; i < this->n; ++i) std::cout << this->current_solution[i] <<" ";
+		// std::cout << "\nFitness of the best solution: " << this->fitness_current_best_solution << std::endl;
+		// std::cout << "Fitness of the current solution: " << this->fitness_current_solution << std::endl;
+		// // this->print_tabu_list();
 
 		// evaluates the neighborhood
 		this->update_delta_matrix(best_neighbor_swap.first);
 
 		best_neighbor_swap = this->get_best_neighbor();
 
-		this->print_delta_matrix();std::cout << std::endl;
-		this->print_naive_delta_matrix();std::cout << std::endl;
+		// this->print_delta_matrix();std::cout << std::endl;
+		// this->print_naive_delta_matrix();std::cout << std::endl;
 
-		std::cout << "Best swap: <" << best_neighbor_swap.first.first 
-			<< ", " << best_neighbor_swap.first.second << ">, with delta = "
-			<< best_neighbor_swap.second << " and new fitness = " 
-			<< (best_neighbor_swap.second+this->fitness_current_solution) << std::endl;
+		// std::cout << "Best swap: <" << best_neighbor_swap.first.first 
+		// 	<< ", " << best_neighbor_swap.first.second << ">, with delta = "
+		// 	<< best_neighbor_swap.second << " and new fitness = " 
+		// 	<< (best_neighbor_swap.second+this->fitness_current_solution) << std::endl;
 
 		// updates current solution
 		this->set_current_solution(best_neighbor_swap.first);
@@ -378,7 +379,7 @@ void TsQAP::run()
 			++iterations_not_improved;
 
 		this->add_swap_to_tabu_list(best_neighbor_swap.first);
-		std::cout << std::endl;
+		// std::cout << std::endl;
 	}
 
 }
@@ -465,6 +466,16 @@ int TsQAP::get_fitness_current_solution()
 	return this->fitness_current_solution;
 }
 
+int TsQAP::get_fitness_current_best_solution()
+{
+	return fitness_current_best_solution;
+}
+
+int TsQAP::get_n()
+{
+	return this->n;
+}
+
 void TsQAP::set_fitness_current_solution(int new_fitness)
 {
 	this->fitness_current_solution = new_fitness;
@@ -519,4 +530,9 @@ void TsQAP::add_swap_to_tabu_list(int i, int j)
 bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2)
 {
 	return p1 == p2 or (p1.first == p2.second and p1.second == p2.first);
+}
+
+std::string TsQAP::get_instance_name ()
+{
+	return this->instance_name;
 }

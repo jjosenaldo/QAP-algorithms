@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <vector>
 #include <iostream>
+#include <string>
 #include "qap.h"
 
 bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2);
@@ -29,6 +30,8 @@ class TsQAP
 private:
 
 	int n;
+
+	std::string instance_name;
 
 	/* It consists of the current best n-dimensional permutation vector in 
 	 * which the i-th element corresponds to the facility assigned to the
@@ -115,7 +118,7 @@ public:
 	 * @param[in]  instance  The instance qap
 	 * @param[in]  max_size  The maximum size of tabu list
 	 */
-	TsQAP(QAP *instance, int max_size);
+	TsQAP(QAP *instance, int max_size, std::string instance_name);
 
 	/**
 	 * @brief      Destroys the object.
@@ -211,6 +214,8 @@ public:
 	 * @return     The fitness best candidate.
 	 */
 	int get_fitness_current_solution();
+
+	int get_fitness_current_best_solution();
 	
 	void print_tabu_list();
 
@@ -219,6 +224,10 @@ public:
 	void print_delta_matrix();
 
 	void print_naive_delta_matrix();
+
+	std::string get_instance_name ();
+
+	int get_n();
 };
 
 #endif
