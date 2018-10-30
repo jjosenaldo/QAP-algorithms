@@ -143,12 +143,12 @@ void TsQAP::generate_initial_solution()
 	// copies the initial solution into the best one
 	std::copy(this->current_solution, this->current_solution+this->n, this->current_best_solution);
 
-	int* hardcoded = new int[this->n];
+	/*int* hardcoded = new int[this->n];
 	hardcoded[0] = 1;
 	hardcoded[1] = 0;
 	hardcoded[2] = 3;
 	hardcoded[3] = 2;
-	this->hardcode_solution(hardcoded);
+	this->hardcode_solution(hardcoded);*/
 
 	// sets the fitnesses
 	int initial_fitness = this->problem->calculate_cost_of_solution(this->current_solution);
@@ -229,6 +229,9 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 			// não precisa analisar os vizinhos tabu
 			if(better_non_tabu_found)
 			{
+				if(this->is_forbidden(i,j))
+					continue;
+
 				// se o vizinho é o melhor não-tabu já visto
 				if(neighbor_cost < best_non_tabu_cost_found)
 				{
@@ -378,37 +381,14 @@ void TsQAP::run()
 
 void TsQAP::add_swap_to_tabu_list(std::pair<int, int> perturbation)
 {
-	bool swap_already_found_in_list = false;
-
 	for(std::unordered_map<std::pair<int, int>, int, pair_hash>::iterator it = this->tabu_list.begin(); 
 		it != this->tabu_list.end(); ++it)
 	{
-		if(!swap_already_found_in_list)
-		{
-			if(it->first == perturbation)
-			{
-				this->tabu_list[perturbation] = this->max_size_tabu_list;				
-				swap_already_found_in_list = true;		
-			}
-
-			else
-			{
-				if(--it->second == 0)
-					this->tabu_list.erase(it);		
-			}
-		}
-
-		else
-		{
-			it->second -= 2;
-
-			if(it->second == 0)
-				this->tabu_list.erase(it);		
-		}
+		if(--it->second == 0)
+			this->tabu_list.erase(it);
 	}
 
-	if(!swap_already_found_in_list)
-		this->tabu_list[perturbation] = this->max_size_tabu_list;
+	this->tabu_list[perturbation] = this->max_size_tabu_list;
 }
 
 void TsQAP::hardcode_solution(int* solution)
