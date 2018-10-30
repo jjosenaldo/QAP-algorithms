@@ -386,10 +386,13 @@ void TsQAP::run()
 void TsQAP::add_swap_to_tabu_list(std::pair<int, int> perturbation)
 {
 	for(std::unordered_map<std::pair<int, int>, int, pair_hash>::iterator it = this->tabu_list.begin(); 
-		it != this->tabu_list.end(); ++it)
+		it != this->tabu_list.end();)
 	{
 		if(--it->second == 0)
-			this->tabu_list.erase(it);
+			it = this->tabu_list.erase(it);
+
+		else
+			 ++it;
 	}
 
 	this->tabu_list[perturbation] = this->max_size_tabu_list;
