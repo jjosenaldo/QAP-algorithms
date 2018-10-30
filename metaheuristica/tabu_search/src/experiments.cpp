@@ -50,7 +50,7 @@ void run_tabu_search( std::string instance_name )
 	TsQAP ts = TsQAP(&qap, n);
 
 	std::cout << "Running Tabu Search in QAP...\n";
-	for(int i=0; i<10; i++){
+	for(int i=0; i<30; i++){
 		high_resolution_clock::time_point t1 = high_resolution_clock::now();
 		ts.run();
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();

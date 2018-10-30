@@ -109,14 +109,18 @@ std::pair<std::pair<int, int>, int> TsQAP::init_delta_matrix()
 	{
 		for(int j = 0; j < i; ++j)
 		{
-			int delta = this->delta_value_linear(i, j);
-			this->delta_matrix[i][j] = delta;
+			if (i == j)
+				this->delta_matrix[i][j] = 0;
+			else {
+				int delta = this->delta_value_linear(i, j);
+				this->delta_matrix[i][j] = delta;
 
-			if(delta < least_delta)
-			{
-				least_delta = delta;
-				least_neighbor.first = i;
-				least_neighbor.second = j;
+				if(delta < least_delta)
+				{
+					least_delta = delta;
+					least_neighbor.first = i;
+					least_neighbor.second = j;
+				}
 			}
 
 		}
@@ -246,7 +250,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 				// verifica se o vizinho é tabu
 				if(this->is_forbidden(i, j))
 				{
-					std::cout << "neighbor <"<<i << ", "<<j<<"> is tabu\n";
+					// std::cout << "neighbor <"<<i << ", "<<j<<"> is tabu\n";
 					// o vizinho tabu satisfaz o critério de aspiração
 					if(this->satisfies_aspiration_criteria1(this->fitness_current_solution + neighbor_cost))
 					{
@@ -264,7 +268,7 @@ std::pair<std::pair<int, int>, int> TsQAP::get_best_neighbor()
 				// o vizinho não é tabu
 				else
 				{
-					std::cout << "neighbor <"<<i << ", "<<j<<"> is NOT tabu\n";
+					// std::cout << "neighbor <"<<i << ", "<<j<<"> is NOT tabu\n";
 					// se o vizinho é o melhor não-tabu já visto
 					if(neighbor_cost < best_non_tabu_cost_found)
 					{
@@ -314,10 +318,10 @@ void TsQAP::run()
 	std::pair<std::pair<int, int>, int> best_neighbor_swap = this->init_delta_matrix();
 
 	this->print_delta_matrix();std::cout << std::endl;
-	std::cout << "Best swap: <" << best_neighbor_swap.first.first 
-			<< ", " << best_neighbor_swap.first.second << ">, with delta = "
-			<< best_neighbor_swap.second << " and new fitness = " 
-			<< (best_neighbor_swap.second+this->fitness_current_solution) << std::endl << std::endl;
+	// std::cout << "Best swap: <" << best_neighbor_swap.first.first 
+	// 		<< ", " << best_neighbor_swap.first.second << ">, with delta = "
+	// 		<< best_neighbor_swap.second << " and new fitness = " 
+	// 		<< (best_neighbor_swap.second+this->fitness_current_solution) << std::endl << std::endl;
 
 	this->set_current_solution(best_neighbor_swap.first);
 	this->increment_fitness_current_solution(best_neighbor_swap.second);
@@ -339,12 +343,12 @@ void TsQAP::run()
 
 	while (++current_iteration < MAX_ITERATIONS && iterations_not_improved++ < MAX_ITERATIONS_NOT_IMPROVED)
 	{
-		std::cout << "Current iteration: " << current_iteration << " ####################################################################### " << std::endl;
+		std::cout << "Current iteration: " << current_iteration << "\n####################################################################### " << std::endl;
 		std::cout << "Current solution: ";
 		for(int i = 0; i < this->n; ++i) std::cout << this->current_solution[i] <<" ";
 		std::cout << "\nFitness of the best solution: " << this->fitness_current_best_solution << std::endl;
 		std::cout << "Fitness of the current solution: " << this->fitness_current_solution << std::endl;
-		this->print_tabu_list();
+		// this->print_tabu_list();
 
 		// evaluates the neighborhood
 		this->update_delta_matrix(best_neighbor_swap.first);
@@ -470,11 +474,11 @@ void TsQAP::set_fitness_current_best_solution(int new_fitness)
 
 void TsQAP::print_tabu_list()
 {
-	std::cout << "Tabu list: ";
-	for(std::unordered_map<std::pair<int, int>, int, pair_hash>::iterator it = this->tabu_list.begin(); 
-		it != this->tabu_list.end(); ++it)
-		std::cout << "<" << it->first.first << ", " << it->first.second << "> : " << it->second << std::endl;
-	std::cout << std::endl;
+	// std::cout << "Tabu list: ";
+	// for(std::unordered_map<std::pair<int, int>, int, pair_hash>::iterator it = this->tabu_list.begin(); 
+	// 	it != this->tabu_list.end(); ++it)
+	// 	std::cout << "<" << it->first.first << ", " << it->first.second << "> : " << it->second << std::endl;
+	// std::cout << std::endl;
 }
 
 void TsQAP::print_delta_matrix()
