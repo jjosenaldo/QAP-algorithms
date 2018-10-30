@@ -6,6 +6,7 @@
 #include <ctime> 
 #include <unordered_map>
 #include <vector>
+#include <iostream>
 #include "qap.h"
 
 bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2);
@@ -27,6 +28,8 @@ class TsQAP
 
 private:
 
+	int n;
+
 	/* It consists of the current best n-dimensional permutation vector in 
 	 * which the i-th element corresponds to the facility assigned to the
 	 * i-th location */
@@ -37,9 +40,9 @@ private:
 	/**
 	 * The candidate for a best solution
 	 */
-	int* best_candidate;
+	int* current_solution;
 
-	int fitness_best_candidate;
+	int fitness_current_solution;
 
 	/**
 	 * The tabu list
@@ -58,7 +61,7 @@ private:
 
 	int** delta_matrix;
 
-	std::pair<int, int> init_delta_matrix();
+	std::pair<std::pair<int, int>, int> init_delta_matrix();
 
 	int delta_value_linear(int i, int j);
 
@@ -66,11 +69,20 @@ private:
 
 	void update_delta_matrix(std::pair<int,int> op);
 
-	void set_best_candidate(std::pair<int, int> perturbation);
+	void set_current_solution(std::pair<int, int> perturbation);
 
 	void add_swap_to_tabu_list(std::pair<int, int> perturbation);
 
-	std::pair<int, int> get_best_neighbor();
+	std::pair<std::pair<int, int>, int> get_best_neighbor();
+
+	/**
+	 * @brief      Generates a initial solution (i.e., a permutation vector),
+	 *             that will define the first upper bound used in the main
+	 *             algorithm
+	 *
+	 * @param      size_solution    the size problem          
+	 */
+	void generate_initial_solution();
 
 	/**
 	 * @brief      Determines if forbidden.
@@ -79,11 +91,21 @@ private:
 	 *
 	 * @return     True if forbidden, False otherwise.
 	 */
-	bool isForbidden(std::pair<int,int> operation);
+	bool is_forbidden(std::pair<int,int> operation);
 
-	bool isForbidden(int i, int j);
+	bool is_forbidden(int i, int j);
 
 	bool satisfies_aspiration_criteria1(int cost);
+
+	void set_fitness_current_solution(int new_cost);
+
+	void set_fitness_current_best_solution(int new_cost);
+
+	void increment_fitness_current_best_solution(int delta);
+
+	void increment_fitness_current_solution(int delta);
+
+	void hardcode_solution(int* solution);
 
 public:
 
@@ -100,14 +122,6 @@ public:
 	 */
 	~TsQAP();
 
-	/**
-	 * @brief      Generates a initial solution (i.e., a permutation vector),
-	 *             that will define the first upper bound used in the main
-	 *             algorithm
-	 *
-	 * @param      size_solution    the size problem          
-	 */
-	void generate_inicial_solution (int size_solution);
 
 
 	/**
@@ -151,19 +165,21 @@ public:
 	 */
 	void set_current_best_solution(int* new_best_solution);
 
+	void set_current_best_solution(std::pair<int, int> perturbation);
+
 	/**
 	 * @brief      Gets the best candidate.
 	 *
 	 * @return     The best candidate.
 	 */
-	int* get_best_candidate();
+	int* get_current_solution();
 
 	/**
 	 * @brief      Sets the best candidate.
 	 *
-	 * @param      new_best_candidate  The new best candidate
+	 * @param      new_current_solution  The new best candidate
 	 */
-	void set_best_candidate(int* new_best_candidate);
+	void set_current_solution(int* new_current_solution);
 
 	/**
 	 * @brief      Gets the maximum size tabu list.
@@ -194,8 +210,15 @@ public:
 	 *
 	 * @return     The fitness best candidate.
 	 */
-	int get_fitness_best_candidate();
+	int get_fitness_current_solution();
 	
+	void print_tabu_list();
+
+	void add_swap_to_tabu_list(int i, int j);
+
+	void print_delta_matrix();
+
+	void print_naive_delta_matrix();
 };
 
 #endif

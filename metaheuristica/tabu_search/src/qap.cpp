@@ -24,11 +24,6 @@ QAP::QAP(int n, int** d_mat, int** f_mat, int* best_solution, int best_cost)
 	this->best_cost = best_cost;
 }
 
-QAP::~QAP()
-{
-	delete[] this->best_solution;
-}
-
 int QAP::get_number_of_facilities()
 {
 	return this->n;
@@ -62,4 +57,16 @@ int QAP::get_best_cost()
 void QAP::set_best_cost(int new_best_cost)
 {
 	this->best_cost = new_best_cost;
+}
+
+int QAP::calculate_cost_of_solution(int* solution)
+{
+	int cost = 0;
+	
+	for(int i = 0; i < this->n; ++i)
+	{
+		for(int j = 0; j < this->n; ++j)
+			cost += this->f_mat[solution[i]][solution[j]] * this->d_mat[i][j];
+	}
+	return cost;
 }
