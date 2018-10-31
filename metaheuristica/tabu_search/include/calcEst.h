@@ -7,6 +7,8 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+#include <iomanip>      // std::setprecision
+
 
 struct Dados {
 	std::vector<int> custos;

@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
 		}
 
 		instanceFile.close();
+		criar_tabelas_latex ();
 	}
 
 	else 

@@ -43,11 +43,13 @@ void calcEstatisticas ( Dados dados )
 	std::ofstream out("archives/resultExecution.txt", std::ofstream::app);
 	if (!out.is_open()) std::cout << "\nNão abriu o arquivo!\n";
 
+	std::ofstream latex("archives/in_latex.dat", std::ofstream::app);
+	if (!latex.is_open()) std::cout << "\nNão abriu o arquivo!\n";
+
 	out << dados.instance << "\n";
 	out << "REPORT\n--------------------------------------------------\n";
 	out << "Instance size: " << dados.tamanho << std::endl;
 	out << "Average elapsed time: " << media_tempo << " ms" << std::endl;
-	out << "Best solution: " << dados.optimal_cost << std::endl;
 	out << "Percentual of optimal solutions found: " << percentual_optimal_solutions_found << "%" << std::endl;
 	out << "Min found cost: " << calcDistanciamento(min_cost, dados.optimal_cost) << "%" << std::endl;
 	out << "Max found cost: " << calcDistanciamento(max_cost, dados.optimal_cost) << "%" << std::endl;
@@ -55,6 +57,16 @@ void calcEstatisticas ( Dados dados )
 	out << "Median: " << calcDistanciamento(mediana, dados.optimal_cost) << "%" << std::endl;
 	out << "Standard deviation of cost: " << dp_custo << std::endl;
 	out << "--------------------------------------------------\n";
+	out.close();
+
+	latex << "\n" << dados.instance << "\n";
+	latex << dados.tamanho << std::endl;
+	latex << media_tempo << std::endl;
+	latex << std::fixed << std::setprecision(2) << percentual_optimal_solutions_found << std::endl;
+	latex << std::setprecision(2) << calcDistanciamento(min_cost, dados.optimal_cost) << std::endl;
+	latex << std::setprecision(2) << calcDistanciamento(max_cost, dados.optimal_cost) << std::endl;
+	latex << std::setprecision(2) << calcDistanciamento(media_custo, dados.optimal_cost) << std::endl; 
+	latex << std::setprecision(2) << dp_custo;
 	out.close();
 
 }

@@ -12,6 +12,7 @@
 #include "qap.h"
 #include "tabu_search_qap.h"
 #include "calcEst.h"
+#include "latex.h"
 
 const std::string PATH_INSTANCE_PREFIX = "../../instances/";
 const std::string FILE_INSTANCE_SUFFIX = ".dat";

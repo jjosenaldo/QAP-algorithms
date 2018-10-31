@@ -3,7 +3,6 @@ REPORT
 --------------------------------------------------
 Instance size: 8
 Average elapsed time: 0 ms
-Best solution: 2
 Percentual of optimal solutions found: 100%
 Min found cost: 0%
 Max found cost: 0%
@@ -16,7 +15,6 @@ REPORT
 --------------------------------------------------
 Instance size: 8
 Average elapsed time: 0 ms
-Best solution: 8
 Percentual of optimal solutions found: 100%
 Min found cost: 0%
 Max found cost: 0%
@@ -29,7 +27,6 @@ REPORT
 --------------------------------------------------
 Instance size: 8
 Average elapsed time: 0 ms
-Best solution: 32
 Percentual of optimal solutions found: 100%
 Min found cost: 0%
 Max found cost: 0%
@@ -42,7 +39,6 @@ REPORT
 --------------------------------------------------
 Instance size: 8
 Average elapsed time: 0 ms
-Best solution: 6
 Percentual of optimal solutions found: 100%
 Min found cost: 0%
 Max found cost: 0%
@@ -55,7 +51,6 @@ REPORT
 --------------------------------------------------
 Instance size: 8
 Average elapsed time: 0 ms
-Best solution: 2
 Percentual of optimal solutions found: 100%
 Min found cost: 0%
 Max found cost: 0%
@@ -68,20 +63,18 @@ REPORT
 --------------------------------------------------
 Instance size: 10
 Average elapsed time: 0 ms
-Best solution: 174220
-Percentual of optimal solutions found: 86.6667%
+Percentual of optimal solutions found: 90%
 Min found cost: 0%
-Max found cost: 3.81357%
-Average found cost: 0.222707%
+Max found cost: 0.959706%
+Average found cost: 0.0958558%
 Median: 0%
-Standard deviation of cost: 1286.5
+Standard deviation of cost: 510.175
 --------------------------------------------------
 lipa10a
 REPORT
 --------------------------------------------------
 Instance size: 10
 Average elapsed time: 0 ms
-Best solution: 473
 Percentual of optimal solutions found: 100%
 Min found cost: 0%
 Max found cost: 0%
@@ -94,7 +87,6 @@ REPORT
 --------------------------------------------------
 Instance size: 10
 Average elapsed time: 0 ms
-Best solution: 2008
 Percentual of optimal solutions found: 100%
 Min found cost: 0%
 Max found cost: 0%
@@ -107,20 +99,306 @@ REPORT
 --------------------------------------------------
 Instance size: 10
 Average elapsed time: 0 ms
-Best solution: 26992
-Percentual of optimal solutions found: 56.6667%
+Percentual of optimal solutions found: 30%
 Min found cost: 0%
-Max found cost: 7.55779%
-Average found cost: 1.61529%
-Median: 0%
-Standard deviation of cost: 548.095
+Max found cost: 8.77297%
+Average found cost: 2.76008%
+Median: 3.0898%
+Standard deviation of cost: 577.723
 --------------------------------------------------
 tai10a
 REPORT
 --------------------------------------------------
 Instance size: 10
 Average elapsed time: 0 ms
-Best solution: 135028
+Percentual of optimal solutions found: 76.6667%
+Min found cost: 0%
+Max found cost: 0.453239%
+Average found cost: 0.105163%
+Median: 0%
+Standard deviation of cost: 263.273
+--------------------------------------------------
+tai10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 73.3333%
+Min found cost: 0%
+Max found cost: 13.8473%
+Average found cost: 0.527894%
+Median: 0%
+Standard deviation of cost: 29813.9
+--------------------------------------------------
+tai12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 73.3333%
+Min found cost: 0%
+Max found cost: 2.80194%
+Average found cost: 0.72321%
+Median: 0%
+Standard deviation of cost: 2751.85
+--------------------------------------------------
+chr12a
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 33.3333%
+Min found cost: 0%
+Max found cost: 22.3618%
+Average found cost: 6.66876%
+Median: 5.69514%
+Standard deviation of cost: 692.281
+--------------------------------------------------
+had12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 46.6667%
+Min found cost: 0%
+Max found cost: 0.484262%
+Average found cost: 0.242131%
+Median: 0.484262%
+Standard deviation of cost: 4.06838
+--------------------------------------------------
+nug12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 60%
+Min found cost: 0%
+Max found cost: 2.07612%
+Average found cost: 0.346021%
+Median: 0%
+Standard deviation of cost: 4.03434
+--------------------------------------------------
+rou12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 43.3333%
+Min found cost: 0%
+Max found cost: 2.17554%
+Average found cost: 0.495907%
+Median: 0.137563%
+Standard deviation of cost: 1640.04
+--------------------------------------------------
+scr12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 70%
+Min found cost: 0%
+Max found cost: 3.87138%
+Average found cost: 0.86915%
+Median: 0%
+Standard deviation of cost: 434.871
+--------------------------------------------------
+chr15a
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 13.3333%
+Min found cost: 0%
+Max found cost: 22.0089%
+Average found cost: 5.39612%
+Median: 3.24373%
+Standard deviation of cost: 546.163
+--------------------------------------------------
+chr15b
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 0%
+Min found cost: 2.75344%
+Max found cost: 36.1202%
+Average found cost: 16.7584%
+Median: 16.2703%
+Standard deviation of cost: 585.059
+--------------------------------------------------
+chr15c
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 3 ms
+Percentual of optimal solutions found: 6.66667%
+Min found cost: 0%
+Max found cost: 34.8064%
+Average found cost: 15.8249%
+Median: 17.0139%
+Standard deviation of cost: 883.747
+--------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 56.6667%
+Min found cost: 0%
+Max found cost: 5.9562%
+Average found cost: 1.94368%
+Median: 0%
+Standard deviation of cost: 1183.61
+--------------------------------------------------
+nug15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 33.3333%
+Min found cost: 0%
+Max found cost: 0.869565%
+Average found cost: 0.173913%
+Median: 0.173913%
+Standard deviation of cost: 3.8237
+--------------------------------------------------
+rou15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 46.6667%
+Min found cost: 0%
+Max found cost: 2.98862%
+Average found cost: 0.962706%
+Median: 0.752096%
+Standard deviation of cost: 3672.15
+--------------------------------------------------
+nug25
+REPORT
+--------------------------------------------------
+Instance size: 25
+Average elapsed time: 14 ms
+Percentual of optimal solutions found: 23.3333%
+Min found cost: 0%
+Max found cost: 0.90812%
+Average found cost: 0.186966%
+Median: 0.133547%
+Standard deviation of cost: 8.52987
+--------------------------------------------------
+esc8a
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8b
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8c
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8d
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8e
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+rou10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 86.6667%
+Min found cost: 0%
+Max found cost: 0.959706%
+Average found cost: 0.127425%
+Median: 0%
+Standard deviation of cost: 578.088
+--------------------------------------------------
+lipa10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 96.6667%
+Min found cost: 0%
+Max found cost: 2.11416%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 1.85695
+--------------------------------------------------
+lipa10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+scr10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 46.6667%
+Min found cost: 0%
+Max found cost: 8.77297%
+Average found cost: 2.008%
+Median: 3.0898%
+Standard deviation of cost: 580.906
+--------------------------------------------------
+tai10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
 Percentual of optimal solutions found: 66.6667%
 Min found cost: 0%
 Max found cost: 0.453239%
@@ -133,180 +411,1318 @@ REPORT
 --------------------------------------------------
 Instance size: 10
 Average elapsed time: 0 ms
-Best solution: 1183760
-Percentual of optimal solutions found: 63.3333%
+Percentual of optimal solutions found: 70%
 Min found cost: 0%
-Max found cost: 0.284348%
-Average found cost: 0.104244%
+Max found cost: 13.8473%
+Average found cost: 0.537356%
 Median: 0%
-Standard deviation of cost: 1649.79
+Standard deviation of cost: 29795.9
 --------------------------------------------------
 tai12
 REPORT
 --------------------------------------------------
 Instance size: 12
 Average elapsed time: 0 ms
-Best solution: 224416
-Percentual of optimal solutions found: 73.3333%
+Percentual of optimal solutions found: 70%
 Min found cost: 0%
-Max found cost: 3.84286%
-Average found cost: 0.709842%
+Max found cost: 2.80194%
+Average found cost: 0.768662%
 Median: 0%
-Standard deviation of cost: 2766.49
+Standard deviation of cost: 2713.56
 --------------------------------------------------
 chr12a
 REPORT
 --------------------------------------------------
 Instance size: 12
 Average elapsed time: 0 ms
-Best solution: 9552
-Percentual of optimal solutions found: 40%
+Percentual of optimal solutions found: 33.3333%
 Min found cost: 0%
-Max found cost: 40.5988%
-Average found cost: 8.74162%
+Max found cost: 26.9891%
+Average found cost: 8.32286%
 Median: 5.69514%
-Standard deviation of cost: 1016.41
+Standard deviation of cost: 856.071
 --------------------------------------------------
 had12
 REPORT
 --------------------------------------------------
 Instance size: 12
 Average elapsed time: 0 ms
-Best solution: 1652
-Percentual of optimal solutions found: 53.3333%
+Percentual of optimal solutions found: 56.6667%
 Min found cost: 0%
 Max found cost: 0.484262%
 Average found cost: 0.181598%
 Median: 0%
-Standard deviation of cost: 4.12729
+Standard deviation of cost: 4.0599
 --------------------------------------------------
 nug12
 REPORT
 --------------------------------------------------
 Instance size: 12
 Average elapsed time: 0 ms
-Best solution: 578
-Percentual of optimal solutions found: 60%
+Percentual of optimal solutions found: 63.3333%
 Min found cost: 0%
 Max found cost: 1.38408%
 Average found cost: 0.346021%
 Median: 0%
-Standard deviation of cost: 3.44414
+Standard deviation of cost: 3.89518
 --------------------------------------------------
 rou12
 REPORT
 --------------------------------------------------
 Instance size: 12
-Average elapsed time: 1 ms
-Best solution: 235528
-Percentual of optimal solutions found: 63.3333%
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 53.3333%
 Min found cost: 0%
-Max found cost: 1.10645%
-Average found cost: 0.244132%
+Max found cost: 1.95136%
+Average found cost: 0.280646%
 Median: 0%
-Standard deviation of cost: 1039.67
+Standard deviation of cost: 1308.6
 --------------------------------------------------
 scr12
 REPORT
 --------------------------------------------------
 Instance size: 12
 Average elapsed time: 0 ms
-Best solution: 31410
-Percentual of optimal solutions found: 76.6667%
+Percentual of optimal solutions found: 86.6667%
 Min found cost: 0%
-Max found cost: 5.04935%
-Average found cost: 0.900987%
+Max found cost: 3.87138%
+Average found cost: 0.432983%
 Median: 0%
-Standard deviation of cost: 531.334
+Standard deviation of cost: 360.359
 --------------------------------------------------
 chr15a
 REPORT
 --------------------------------------------------
 Instance size: 15
 Average elapsed time: 3 ms
-Best solution: 9896
 Percentual of optimal solutions found: 3.33333%
 Min found cost: 0%
-Max found cost: 21.1601%
-Average found cost: 7.85166%
-Median: 5.81043%
-Standard deviation of cost: 678.436
+Max found cost: 19.8666%
+Average found cost: 6.93209%
+Median: 4.59782%
+Standard deviation of cost: 504.036
 --------------------------------------------------
 chr15b
 REPORT
 --------------------------------------------------
 Instance size: 15
 Average elapsed time: 2 ms
-Best solution: 7990
-Percentual of optimal solutions found: 10%
+Percentual of optimal solutions found: 16.6667%
 Min found cost: 0%
-Max found cost: 39.0238%
-Average found cost: 16.9462%
-Median: 16.2703%
-Standard deviation of cost: 794.388
+Max found cost: 37.7972%
+Average found cost: 13.4793%
+Median: 14.1677%
+Standard deviation of cost: 739.49
 --------------------------------------------------
 chr15c
 REPORT
 --------------------------------------------------
 Instance size: 15
 Average elapsed time: 2 ms
-Best solution: 9504
 Percentual of optimal solutions found: 3.33333%
 Min found cost: 0%
-Max found cost: 31.4184%
-Average found cost: 19.213%
-Median: 23.1587%
-Standard deviation of cost: 820.724
+Max found cost: 35.6692%
+Average found cost: 17.9714%
+Median: 17.5821%
+Standard deviation of cost: 897.639
 --------------------------------------------------
 scr15
 REPORT
 --------------------------------------------------
 Instance size: 15
 Average elapsed time: 2 ms
-Best solution: 51140
-Percentual of optimal solutions found: 56.6667%
+Percentual of optimal solutions found: 63.3333%
 Min found cost: 0%
-Max found cost: 6.93%
-Average found cost: 2.27806%
+Max found cost: 5.25225%
+Average found cost: 1.56042%
 Median: 0%
-Standard deviation of cost: 1393.59
+Standard deviation of cost: 1079.4
 --------------------------------------------------
 nug15
 REPORT
 --------------------------------------------------
 Instance size: 15
 Average elapsed time: 1 ms
-Best solution: 1150
-Percentual of optimal solutions found: 30%
+Percentual of optimal solutions found: 46.6667%
 Min found cost: 0%
 Max found cost: 0.869565%
-Average found cost: 0.173913%
+Average found cost: 0.0869565%
 Median: 0.173913%
-Standard deviation of cost: 2.70376
+Standard deviation of cost: 3.05129
 --------------------------------------------------
 rou15
 REPORT
 --------------------------------------------------
 Instance size: 15
 Average elapsed time: 2 ms
-Best solution: 354210
-Percentual of optimal solutions found: 33.3333%
+Percentual of optimal solutions found: 30%
 Min found cost: 0%
-Max found cost: 3.17439%
-Average found cost: 1.36557%
-Median: 1.63829%
-Standard deviation of cost: 3966.91
+Max found cost: 2.91409%
+Average found cost: 1.10499%
+Median: 1.03978%
+Standard deviation of cost: 3362.62
+--------------------------------------------------
+nug25
+REPORT
+--------------------------------------------------
+Instance size: 25
+Average elapsed time: 12 ms
+Percentual of optimal solutions found: 36.6667%
+Min found cost: 0%
+Max found cost: 0.480769%
+Average found cost: 0.106838%
+Median: 0.160256%
+Standard deviation of cost: 4.60884
+--------------------------------------------------
+esc8a
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8b
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8c
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8d
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8e
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+rou10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 90%
+Min found cost: 0%
+Max found cost: 3.81357%
+Average found cost: 0.190564%
+Median: 0%
+Standard deviation of cost: 1265.03
+--------------------------------------------------
+lipa10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+lipa10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+scr10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 50%
+Min found cost: 0%
+Max found cost: 5.64612%
+Average found cost: 1.80794%
+Median: 1.5449%
+Standard deviation of cost: 523.126
+--------------------------------------------------
+tai10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 80%
+Min found cost: 0%
+Max found cost: 2.2973%
+Average found cost: 0.199218%
+Median: 0%
+Standard deviation of cost: 711.038
+--------------------------------------------------
+tai10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 66.6667%
+Min found cost: 0%
+Max found cost: 13.8473%
+Average found cost: 0.546817%
+Median: 0%
+Standard deviation of cost: 29777.4
+--------------------------------------------------
+tai12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 1 ms
+Percentual of optimal solutions found: 83.3333%
+Min found cost: 0%
+Max found cost: 2.80194%
+Average found cost: 0.442927%
+Median: 0%
+Standard deviation of cost: 2277.05
+--------------------------------------------------
+chr12a
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 26.6667%
+Min found cost: 0%
+Max found cost: 42.6298%
+Average found cost: 9.24414%
+Median: 5.69514%
+Standard deviation of cost: 1056.77
+--------------------------------------------------
+had12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 60%
+Min found cost: 0%
+Max found cost: 0.484262%
+Average found cost: 0.181598%
+Median: 0%
+Standard deviation of cost: 3.99137
+--------------------------------------------------
+nug12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 63.3333%
+Min found cost: 0%
+Max found cost: 1.38408%
+Average found cost: 0.346021%
+Median: 0%
+Standard deviation of cost: 3.75086
+--------------------------------------------------
+rou12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 60%
+Min found cost: 0%
+Max found cost: 1.95136%
+Average found cost: 0.272579%
+Median: 0%
+Standard deviation of cost: 1325.7
+--------------------------------------------------
+scr12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 76.6667%
+Min found cost: 0%
+Max found cost: 3.87138%
+Average found cost: 0.818211%
+Median: 0%
+Standard deviation of cost: 482.988
+--------------------------------------------------
+chr15a
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 13.3333%
+Min found cost: 0%
+Max found cost: 32.7001%
+Average found cost: 6.96241%
+Median: 5.48707%
+Standard deviation of cost: 777.186
+--------------------------------------------------
+chr15b
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 3.33333%
+Min found cost: 0%
+Max found cost: 41.3517%
+Average found cost: 18.761%
+Median: 18.0601%
+Standard deviation of cost: 700.462
+--------------------------------------------------
+chr15c
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 3.33333%
+Min found cost: 0%
+Max found cost: 34.8906%
+Average found cost: 18.9499%
+Median: 19.0236%
+Standard deviation of cost: 761.422
+--------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 60%
+Min found cost: 0%
+Max found cost: 7.02777%
+Average found cost: 1.95737%
+Median: 0%
+Standard deviation of cost: 1284.16
+--------------------------------------------------
+nug15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 46.6667%
+Min found cost: 0%
+Max found cost: 0.869565%
+Average found cost: 0.173913%
+Median: 0.173913%
+Standard deviation of cost: 3.28003
+--------------------------------------------------
+rou15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 3 ms
+Percentual of optimal solutions found: 26.6667%
+Min found cost: 0%
+Max found cost: 3.68256%
+Average found cost: 1.44462%
+Median: 1.32746%
+Standard deviation of cost: 3779
+--------------------------------------------------
+nug25
+REPORT
+--------------------------------------------------
+Instance size: 25
+Average elapsed time: 14 ms
+Percentual of optimal solutions found: 23.3333%
+Min found cost: 0%
+Max found cost: 0.480769%
+Average found cost: 0.106838%
+Median: 0.106838%
+Standard deviation of cost: 4.44119
+--------------------------------------------------
+esc8a
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8b
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8c
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8d
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8e
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+rou10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 93.3333%
+Min found cost: 0%
+Max found cost: 0.959706%
+Average found cost: 0.0637125%
+Median: 0%
+Standard deviation of cost: 424.2
+--------------------------------------------------
+lipa10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+lipa10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+scr10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 53.3333%
+Min found cost: 0%
+Max found cost: 8.77297%
+Average found cost: 1.7709%
+Median: 0%
+Standard deviation of cost: 585.323
+--------------------------------------------------
+tai10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 76.6667%
+Min found cost: 0%
+Max found cost: 2.2973%
+Average found cost: 0.166632%
+Median: 0%
+Standard deviation of cost: 597.123
+--------------------------------------------------
+tai10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 66.6667%
+Min found cost: 0%
+Max found cost: 13.8473%
+Average found cost: 0.546817%
+Median: 0%
+Standard deviation of cost: 29777.4
+--------------------------------------------------
+tai12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 73.3333%
+Min found cost: 0%
+Max found cost: 2.80194%
+Average found cost: 0.699148%
+Median: 0%
+Standard deviation of cost: 2672.2
+--------------------------------------------------
+chr12a
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 23.3333%
+Min found cost: 0%
+Max found cost: 56.9305%
+Average found cost: 11.9556%
+Median: 6.70017%
+Standard deviation of cost: 1230.18
+--------------------------------------------------
+had12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 73.3333%
+Min found cost: 0%
+Max found cost: 0.484262%
+Average found cost: 0.121065%
+Median: 0%
+Standard deviation of cost: 3.60077
+--------------------------------------------------
+nug12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 43.3333%
+Min found cost: 0%
+Max found cost: 1.38408%
+Average found cost: 0.692042%
+Median: 0.692042%
+Standard deviation of cost: 3.85961
+--------------------------------------------------
+rou12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 43.3333%
+Min found cost: 0%
+Max found cost: 2.25791%
+Average found cost: 0.594834%
+Median: 0.137563%
+Standard deviation of cost: 1975.01
+--------------------------------------------------
+scr12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 60%
+Min found cost: 0%
+Max found cost: 3.87138%
+Average found cost: 1.42311%
+Median: 0%
+Standard deviation of cost: 567.714
+--------------------------------------------------
+chr15a
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 3 ms
+Percentual of optimal solutions found: 6.66667%
+Min found cost: 0%
+Max found cost: 31.73%
+Average found cost: 6.03274%
+Median: 5.47696%
+Standard deviation of cost: 646.23
+--------------------------------------------------
+chr15b
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 3.33333%
+Min found cost: 0%
+Max found cost: 42.2278%
+Average found cost: 17.7096%
+Median: 17.1089%
+Standard deviation of cost: 774.225
+--------------------------------------------------
+chr15c
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 3.33333%
+Min found cost: 0%
+Max found cost: 31.7761%
+Average found cost: 19.2866%
+Median: 19.1919%
+Standard deviation of cost: 777.836
+--------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 50%
+Min found cost: 0%
+Max found cost: 7.34063%
+Average found cost: 2.36801%
+Median: 1.92413%
+Standard deviation of cost: 1292.02
+--------------------------------------------------
+nug15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 50%
+Min found cost: 0%
+Max found cost: 0.869565%
+Average found cost: 0.0869565%
+Median: 0.0869565%
+Standard deviation of cost: 3.18401
+--------------------------------------------------
+rou15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 40%
+Min found cost: 0%
+Max found cost: 2.80116%
+Average found cost: 1.16315%
+Median: 1.32746%
+Standard deviation of cost: 3854.9
 --------------------------------------------------
 nug25
 REPORT
 --------------------------------------------------
 Instance size: 25
 Average elapsed time: 13 ms
-Best solution: 3744
-Percentual of optimal solutions found: 20%
+Percentual of optimal solutions found: 36.6667%
 Min found cost: 0%
-Max found cost: 0.587607%
-Average found cost: 0.160256%
-Median: 0.160256%
-Standard deviation of cost: 5.57086
+Max found cost: 0.961538%
+Average found cost: 0.186966%
+Median: 0.0801282%
+Standard deviation of cost: 9.66686
+--------------------------------------------------
+esc8a
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8b
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8c
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8d
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8e
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+rou10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 93.3333%
+Min found cost: 0%
+Max found cost: 0.959706%
+Average found cost: 0.0637125%
+Median: 0%
+Standard deviation of cost: 424.2
+--------------------------------------------------
+lipa10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+lipa10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+scr10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 50%
+Min found cost: 0%
+Max found cost: 4.83847%
+Average found cost: 1.68939%
+Median: 1.5449%
+Standard deviation of cost: 473.36
+--------------------------------------------------
+tai10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 66.6667%
+Min found cost: 0%
+Max found cost: 2.2973%
+Average found cost: 0.271055%
+Median: 0%
+Standard deviation of cost: 778.046
+--------------------------------------------------
+tai10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 70%
+Min found cost: 0%
+Max found cost: 0.284348%
+Average found cost: 0.0852369%
+Median: 0%
+Standard deviation of cost: 1568.86
+--------------------------------------------------
+tai12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 80%
+Min found cost: 0%
+Max found cost: 2.80194%
+Average found cost: 0.536058%
+Median: 0%
+Standard deviation of cost: 2464.09
+--------------------------------------------------
+chr12a
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 26.6667%
+Min found cost: 0%
+Max found cost: 42.6298%
+Average found cost: 12.1336%
+Median: 7.68425%
+Standard deviation of cost: 1124.3
+--------------------------------------------------
+had12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 43.3333%
+Min found cost: 0%
+Max found cost: 0.484262%
+Average found cost: 0.242131%
+Median: 0.484262%
+Standard deviation of cost: 4.06838
+--------------------------------------------------
+nug12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 43.3333%
+Min found cost: 0%
+Max found cost: 1.38408%
+Average found cost: 0.519031%
+Median: 0.692042%
+Standard deviation of cost: 3.59118
+--------------------------------------------------
+rou12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 46.6667%
+Min found cost: 0%
+Max found cost: 2.25791%
+Average found cost: 0.520957%
+Median: 0.137563%
+Standard deviation of cost: 1754.03
+--------------------------------------------------
+scr12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 86.6667%
+Min found cost: 0%
+Max found cost: 3.87138%
+Average found cost: 0.432983%
+Median: 0%
+Standard deviation of cost: 360.359
+--------------------------------------------------
+chr15a
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 10%
+Min found cost: 0%
+Max found cost: 27.7284%
+Average found cost: 8.24576%
+Median: 6.62894%
+Standard deviation of cost: 777
+--------------------------------------------------
+chr15b
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 3 ms
+Percentual of optimal solutions found: 13.3333%
+Min found cost: 0%
+Max found cost: 37.1715%
+Average found cost: 14.9061%
+Median: 14.1677%
+Standard deviation of cost: 686.311
+--------------------------------------------------
+chr15c
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 3.33333%
+Min found cost: 0%
+Max found cost: 33.4806%
+Average found cost: 18.9184%
+Median: 18.8552%
+Standard deviation of cost: 889.604
+--------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 66.6667%
+Min found cost: 0%
+Max found cost: 7.38365%
+Average found cost: 1.63082%
+Median: 0%
+Standard deviation of cost: 1237.25
+--------------------------------------------------
+nug15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 40%
+Min found cost: 0%
+Max found cost: 1.21739%
+Average found cost: 0.173913%
+Median: 0.173913%
+Standard deviation of cost: 3.32182
+--------------------------------------------------
+rou15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 3 ms
+Percentual of optimal solutions found: 56.6667%
+Min found cost: 0%
+Max found cost: 2.82036%
+Average found cost: 0.676435%
+Median: 0%
+Standard deviation of cost: 3174.21
+--------------------------------------------------
+nug25
+REPORT
+--------------------------------------------------
+Instance size: 25
+Average elapsed time: 14 ms
+Percentual of optimal solutions found: 43.3333%
+Min found cost: 0%
+Max found cost: 1.01496%
+Average found cost: 0.133547%
+Median: 0.0801282%
+Standard deviation of cost: 7.92639
+--------------------------------------------------
+esc8a
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8b
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8c
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8d
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+esc8e
+REPORT
+--------------------------------------------------
+Instance size: 8
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+rou10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 86.6667%
+Min found cost: 0%
+Max found cost: 1.77592%
+Average found cost: 0.154976%
+Median: 0%
+Standard deviation of cost: 737.358
+--------------------------------------------------
+lipa10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+lipa10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+scr10
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 60%
+Min found cost: 0%
+Max found cost: 4.33462%
+Average found cost: 1.34114%
+Median: 0%
+Standard deviation of cost: 456.998
+--------------------------------------------------
+tai10a
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 70%
+Min found cost: 0%
+Max found cost: 2.2973%
+Average found cost: 0.20144%
+Median: 0%
+Standard deviation of cost: 606.02
+--------------------------------------------------
+tai10b
+REPORT
+--------------------------------------------------
+Instance size: 10
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 66.6667%
+Min found cost: 0%
+Max found cost: 13.8473%
+Average found cost: 0.546817%
+Median: 0%
+Standard deviation of cost: 29777.4
+--------------------------------------------------
+tai12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 90%
+Min found cost: 0%
+Max found cost: 2.80194%
+Average found cost: 0.279837%
+Median: 0%
+Standard deviation of cost: 1918.65
+--------------------------------------------------
+chr12a
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 46.6667%
+Min found cost: 0%
+Max found cost: 40.5988%
+Average found cost: 9.19179%
+Median: 4.75293%
+Standard deviation of cost: 1258.65
+--------------------------------------------------
+had12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 46.6667%
+Min found cost: 0%
+Max found cost: 0.484262%
+Average found cost: 0.242131%
+Median: 0.363196%
+Standard deviation of cost: 4
+--------------------------------------------------
+nug12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 56.6667%
+Min found cost: 0%
+Max found cost: 2.07612%
+Average found cost: 0.346021%
+Median: 0%
+Standard deviation of cost: 3.89518
+--------------------------------------------------
+rou12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 53.3333%
+Min found cost: 0%
+Max found cost: 1.91485%
+Average found cost: 0.31716%
+Median: 0%
+Standard deviation of cost: 1246.74
+--------------------------------------------------
+scr12
+REPORT
+--------------------------------------------------
+Instance size: 12
+Average elapsed time: 0 ms
+Percentual of optimal solutions found: 80%
+Min found cost: 0%
+Max found cost: 3.87138%
+Average found cost: 0.690863%
+Median: 0%
+Standard deviation of cost: 449.67
+--------------------------------------------------
+chr15a
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 16.6667%
+Min found cost: 0%
+Max found cost: 33.4883%
+Average found cost: 7.88197%
+Median: 4.5574%
+Standard deviation of cost: 915.558
+--------------------------------------------------
+chr15b
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 0%
+Min found cost: 2.75344%
+Max found cost: 38.1977%
+Average found cost: 21.3517%
+Median: 18.3354%
+Standard deviation of cost: 678.449
+--------------------------------------------------
+chr15c
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 6.66667%
+Min found cost: 0%
+Max found cost: 36.2163%
+Average found cost: 18.0135%
+Median: 19.0236%
+Standard deviation of cost: 820.268
+--------------------------------------------------
+scr15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 70%
+Min found cost: 0%
+Max found cost: 6.79312%
+Average found cost: 1.57215%
+Median: 0%
+Standard deviation of cost: 1276.02
+--------------------------------------------------
+nug15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 60%
+Min found cost: 0%
+Max found cost: 0.869565%
+Average found cost: 0.0869565%
+Median: 0%
+Standard deviation of cost: 3.47404
+--------------------------------------------------
+rou15
+REPORT
+--------------------------------------------------
+Instance size: 15
+Average elapsed time: 2 ms
+Percentual of optimal solutions found: 33.3333%
+Min found cost: 0%
+Max found cost: 2.98862%
+Average found cost: 1.25886%
+Median: 1.32746%
+Standard deviation of cost: 3759.57
+--------------------------------------------------
+nug25
+REPORT
+--------------------------------------------------
+Instance size: 25
+Average elapsed time: 12 ms
+Percentual of optimal solutions found: 26.6667%
+Min found cost: 0%
+Max found cost: 0.480769%
+Average found cost: 0.133547%
+Median: 0.133547%
+Standard deviation of cost: 4.57127
 --------------------------------------------------
