@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime> 
-#include <unordered_map>
 #include <vector>
 #include <iostream>
 #include <string>
@@ -22,6 +21,29 @@ struct pair_hash {
         // In the real world, use sth. like boost.hash_combine
         return h1 ^ h2;  
     }
+};
+
+class Operation
+{
+
+private: 
+	int first;
+	int second;
+
+public:
+	Operation();
+
+	Operation(int i, int j);
+
+	int get_first();
+
+	int get_second();
+
+	void set_first(int i);
+
+	void set_second(int i);
+
+	void set(int i, int j);
 };
 
 class TsQAP
@@ -50,7 +72,7 @@ private:
 	/**
 	 * The tabu list
 	 */
-	std::unordered_map<std::pair<int,int>, int, pair_hash> tabu_list;
+	std::vector<std::vector<int>> last_seen_matrix;
 
 	/**
 	 * Max size of tabu list
@@ -62,21 +84,23 @@ private:
 	 */
 	QAP *problem;
 
-	int** delta_matrix;
+	std::vector<std::vector<int>> delta_matrix;
 
-	std::pair<std::pair<int, int>, int> init_delta_matrix();
+	int current_iteration;
+
+	Operation init_delta_matrix();
 
 	int delta_value_linear(int i, int j);
 
 	int delta_value_constant(int i, int j, int p, int q);
 
-	void update_delta_matrix(std::pair<int,int> op);
+	void update_delta_matrix(Operation operation);
 
-	void set_current_solution(std::pair<int, int> perturbation);
+	void apply_operation(Operation operation, int* array);
 
-	void add_swap_to_tabu_list(std::pair<int, int> perturbation);
+	void init_matrix(std::vector<std::vector<int>>& matrix);
 
-	std::pair<std::pair<int, int>, int> get_best_neighbor();
+	Operation get_best_neighbor();
 
 	/**
 	 * @brief      Generates a initial solution (i.e., a permutation vector),
@@ -87,16 +111,9 @@ private:
 	 */
 	void generate_initial_solution();
 
-	/**
-	 * @brief      Determines if forbidden.
-	 *
-	 * @param[in]  operation  The operation
-	 *
-	 * @return     True if forbidden, False otherwise.
-	 */
-	bool is_forbidden(std::pair<int,int> operation);
+	bool is_tabu(int i, int j);
 
-	bool is_forbidden(int i, int j);
+	bool is_tabu(Operation operation);
 
 	bool satisfies_aspiration_criteria1(int cost);
 
@@ -109,6 +126,14 @@ private:
 	void increment_fitness_current_solution(int delta);
 
 	void hardcode_solution(int* solution);
+
+	void init_last_seen_matrix();
+
+	void set_last_seen(int i, int j);
+
+	void set_last_seen(Operation operation);
+
+	int get_delta(Operation operation);
 
 public:
 
