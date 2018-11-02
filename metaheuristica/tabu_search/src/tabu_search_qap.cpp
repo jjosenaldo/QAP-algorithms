@@ -57,10 +57,13 @@ void TsQAP::init_matrix(std::vector<std::vector<int>>& matrix)
 	{
 		row_size = this->n - i - 1;
 
-		matrix[i].reserve(row_size);
+		std::vector<int> line;
+		line.reserve(row_size);
 
 		for(int j = 0; j < row_size;  ++j)
-			matrix[i].push_back(-1);
+			line.push_back(-1);	
+
+		matrix.push_back(line);
 	}
 }
 

@@ -8,16 +8,16 @@
 int main(int argc, char *argv[])
 {	
 	std::srand(std::time(0));
-	std::string file;
-	
-	if (argc == 2)
+	std::string file = "archives/beth.in";
+	/*
+	if (argc > -1)
 		file = argv[1];
 	
 	else
 	{
 		printf("%s\n", "ERROR - invalid argument\n");
 		return 0;
-	} 
+	} */
 	
 	std::ifstream instanceFile (file);
 	std::string instance;
