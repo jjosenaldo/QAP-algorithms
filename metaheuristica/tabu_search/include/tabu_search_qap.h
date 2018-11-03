@@ -9,39 +9,21 @@
 #include <string>
 #include "qap.h"
 
-bool pair_equals(std::pair<int, int> p1, std::pair<int, int> p2);
-
-// based on Casey's answer on https://stackoverflow.com/questions/20590656/error-for-hash-function-of-pair-of-ints
-struct pair_hash {
-    std::size_t operator () (const std::pair<int,int> &p) const {
-        auto h1 = std::hash<int>{}(p.first);
-        auto h2 = std::hash<int>{}(p.second);
-
-        // Mainly for demonstration purposes, i.e. works but is overly simple
-        // In the real world, use sth. like boost.hash_combine
-        return h1 ^ h2;  
-    }
-};
-
 class Operation
 {
 
 private: 
-	int first;
-	int second;
+	int miN;
+	int maX;
 
 public:
 	Operation();
 
 	Operation(int i, int j);
 
-	int get_first();
+	int get_min();
 
-	int get_second();
-
-	void set_first(int i);
-
-	void set_second(int i);
+	int get_max();
 
 	void set(int i, int j);
 };
@@ -125,16 +107,29 @@ private:
 
 	void increment_fitness_current_solution(int delta);
 
-	void hardcode_solution(int* solution);
-
 	void init_last_seen_matrix();
 
 	void set_last_seen(int i, int j);
 
-	void set_last_seen(Operation operation);
+	void set_last_seen(Operation index);
 
-	int get_delta(Operation operation);
+	int get_delta(Operation index);
 
+	void set_delta(Operation index, int new_value);
+
+	/**
+	 * @brief      Sets the current best solution.
+	 *
+	 * @param      new_best_solution  The new best solution
+	 */
+	void set_current_best_solution(int* new_best_solution);
+
+	/**
+	 * @brief      Sets the best candidate.
+	 *
+	 * @param      new_current_solution  The new best candidate
+	 */
+	void set_current_solution(int* new_current_solution);
 public:
 
 	/**
@@ -179,66 +174,6 @@ public:
 	 */
 	void run();
 
-	/**
-	 * @brief      Gets the current best solution.
-	 *
-	 * @return     The current best solution.
-	 */
-	int* get_current_best_solution();
-
-	/**
-	 * @brief      Sets the current best solution.
-	 *
-	 * @param      new_best_solution  The new best solution
-	 */
-	void set_current_best_solution(int* new_best_solution);
-
-	void set_current_best_solution(std::pair<int, int> perturbation);
-
-	/**
-	 * @brief      Gets the best candidate.
-	 *
-	 * @return     The best candidate.
-	 */
-	int* get_current_solution();
-
-	/**
-	 * @brief      Sets the best candidate.
-	 *
-	 * @param      new_current_solution  The new best candidate
-	 */
-	void set_current_solution(int* new_current_solution);
-
-	/**
-	 * @brief      Gets the maximum size tabu list.
-	 *
-	 * @return     The maximum size tabu list.
-	 */
-	int get_max_size_tabu_list();
-
-	/**
-	 * @brief      Sets the maximum size tabu list.
-	 *
-	 * @param[in]  new_max_size  The new maximum size
-	 */
-	void set_max_size_tabu_list(int new_max_size);
-
-	// std::vector<int*> get_tabu_list();
-
-	/**
-	 * @brief      Gets the instance qap.
-	 *
-	 * @return     The instance qap.
-	 */
-	QAP* get_instance_qap ();
-
-
-	/**
-	 * @brief      Gets the fitness best candidate.
-	 *
-	 * @return     The fitness best candidate.
-	 */
-	int get_fitness_current_solution();
 
 	int get_fitness_current_best_solution();
 	
@@ -251,8 +186,6 @@ public:
 	void print_naive_delta_matrix();
 
 	std::string get_instance_name ();
-
-	int get_n();
 };
 
 #endif

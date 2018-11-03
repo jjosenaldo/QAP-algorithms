@@ -47,7 +47,6 @@ void run_tabu_search( std::string instance_name )
 	read_instance(instance_name);
 	
 	QAP qap = QAP( n, d_mat, f_mat);
-	TsQAP ts = TsQAP(&qap, n, instance_name);
 
 	std::cout << "Running Tabu Search in QAP...\n";
 	
@@ -55,6 +54,7 @@ void run_tabu_search( std::string instance_name )
 	std::vector<int> tempos;
 	
 	for(int i=0; i<30; i++){
+		TsQAP ts = TsQAP(&qap, n, instance_name);
 		high_resolution_clock::time_point t1 = high_resolution_clock::now();
 		ts.run();
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
@@ -67,7 +67,7 @@ void run_tabu_search( std::string instance_name )
 	std::ifstream opt_solution_stream(PATH_INSTANCE_PREFIX + FILE_OPT_PREFIX +  instance_name + FILE_OPT_SUFFIX);
 	int opt_cost;
 	opt_solution_stream >> opt_cost;
-	Dados dados = {custos, tempos, ts.get_instance_name(), ts.get_n(), opt_cost};
+	Dados dados = {custos, tempos, instance_name, n, opt_cost};
 	calcEstatisticas(dados);
 
 	std::cout << "Execution finished!" << "\n\n";
