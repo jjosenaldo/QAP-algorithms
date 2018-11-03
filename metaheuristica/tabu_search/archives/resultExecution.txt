@@ -598,3 +598,27 @@ Average found cost: 0.0801282%
 Median: 0.0534188%
 Standard deviation of cost: 4.51052
 --------------------------------------------------
+beth
+REPORT
+--------------------------------------------------
+Instance size: 4
+Average elapsed time: 14 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------
+beth
+REPORT
+--------------------------------------------------
+Instance size: 4
+Average elapsed time: 23 ms
+Percentual of optimal solutions found: 100%
+Min found cost: 0%
+Max found cost: 0%
+Average found cost: 0%
+Median: 0%
+Standard deviation of cost: 0
+--------------------------------------------------

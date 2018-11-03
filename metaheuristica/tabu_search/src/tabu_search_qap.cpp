@@ -298,31 +298,14 @@ void TsQAP::set_delta(Operation operation, int val){ this->delta_matrix[operatio
 void TsQAP::run()
 {
 	this->generate_initial_solution();
-	Operation best_neighbor_swap = this->init_delta_matrix();
+	Operation best_neighbor_swap;
 
-	this->print_delta_matrix();std::cout << std::endl;
-	std::cout << "Best swap: <" << best_neighbor_swap.get_max() 
-			<< ", " << best_neighbor_swap.get_min() << ">, with delta = "
-			<< this->get_delta(best_neighbor_swap) << " and new fitness = " 
-			<< (this->get_delta(best_neighbor_swap)+this->fitness_current_solution) << std::endl;
-	int neighbor_delta = this->get_delta(best_neighbor_swap);
-
-	this->apply_operation(best_neighbor_swap, this->current_solution);
-	this->increment_fitness_current_solution(neighbor_delta);
-
-	// Se o primeiro melhor vizinho é melhor que a soulução inicial,
-	// então a solução melhor é setada com esse vizinho. 
-	if(neighbor_delta < 0)
-	{
-		this->set_current_best_solution(this->current_solution);
-		this->set_fitness_current_best_solution(this->fitness_current_solution);
-	}
-
-	this->set_last_seen(best_neighbor_swap);
+	int neighbor_delta;
 
 	const int MAX_ITERATIONS = 100*this->n;
 	const int MAX_ITERATIONS_NOT_IMPROVED = 30*this->n;
 	int iterations_not_improved = 0;
+	bool first_iteration = true;
 
 	while (this->current_iteration < MAX_ITERATIONS && iterations_not_improved < MAX_ITERATIONS_NOT_IMPROVED)
 	{
@@ -336,13 +319,23 @@ void TsQAP::run()
 		std::cout << "Fitness of the best solution: " << this->fitness_current_best_solution << std::endl;
 
 		// evaluates the neighborhood
-		this->update_delta_matrix(best_neighbor_swap);
+		if(first_iteration)
+		{
+			first_iteration = false;
+			best_neighbor_swap = this->init_delta_matrix();
+		}
+
+		else
+		{
+			this->update_delta_matrix(best_neighbor_swap);
+			best_neighbor_swap = this->get_best_neighbor();
+		}
+			
 
 		std::cout <<  "Delta matrix updated!\n";
 		this->print_delta_matrix();std::cout << std::endl;
 		this->print_naive_delta_matrix();std::cout << std::endl;
 
-		best_neighbor_swap = this->get_best_neighbor();
 
 		std::cout << "Best swap: <" << best_neighbor_swap.get_max() 
 			<< ", " << best_neighbor_swap.get_min() << ">, with delta = "
