@@ -2,6 +2,9 @@
 #define _GA_QAP_H_
 
 #include <vector>
+#include <algorithm>
+#include <iostream>
+#include "qap.h"
 
 class GA_QAP 
 {
@@ -10,8 +13,6 @@ class GA_QAP
 		/* this is a QAP solution  */
 		int* chromossome;
 
-		int max_size_population;
-
 		int size_initial_population;
 
 		std::vector<int*> population;
@@ -19,12 +20,17 @@ class GA_QAP
 		/** instance size of QAP */
 		int size_problem;
 
+		QAP *problem;
+
 	public:
 
 		/**
 		 * @brief      Constructs the object.
+		 *
+		 * @param      problem       The problem
+		 * @param[in]  size_problem  The size problem
 		 */
-		GA_QAP();
+		GA_QAP(QAP *problem, int size_initial_population);
 
 		/**
 		 * @brief      Destroys the object.
@@ -60,7 +66,12 @@ class GA_QAP
 		 */
 		void mutation();
 
+		/**
+		 * @brief      print the individuals of population
+		 */
+		void print_population();
 
+		void run();
 
 };
 

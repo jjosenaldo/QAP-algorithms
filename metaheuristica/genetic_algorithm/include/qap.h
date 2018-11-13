@@ -121,6 +121,7 @@ public:
 	 * @return     The cost of solution.
 	 */
 	int calculate_cost_of_solution(int* solution);
+
 };
 
 #endif
