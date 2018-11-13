@@ -5,11 +5,13 @@ GA_QAP::GA_QAP(QAP *problem, int size_initial_population)
 	this->size_initial_population = size_initial_population;
 	this->size_problem = problem->get_number_of_facilities();
 
+	chromossome = new int[size_problem];
 	this->generate_initial_population();
 }
 
 GA_QAP::~GA_QAP()
 {
+	std::cout << population.size();
 	delete[] chromossome;
 	for (unsigned int i=0; i < population.size(); i++)
 		delete[] population[i];
@@ -17,16 +19,17 @@ GA_QAP::~GA_QAP()
 
 void GA_QAP::generate_initial_population()
 {
+	std::cout << "size: " << this->size_problem << std::endl;
+
 	for (int i=0; i < this->size_problem; i++)
 		chromossome[i] = i;
 
-	std::cout << "size: " << size_problem << std::endl;
-	std::cout << "passou\n";
-
 	for (int i=0; i < this->size_initial_population; i++)
 	{
-		std::random_shuffle(chromossome, chromossome + this->size_problem);
-		population.push_back(chromossome);
+		int* new_individual = new int[this->size_problem];
+		std::copy(chromossome, chromossome + this->size_problem, new_individual);
+		std::random_shuffle(new_individual, new_individual + this->size_problem);
+		population.push_back(new_individual);		
 	}
 }
 
