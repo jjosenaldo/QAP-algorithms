@@ -22,6 +22,17 @@ class GA_QAP
 
 		QAP *problem;
 
+		/**
+		 * mutation rate, initial with 20%
+		 */
+		int mutation_rate;
+
+		int* current_best_individual;
+
+		int fitness_of_current_best_individual;
+
+		bool improved;
+
 	public:
 
 		/**
@@ -82,7 +93,16 @@ class GA_QAP
 		 */
 		void print_population();
 
-		
+		/**
+		 * @brief      Determines if dominate.
+		 *
+		 * @param      individual  The individual
+		 *
+		 * @return     True if dominate, False otherwise.
+		 */
+		bool is_dominate(int* individual);
+
+		int get_fitness_current_best_solution();
 
 		void run();
 

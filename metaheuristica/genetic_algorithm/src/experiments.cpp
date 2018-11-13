@@ -1,4 +1,5 @@
 #include "experiments.h"
+#include "calcEst.h"
 
 using namespace std::chrono;
 
@@ -50,25 +51,25 @@ void run_genetic_algorithm( std::string instance_name )
 
 	std::cout << "Running genetic algorithm in QAP...\n";
 	
-	// std::vector<int> custos;
-	// std::vector<int> tempos;
+	std::vector<int> custos;
+	std::vector<int> tempos;
 	
-	for(int i=0; i<1; i++){
+	for(int i=0; i<30; i++){
 		GA_QAP ga = GA_QAP(&qap, size_initial_population);
 		high_resolution_clock::time_point t1 = high_resolution_clock::now();
 		ga.run();
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 		int duration_in_milisseconds = duration_cast<milliseconds>(t2 - t1).count();
 
-		// custos.push_back(ts.get_fitness_current_best_solution());
-		// tempos.push_back(duration_in_milisseconds);
+		custos.push_back(ga.get_fitness_current_best_solution());
+		tempos.push_back(duration_in_milisseconds);
 	}
 
-	// std::ifstream opt_solution_stream(PATH_INSTANCE_PREFIX + FILE_OPT_PREFIX +  instance_name + FILE_OPT_SUFFIX);
-	// int opt_cost;
-	// opt_solution_stream >> opt_cost;
-	// Dados dados = {custos, tempos, instance_name, n, opt_cost};
-	// calcEstatisticas(dados);
+	std::ifstream opt_solution_stream(PATH_INSTANCE_PREFIX + FILE_OPT_PREFIX +  instance_name + FILE_OPT_SUFFIX);
+	int opt_cost;
+	opt_solution_stream >> opt_cost;
+	Dados dados = {custos, tempos, instance_name, n, opt_cost};
+	calcEstatisticas(dados);
 
 	std::cout << "Execution finished!" << "\n\n";
 

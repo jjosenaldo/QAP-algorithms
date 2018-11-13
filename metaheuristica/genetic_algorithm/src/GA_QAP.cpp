@@ -7,19 +7,42 @@ void print_solution (int* solution, int size_problem)
 	std::cout << std::endl;
 }
 
+std::vector<int> raffle(int lower_bound, int upper_bound, int amount )
+{
+	std::vector<int> values;
+	for (int i = lower_bound; i < upper_bound; i++)
+		values.push_back(i);
+	std::random_shuffle(values.begin(), values.end());
+
+	std::vector<int> drawn;
+	for (int i=0; i < amount; i++)
+		drawn.push_back(values[i]);
+	return drawn;
+}
+
 GA_QAP::GA_QAP(QAP *problem, int size_initial_population)
 {
 	this->size_initial_population = size_initial_population;
 	this->size_problem = problem->get_number_of_facilities();
 	this->problem = problem;
+	this->mutation_rate = 20;
+	this->improved = false;
 
 	chromossome = new int[size_problem];
 	this->generate_initial_population();
+
+	/** iniciar melhor solução atual */
+	this->current_best_individual = this->population[0];
+	this->fitness_of_current_best_individual = 
+		this->problem->calculate_cost_of_solution(this->current_best_individual);
+	
+	/** Buscar melhor indivíduo da população gerada*/
+	for (unsigned int i=1; i < this->population.size(); i++)
+		this->is_dominate(this->population[i]);
 }
 
 GA_QAP::~GA_QAP()
 {
-	std::cout << population.size();
 	delete[] chromossome;
 	for (unsigned int i=0; i < population.size(); i++)
 		delete[] population[i];
@@ -27,8 +50,7 @@ GA_QAP::~GA_QAP()
 
 void GA_QAP::generate_initial_population()
 {
-	std::cout << "size: " << this->size_problem << std::endl;
-
+	
 	for (int i=0; i < this->size_problem; i++)
 		chromossome[i] = i;
 
@@ -39,6 +61,20 @@ void GA_QAP::generate_initial_population()
 		std::random_shuffle(new_individual, new_individual + this->size_problem);
 		population.push_back(new_individual);		
 	}
+}
+
+bool GA_QAP::is_dominate(int* individual)
+{
+	int fitness = this->problem->calculate_cost_of_solution(individual);
+		
+	if (fitness < this->fitness_of_current_best_individual)
+	{
+		current_best_individual = individual;
+		fitness_of_current_best_individual = fitness;
+		this->improved = true;
+		return true;
+	}
+	return false;
 }
 
 void GA_QAP::print_population()
@@ -58,7 +94,10 @@ int* GA_QAP::selection ()
 		temp.push_back(i);
 
 	std::random_shuffle(temp.begin(), temp.end());	
-	return this->crossover(population[temp[0]], population[temp[1]]);
+	int* new_individual = this->crossover(population[temp[0]], population[temp[1]]);
+	this->population.push_back(new_individual);
+	this->is_dominate(new_individual);
+	return new_individual;
 }
 
 void GA_QAP::swap(int num1, int num2, int* individual)
@@ -89,24 +128,37 @@ void GA_QAP::verify_condition_path_swap (int* child1, int* child2, int position)
 	}
 }
 
+void GA_QAP::mutation()
+{
+	int total = (this->mutation_rate/100.00) * this->population.size();
+	std::vector<int> positions = raffle(0, this->population.size()-1, total );
+
+	for (unsigned int i = 0; i < positions.size(); i++)
+	{
+		std::vector<int> positions_to_swap = raffle(0, this->size_problem, 2);
+		
+		/** Trocar os genes selecionados */
+		int aux = population[positions[i]][positions_to_swap[0]];
+		population[positions[i]][positions_to_swap[0]] = population[positions[i]][positions_to_swap[1]];
+		population[positions[i]][positions_to_swap[1]] = aux;
+
+		this->is_dominate(population[i]);
+	}
+
+	if (this->mutation_rate > 2)
+		this->mutation_rate--;
+
+}
 
 int* GA_QAP::crossover(int* father, int* mother)
 {
-	/** Imprimir parâmetos iniciais */
-	std::cout << "indivíduos escolhidos\n";
-	for (int i=0; i < size_problem; i++)
-		std::cout << father[i] << " ";
-	std::cout << std::endl;
-
-	for (int i=0; i < size_problem; i++)
-		std::cout << mother[i] << " ";
-	std::cout << std::endl;
+	// /** Imprimir parâmetos iniciais */
+	// std::cout << "indivíduos escolhidos\n";
+	// print_solution(father, size_problem);
+	// print_solution(mother, size_problem);
 
 	/** Sortear uma posição aleatória para iniciar */
-	std::vector<int> temp;
-	for (int i=0; i < size_problem; i++)
-		temp.push_back(i);
-	std::random_shuffle(temp.begin(), temp.end());		
+	std::vector<int> temp = raffle(0, size_problem, 1);
 	int position = temp[0];
 
 	/** Metodologia de path swap para crossover */
@@ -125,15 +177,14 @@ int* GA_QAP::crossover(int* father, int* mother)
 			this->verify_condition_path_swap(child1, child2, i);
 
 	} else
-	{
 		for (int i=0; i < size_problem; i++)
 			this->verify_condition_path_swap(child1, child2, i);
-	} 
+	 
 
-	std::cout << "child1 gerada: ";
-	print_solution(child1, size_problem);
-	std::cout << "child2 gerada: ";
-	print_solution(child2, size_problem);
+	// std::cout << "child1 gerada: ";
+	// print_solution(child1, size_problem);
+	// std::cout << "child2 gerada: ";
+	// print_solution(child2, size_problem);
 
 	/** Avaliar melhor filho gerado */
 	int fitness_child1 = this->problem->calculate_cost_of_solution(child1);
@@ -154,10 +205,39 @@ int* GA_QAP::crossover(int* father, int* mother)
 
 void GA_QAP::run()
 {
-	this->print_population();
-	int* aux = new int[this->size_problem];
-	aux = this->selection();
-	std::cout << "new child generate\n";
-	print_solution(aux, size_problem);
-	delete[] aux;
+	int count_mutation = 0;
+	int count_stop = 0;
+
+	bool stopping_condition = false;
+	
+	while (!stopping_condition)
+	{
+		this->selection();
+		
+		if (this->improved)
+		{
+			this->improved = false;
+			count_stop = 0;
+		}else count_stop++;
+
+		if (count_mutation == 10)
+		{
+			this->mutation();
+			count_mutation = 0;
+		}else count_mutation++;
+
+		if(count_stop >= (100*this->size_problem))
+			stopping_condition = true;		
+	}
+
+	// std::cout << "The best solution found: ";
+	// print_solution(this->current_best_individual, size_problem);
+	// std::cout << "Cost of best solution found: ";
+	// std::cout << fitness_of_current_best_individual << std::endl;
+}
+
+
+int GA_QAP::get_fitness_current_best_solution()
+{
+	return this->fitness_of_current_best_individual;
 }
