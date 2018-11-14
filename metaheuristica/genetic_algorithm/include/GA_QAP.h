@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <utility>
 #include "qap.h"
 
 class GA_QAP 
@@ -32,6 +33,8 @@ class GA_QAP
 		int fitness_of_current_best_individual;
 
 		bool improved;
+
+		int position_local_optimization = 0;
 
 	public:
 
@@ -103,6 +106,14 @@ class GA_QAP
 		bool is_dominate(int* individual);
 
 		int get_fitness_current_best_solution();
+
+		/**
+		 * @brief      optimizes 20% of the current population through 
+		 *             a neighborhood search      
+		 */
+		void local_optimization ();
+
+		void improve_solution ( int* solution );
 
 		void run();
 

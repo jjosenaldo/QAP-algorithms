@@ -95,6 +95,7 @@ int* GA_QAP::selection ()
 
 	std::random_shuffle(temp.begin(), temp.end());	
 	int* new_individual = this->crossover(population[temp[0]], population[temp[1]]);
+
 	this->population.push_back(new_individual);
 	this->is_dominate(new_individual);
 	return new_individual;
@@ -201,6 +202,37 @@ int* GA_QAP::crossover(int* father, int* mother)
 		return child2;
 	} 
 		
+}
+
+void GA_QAP::improve_solution ( int* solution )
+{
+	/**
+	 * TODO
+	 * Monta a vizinhaça de uma solução
+	 * Busca o melhor vizinho dessa solução
+	 * Troca a solução atual por seu melhor vizinho encontrado
+	 */
+}
+
+void GA_QAP::local_optimization ()
+{
+	int individuals = 0.2 * this->population.size();
+	
+	int cont = individuals;
+	int i = position_local_optimization;
+	
+	while (cont > 0)
+	{
+		if (i == (int) this->population.size())
+			i = 0;
+
+		this->improve_solution( this->population[i] );
+
+		cont--;
+		i++;
+	}
+
+	this->position_local_optimization = i;
 }
 
 void GA_QAP::run()

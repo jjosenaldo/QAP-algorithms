@@ -7,7 +7,7 @@ int n;
 int** d_mat;
 int** f_mat;
 int* opt_solution;
-int size_initial_population = 30;
+int size_initial_population = 100;
 
 void read_instance( std::string instance_name )
 {
