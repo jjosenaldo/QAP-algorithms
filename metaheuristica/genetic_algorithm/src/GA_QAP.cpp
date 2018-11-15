@@ -80,7 +80,21 @@ int* GA_QAP::selection ()
 	std::vector<int> parents = raffle(0, this->population.size(), 2);
 	int* new_individual = this->crossover(this->population[parents[0]], this->population[parents[1]]);
 
-	this->population.push_back(new_individual);
+	if(this->problem->calculate_cost_of_solution(this->population[parents[0]]) < this->problem->calculate_cost_of_solution(this->population[parents[1]]))
+	{
+		int* old = this->population[parents[1]];
+		this->population[parents[1]] = new_individual;
+		delete[] old;
+	}
+
+	else
+	{
+		int* old = this->population[parents[0]];
+		this->population[parents[0]] = new_individual;
+		delete[] old;
+	}
+
+	//this->population.push_back(new_individual);
 	this->is_dominate(new_individual);
 	return new_individual;
 }
