@@ -89,12 +89,13 @@ void GA_QAP::print_population()
 
 int* GA_QAP::selection ()
 {
-	std::vector<int> temp;
-	for (unsigned int i=0; i < population.size(); i++)
-		temp.push_back(i);
+	int index_first = rand(this->population.size()-1);
+	int index_second = rand(this->population.size());
 
-	std::random_shuffle(temp.begin(), temp.end());	
-	int* new_individual = this->crossover(population[temp[0]], population[temp[1]]);
+	if(index_second == index_first)
+		index_second = this->population.size() - 1;
+
+	int* new_individual = this->crossover(population[index_first], population[index_second]);
 
 	this->population.push_back(new_individual);
 	this->is_dominate(new_individual);
