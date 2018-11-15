@@ -43,7 +43,7 @@ void calcEstatisticas ( Dados dados )
 	std::ofstream out("archives/resultExecution.txt", std::ofstream::app);
 	if (!out.is_open()) std::cout << "\nNão abriu o arquivo!\n";
 
-	std::ofstream latex("archives/in_latex.dat", std::ofstream::app);
+	std::ofstream latex("archives/in_latex.txt", std::ofstream::app);
 	if (!latex.is_open()) std::cout << "\nNão abriu o arquivo!\n";
 
 	out << dados.instance << "\n";
