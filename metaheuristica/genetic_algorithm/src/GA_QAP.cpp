@@ -202,14 +202,51 @@ int* GA_QAP::crossover(int* father, int* mother)
 		
 }
 
-void GA_QAP::improve_solution ( int* solution )
+void GA_QAP::improve_solution ( int index )
 {
-	/**
-	 * TODO
-	 * Monta a vizinhaça de uma solução
-	 * Busca o melhor vizinho dessa solução
-	 * Troca a solução atual por seu melhor vizinho encontrado
-	 */
+	int* individual = this->population[index];
+	int least_neighbor[2];
+	least_neighbor[0] = -1;
+	least_neighbor[1] = -1;
+	int delta, least_delta = INT_MAX;
+
+	for(int i = 0; i < size_problem; ++i)
+	{
+		for(int j = 0; j < i; ++j)
+		{
+			delta = this->delta_value_linear(i, j, individual);
+			
+			if(delta < least_delta)
+			{
+				least_delta = delta;
+				least_neighbor[0] = i;
+				least_neighbor[1] = j;
+			}
+		}
+	}
+
+	std::iter_swap(individual+least_neighbor[0], individual+least_neighbor[1]);
+}
+
+int GA_QAP::delta_value_linear(int i, int j, int* pi)
+{
+	int** f = this->problem->get_matrix_of_flows();
+	int** d = this->problem->get_matrix_of_distances();
+	
+	int value = 0;
+
+	for(int k = 0; k < size_problem; ++k)
+	{
+		if(k != i && k != j)
+		{
+			value += (d[k][i]-d[k][j]) * (f[pi[k]][pi[j]] - f[pi[k]][pi[i]])
+				+ (d[i][k] - d[j][k]) * (f[pi[j]][pi[k]] - f[pi[i]][pi[k]]);
+		}
+	}
+
+	value += (d[i][j] - d[j][i]) * (f[pi[j]][pi[i]] - f[pi[i]][pi[j]]);
+
+	return value;
 }
 
 void GA_QAP::local_optimization ()
@@ -224,7 +261,7 @@ void GA_QAP::local_optimization ()
 		if (i == (int) this->population.size())
 			i = 0;
 
-		this->improve_solution( this->population[i] );
+		this->improve_solution( i );
 
 		cont--;
 		i++;
@@ -252,6 +289,7 @@ void GA_QAP::run()
 
 		if (count_mutation == 10)
 		{
+			this->local_optimization();
 			this->mutation();
 			count_mutation = 0;
 		}else count_mutation++;

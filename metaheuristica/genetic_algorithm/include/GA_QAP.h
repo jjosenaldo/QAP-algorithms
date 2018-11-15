@@ -1,10 +1,11 @@
 #ifndef _GA_QAP_H_
 #define _GA_QAP_H_
 
-#include <vector>
 #include <algorithm>
+#include <climits> // INT_MAX
 #include <iostream>
 #include <utility>
+#include <vector>
 #include "qap.h"
 
 class GA_QAP 
@@ -35,6 +36,8 @@ class GA_QAP
 		bool improved;
 
 		int position_local_optimization = 0;
+
+		void improve_solution ( int index );
 
 	public:
 
@@ -113,9 +116,9 @@ class GA_QAP
 		 */
 		void local_optimization ();
 
-		void improve_solution ( int* solution );
-
 		void run();
+
+		int delta_value_linear(int i, int j, int* pi);
 
 };
 
