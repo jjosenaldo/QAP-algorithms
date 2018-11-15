@@ -89,7 +89,7 @@ void GA_QAP::print_population()
 
 int* GA_QAP::selection ()
 {
-	int index_first = rand() % this->population.size()-1;
+	int index_first = rand() % (this->population.size()-1);
 	int index_second = rand() % this->population.size();
 
 	if(index_second == index_first)
