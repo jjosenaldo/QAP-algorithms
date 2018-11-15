@@ -1,23 +1,11 @@
 #include "GA_QAP.h"
+#include "utils.h"
 
 void print_solution (int* solution, int size_problem)
 {
 	for (int i=0; i < size_problem; i++)
 		std::cout << solution[i] << " ";
 	std::cout << std::endl;
-}
-
-std::vector<int> raffle(int lower_bound, int upper_bound, int amount )
-{
-	std::vector<int> values;
-	for (int i = lower_bound; i < upper_bound; i++)
-		values.push_back(i);
-	std::random_shuffle(values.begin(), values.end());
-
-	std::vector<int> drawn;
-	for (int i=0; i < amount; i++)
-		drawn.push_back(values[i]);
-	return drawn;
 }
 
 GA_QAP::GA_QAP(QAP *problem, int size_initial_population)
@@ -89,13 +77,8 @@ void GA_QAP::print_population()
 
 int* GA_QAP::selection ()
 {
-	int index_first = rand() % (this->population.size()-1);
-	int index_second = rand() % this->population.size();
-
-	if(index_second == index_first)
-		index_second = this->population.size() - 1;
-
-	int* new_individual = this->crossover(population[index_first], population[index_second]);
+	std::vector<int> parents = raffle(0, this->population.size(), 2);
+	int* new_individual = this->crossover(this->population[parents[0]], this->population[parents[1]]);
 
 	this->population.push_back(new_individual);
 	this->is_dominate(new_individual);
