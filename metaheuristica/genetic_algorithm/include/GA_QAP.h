@@ -17,10 +17,6 @@ struct Individual
 class GA_QAP 
 {
 	private:
-		
-		/* this is a QAP solution  */
-		int* chromossome;
-
 		int size_initial_population;
 
 		std::vector<int*> population;

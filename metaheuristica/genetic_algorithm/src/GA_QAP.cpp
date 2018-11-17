@@ -16,7 +16,6 @@ GA_QAP::GA_QAP(QAP *problem, int size_initial_population)
 	this->mutation_rate = 20;
 	this->improved = false;
 
-	chromossome = new int[size_problem];
 	this->generate_initial_population();
 
 	/** iniciar melhor solução atual */
@@ -31,21 +30,22 @@ GA_QAP::GA_QAP(QAP *problem, int size_initial_population)
 
 GA_QAP::~GA_QAP()
 {
-	delete[] chromossome;
 	for (unsigned int i=0; i < population.size(); i++)
 		delete[] population[i];
 }
 
 void GA_QAP::generate_initial_population()
 {
+	int* temp = new int[this->size_problem];
+	int* new_individual;
 	
 	for (int i=0; i < this->size_problem; i++)
-		chromossome[i] = i;
+		temp[i] = i;
 
 	for (int i=0; i < this->size_initial_population; i++)
 	{
-		int* new_individual = new int[this->size_problem];
-		std::copy(chromossome, chromossome + this->size_problem, new_individual);
+		new_individual = new int[this->size_problem];
+		std::copy(temp, temp + this->size_problem, new_individual);
 		std::random_shuffle(new_individual, new_individual + this->size_problem);
 		population.push_back(new_individual);		
 	}
