@@ -256,31 +256,42 @@ void GA_QAP::local_optimization ()
 
 void GA_QAP::run()
 {
-	int count_mutation = 0;
-	int count_stop = 0;
+	const int MAX_ITERATIONS_WITHOUT_IMPROVEMENT = 100*this->size_problem;
+	const int MUTATION_PERIOD = 10;
 
-	bool stopping_condition = false;
+	int cont_mutation = 0;
+	int iterations_without_improvement = 0;
+	int current_iteration = 0;
+	int last_iteration_with_improvement = 0;
+	int biggest_delay_between_improvements = 0;
 	
-	while (!stopping_condition)
+	while (iterations_without_improvement <= MAX_ITERATIONS_WITHOUT_IMPROVEMENT)
 	{
+		++current_iteration;
+
 		this->selection();
 		
-		if (this->improved)
+		if(this->improved)
 		{
+			biggest_delay_between_improvements = std::max(biggest_delay_between_improvements, current_iteration-last_iteration_with_improvement);
+			last_iteration_with_improvement = current_iteration;
 			this->improved = false;
-			count_stop = 0;
-		}else count_stop++;
+			iterations_without_improvement = 0;
+		}
 
-		if (count_mutation == 10)
+		else
+			++iterations_without_improvement;
+
+		cont_mutation = (++cont_mutation == MUTATION_PERIOD) ? 0 : cont_mutation;
+
+		if(!cont_mutation)
 		{
 			this->local_optimization();
 			this->mutation();
-			count_mutation = 0;
-		}else count_mutation++;
-
-		if(count_stop >= (100*this->size_problem))
-			stopping_condition = true;		
+		}
 	}
+
+	std::cout << this->size_problem << " " << last_iteration_with_improvement << " " << biggest_delay_between_improvements <<  std::endl;
 
 	// std::cout << "The best solution found: ";
 	// print_solution(this->current_best_individual, size_problem);
