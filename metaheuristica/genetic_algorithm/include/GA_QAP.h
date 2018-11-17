@@ -8,6 +8,12 @@
 #include <vector>
 #include "qap.h"
 
+struct Individual
+{
+	int* perm;
+	int fitness;
+};
+
 class GA_QAP 
 {
 	private:
