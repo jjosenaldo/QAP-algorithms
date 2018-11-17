@@ -25,7 +25,7 @@ GA_QAP::GA_QAP(QAP *problem, int size_initial_population)
 	
 	/** Buscar melhor indivíduo da população gerada*/
 	for (unsigned int i=1; i < this->population.size(); i++)
-		this->is_dominate(this->population[i]);
+		this->set_as_best(this->population[i]);
 }
 
 void GA_QAP::generate_initial_population()
@@ -48,16 +48,14 @@ void GA_QAP::generate_initial_population()
 	}
 }
 
-bool GA_QAP::is_dominate(Individual individual)
+void GA_QAP::set_as_best(Individual individual)
 {		
 	if(individual.fitness < this->fitness_of_current_best_individual)
 	{
 		current_best_individual = individual;
 		fitness_of_current_best_individual = individual.fitness;
 		this->improved = true;
-		return true;
 	}
-	return false;
 }
 
 void GA_QAP::print_population()
@@ -81,7 +79,7 @@ Individual GA_QAP::selection ()
 	else
 		this->population[parents[0]] = new_individual;
 
-	this->is_dominate(new_individual);
+	set_as_best(new_individual);
 	return new_individual;
 }
 
@@ -127,7 +125,7 @@ void GA_QAP::mutation()
 		population[positions[i]].perm[positions_to_swap[0]] = population[positions[i]].perm[positions_to_swap[1]];
 		population[positions[i]].perm[positions_to_swap[1]] = aux;
 
-		this->is_dominate(population[i]);
+		this->set_as_best(population[i]);
 	}
 
 	if (this->mutation_rate > 2)

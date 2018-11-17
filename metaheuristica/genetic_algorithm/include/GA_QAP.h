@@ -152,7 +152,7 @@ class GA_QAP
 		 *
 		 * @return     True if dominate, False otherwise.
 		 */
-		bool is_dominate(Individual individual);
+		void set_as_best(Individual individual);
 
 		int get_fitness_current_best_solution();
 
