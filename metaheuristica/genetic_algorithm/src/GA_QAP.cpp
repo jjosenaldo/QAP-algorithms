@@ -21,39 +21,36 @@ GA_QAP::GA_QAP(QAP *problem, int size_initial_population)
 	/** iniciar melhor solução atual */
 	this->current_best_individual = this->population[0];
 	this->fitness_of_current_best_individual = 
-		this->problem->calculate_cost_of_solution(this->current_best_individual);
+		this->problem->calculate_cost_of_solution(this->current_best_individual.perm);
 	
 	/** Buscar melhor indivíduo da população gerada*/
 	for (unsigned int i=1; i < this->population.size(); i++)
 		this->is_dominate(this->population[i]);
 }
 
-GA_QAP::~GA_QAP()
-{
-	for (unsigned int i=0; i < population.size(); i++)
-		delete[] population[i];
-}
-
 void GA_QAP::generate_initial_population()
 {
-	int* temp = new int[this->size_problem];
-	int* new_individual;
-	
-	for (int i=0; i < this->size_problem; i++)
-		temp[i] = i;
+	this->population.reserve(this->size_initial_population);
 
-	for (int i=0; i < this->size_initial_population; i++)
+	int fitness_new_individual;
+
+	for(int i=0; i < this->size_initial_population; i++)
 	{
-		new_individual = new int[this->size_problem];
-		std::copy(temp, temp + this->size_problem, new_individual);
-		std::random_shuffle(new_individual, new_individual + this->size_problem);
-		population.push_back(new_individual);		
+		int* perm_new_individual = new int[this->size_problem];
+
+		for (int i=0; i < this->size_problem; i++)
+			perm_new_individual[i] = i;
+
+		std::random_shuffle(perm_new_individual, perm_new_individual + this->size_problem);
+		fitness_new_individual = this->problem->calculate_cost_of_solution(perm_new_individual);
+
+		population.push_back(Individual(this->size_problem, perm_new_individual, fitness_new_individual));		
 	}
 }
 
-bool GA_QAP::is_dominate(int* individual)
+bool GA_QAP::is_dominate(Individual individual)
 {
-	int fitness = this->problem->calculate_cost_of_solution(individual);
+	int fitness = this->problem->calculate_cost_of_solution(individual.perm);
 		
 	if (fitness < this->fitness_of_current_best_individual)
 	{
@@ -70,52 +67,43 @@ void GA_QAP::print_population()
 	for (unsigned int i=0; i < population.size(); i++ )
 	{
 		for (int j=0; j < size_problem; j++)
-			std::cout << population[i][j] << " ";
+			std::cout << population[i].perm[j] << " ";
 		std::cout << std::endl;
 	}
 }
 
-int* GA_QAP::selection ()
+Individual GA_QAP::selection ()
 {
 	std::vector<int> parents = raffle(0, this->population.size(), 2);
-	int* new_individual = this->crossover(this->population[parents[0]], this->population[parents[1]]);
+	Individual new_individual = this->crossover(this->population[parents[0]], this->population[parents[1]]);
 
-	if(this->problem->calculate_cost_of_solution(this->population[parents[0]]) < this->problem->calculate_cost_of_solution(this->population[parents[1]]))
-	{
-		int* old = this->population[parents[1]];
+	if(this->population[parents[0]].fitness < this->population[parents[1]].fitness)
 		this->population[parents[1]] = new_individual;
-		delete[] old;
-	}
 
 	else
-	{
-		int* old = this->population[parents[0]];
 		this->population[parents[0]] = new_individual;
-		delete[] old;
-	}
 
-	//this->population.push_back(new_individual);
 	this->is_dominate(new_individual);
 	return new_individual;
 }
 
-void GA_QAP::swap(int num1, int num2, int* individual)
+void GA_QAP::swap(int num1, int num2, int* perm_individual)
 {	
 	int pos1 = 0;
 	int pos2 = 0;
 	
 	for (int i=0; i < size_problem; i++)
 	{
-		if (individual[i] == num1)
+		if (perm_individual[i] == num1)
 			pos1 = i;
 
-		else if (individual[i] == num2)
+		else if (perm_individual[i] == num2)
 			pos2 = i;
 	}
 
-	int aux = individual[pos1];
-	individual[pos1] = individual[pos2];
-	individual[pos2] = aux;
+	int aux = perm_individual[pos1];
+	perm_individual[pos1] = perm_individual[pos2];
+	perm_individual[pos2] = aux;
 }
 
 void GA_QAP::verify_condition_path_swap (int* child1, int* child2, int position)
@@ -137,9 +125,9 @@ void GA_QAP::mutation()
 		std::vector<int> positions_to_swap = raffle(0, this->size_problem, 2);
 		
 		/** Trocar os genes selecionados */
-		int aux = population[positions[i]][positions_to_swap[0]];
-		population[positions[i]][positions_to_swap[0]] = population[positions[i]][positions_to_swap[1]];
-		population[positions[i]][positions_to_swap[1]] = aux;
+		int aux = population[positions[i]].perm[positions_to_swap[0]];
+		population[positions[i]].perm[positions_to_swap[0]] = population[positions[i]].perm[positions_to_swap[1]];
+		population[positions[i]].perm[positions_to_swap[1]] = aux;
 
 		this->is_dominate(population[i]);
 	}
@@ -149,7 +137,7 @@ void GA_QAP::mutation()
 
 }
 
-int* GA_QAP::crossover(int* father, int* mother)
+Individual GA_QAP::crossover(Individual father, Individual mother)
 {
 	// /** Imprimir parâmetos iniciais */
 	// std::cout << "indivíduos escolhidos\n";
@@ -161,23 +149,23 @@ int* GA_QAP::crossover(int* father, int* mother)
 	int position = temp[0];
 
 	/** Metodologia de path swap para crossover */
-	int* child1 = new int[this->size_problem];
-	int* child2 = new int[this->size_problem];
+	int* perm_child1 = new int[this->size_problem];
+	int* perm_child2 = new int[this->size_problem];
 
-	std::copy(father, father + this->size_problem, child1);
-	std::copy(mother, mother + this->size_problem, child2);
+	std::copy(father.perm, father.perm + this->size_problem, perm_child1);
+	std::copy(mother.perm, mother.perm + this->size_problem, perm_child2);
 
 	if (position != 0)
 	{
 		for (int i=position; i < this->size_problem; i++ )
-			this->verify_condition_path_swap(child1, child2, i);
+			this->verify_condition_path_swap(perm_child1, perm_child2, i);
 		
 		for (int i=0; i < position; i++)
-			this->verify_condition_path_swap(child1, child2, i);
+			this->verify_condition_path_swap(perm_child1, perm_child2, i);
 
 	} else
 		for (int i=0; i < size_problem; i++)
-			this->verify_condition_path_swap(child1, child2, i);
+			this->verify_condition_path_swap(perm_child1, perm_child2, i);
 	 
 
 	// std::cout << "child1 gerada: ";
@@ -186,25 +174,25 @@ int* GA_QAP::crossover(int* father, int* mother)
 	// print_solution(child2, size_problem);
 
 	/** Avaliar melhor filho gerado */
-	int fitness_child1 = this->problem->calculate_cost_of_solution(child1);
-	int fitness_child2 = this->problem->calculate_cost_of_solution(child2);
+	int fitness_child1 = this->problem->calculate_cost_of_solution(perm_child1);
+	int fitness_child2 = this->problem->calculate_cost_of_solution(perm_child2);
 
 	if (fitness_child1 <= fitness_child2)
 	{
-		delete[] child2;
-		return child1;
+		delete[] perm_child2;
+		return Individual(this->size_problem, perm_child1, fitness_child1);
 	}
 	else
 	{
-		delete[] child1;
-		return child2;
+		delete[] perm_child1;
+		return Individual(this->size_problem, perm_child2, fitness_child2);
 	} 
 		
 }
 
 void GA_QAP::improve_solution ( int index )
 {
-	int* individual = this->population[index];
+	Individual individual = this->population[index];
 	int least_neighbor[2];
 	least_neighbor[0] = -1;
 	least_neighbor[1] = -1;
@@ -214,7 +202,7 @@ void GA_QAP::improve_solution ( int index )
 	{
 		for(int j = 0; j < i; ++j)
 		{
-			delta = this->delta_value_linear(i, j, individual);
+			delta = this->delta_value_linear(i, j, individual.perm);
 			
 			if(delta < least_delta)
 			{
@@ -225,7 +213,7 @@ void GA_QAP::improve_solution ( int index )
 		}
 	}
 
-	std::iter_swap(individual+least_neighbor[0], individual+least_neighbor[1]);
+	std::iter_swap(individual.perm +least_neighbor[0], individual.perm +least_neighbor[1]);
 }
 
 int GA_QAP::delta_value_linear(int i, int j, int* pi)
