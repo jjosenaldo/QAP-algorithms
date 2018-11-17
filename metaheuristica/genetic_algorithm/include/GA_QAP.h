@@ -12,6 +12,8 @@ struct Individual
 {
 	int* perm;
 	int fitness;
+
+	~Individual(){delete[] perm;}
 };
 
 class GA_QAP 
