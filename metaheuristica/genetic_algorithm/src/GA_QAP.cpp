@@ -49,13 +49,11 @@ void GA_QAP::generate_initial_population()
 }
 
 bool GA_QAP::is_dominate(Individual individual)
-{
-	int fitness = this->problem->calculate_cost_of_solution(individual.perm);
-		
-	if (fitness < this->fitness_of_current_best_individual)
+{		
+	if(individual.fitness < this->fitness_of_current_best_individual)
 	{
 		current_best_individual = individual;
-		fitness_of_current_best_individual = fitness;
+		fitness_of_current_best_individual = individual.fitness;
 		this->improved = true;
 		return true;
 	}
@@ -106,12 +104,12 @@ void GA_QAP::swap(int num1, int num2, int* perm_individual)
 	perm_individual[pos2] = aux;
 }
 
-void GA_QAP::verify_condition_path_swap (int* child1, int* child2, int position)
+void GA_QAP::verify_condition_path_swap (int* perm_child1, int* perm_child2, int position)
 {
-	if (child1[position] != child2[position])
+	if (perm_child1[position] != perm_child2[position])
 	{
-		this->swap(child1[position], child2[position], child1);
-		this->swap(child1[position], child2[position], child2);
+		this->swap(perm_child1[position], perm_child2[position], perm_child1);
+		this->swap(perm_child1[position], perm_child2[position], perm_child2);
 	}
 }
 
