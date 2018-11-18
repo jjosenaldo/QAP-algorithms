@@ -48,12 +48,12 @@ void run_genetic_algorithm( std::string instance_name )
 {
 	read_instance(instance_name);
 	QAP qap = QAP( n, d_mat, f_mat);
-	TsQAP ts = TsQAP(&qap, n, instance_name);
 	
 	std::vector<int> custos;
 	std::vector<int> tempos;
 	
 	for(int i=0; i<30; i++){
+		TsQAP ts = TsQAP(&qap, n, instance_name);
 		GA_QAP ga = GA_QAP(&qap, size_initial_population);
 		high_resolution_clock::time_point t1 = high_resolution_clock::now();
 		std::cout << "Running genetic algorithm in QAP...\n";
