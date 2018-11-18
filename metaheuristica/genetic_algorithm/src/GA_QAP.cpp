@@ -282,7 +282,7 @@ void GA_QAP::run()
 		}
 	}
 
-	std::cout << this->size_problem << " " << last_iteration_with_improvement << " " << biggest_delay_between_improvements <<  std::endl;
+	//std::cout << this->size_problem << " " << last_iteration_with_improvement << " " << biggest_delay_between_improvements <<  std::endl;
 
 	// std::cout << "The best solution found: ";
 	// print_solution(this->current_best_individual, size_problem);
@@ -295,3 +295,9 @@ int GA_QAP::get_fitness_current_best_solution()
 {
 	return this->fitness_of_current_best_individual;
 }
+
+int * GA_QAP::get_best_solution()
+{
+	return this->current_best_individual.perm;
+}
+

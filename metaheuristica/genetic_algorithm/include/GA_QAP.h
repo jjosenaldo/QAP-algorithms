@@ -156,6 +156,8 @@ class GA_QAP
 
 		int get_fitness_current_best_solution();
 
+		int * get_best_solution();
+
 		/**
 		 * @brief      optimizes 20% of the current population through 
 		 *             a neighborhood search      

@@ -46,16 +46,16 @@ void calcEstatisticas ( Dados dados )
 	std::ofstream latex("archives/in_latex.txt", std::ofstream::app);
 	if (!latex.is_open()) std::cout << "\nNão abriu o arquivo!\n";
 
-	// out << dados.instance << "\n";
-	// out << "REPORT\n--------------------------------------------------\n";
-	 out << "Instance size: " << dados.tamanho << std::endl;
-	// out << "Average elapsed time: " << media_tempo << " ms" << std::endl;
-	// out << "Percentual of optimal solutions found: " << percentual_optimal_solutions_found << "%" << std::endl;
-	// out << "Min found cost: " << calcDistanciamento(min_cost, dados.optimal_cost) << "%" << std::endl;
-	// out << "Max found cost: " << calcDistanciamento(max_cost, dados.optimal_cost) << "%" << std::endl;
-	 out << "Average found cost: " << calcDistanciamento(media_custo, dados.optimal_cost) << "%" << std::endl; 
-	// out << "Median: " << calcDistanciamento(mediana, dados.optimal_cost) << "%" << std::endl;
-	// out << "Standard deviation of cost: " << dp_custo << std::endl;
+	out << dados.instance << "\n";
+	out << "REPORT\n--------------------------------------------------\n";
+	out << "Instance size: " << dados.tamanho << std::endl;
+	out << "Average elapsed time: " << media_tempo << " ms" << std::endl;
+	out << "Percentual of optimal solutions found: " << percentual_optimal_solutions_found << "%" << std::endl;
+	out << "Min found cost: " << calcDistanciamento(min_cost, dados.optimal_cost) << "%" << std::endl;
+	out << "Max found cost: " << calcDistanciamento(max_cost, dados.optimal_cost) << "%" << std::endl;
+	out << "Average found cost: " << calcDistanciamento(media_custo, dados.optimal_cost) << "%" << std::endl; 
+	out << "Median: " << calcDistanciamento(mediana, dados.optimal_cost) << "%" << std::endl;
+	out << "Standard deviation of cost: " << dp_custo << std::endl;
 	 out << "--------------------------------------------------\n";
 	out.close();
 

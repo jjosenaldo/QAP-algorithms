@@ -11,6 +11,7 @@
 #include <vector>
 #include "qap.h"
 #include "GA_QAP.h"
+#include "tabu_search_qap.h"
 
 const std::string PATH_INSTANCE_PREFIX = "../../instances/";
 const std::string FILE_INSTANCE_SUFFIX = ".dat";

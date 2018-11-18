@@ -44,12 +44,20 @@ void read_instance( std::string instance_name )
 	}
 }
 
+void configure_tabu_search (QAP *qap, TsQAP *ts, int* solution)
+{
+	int fitness = qap->calculate_cost_of_solution(solution);
+	ts->set_current_solution(solution);
+	ts->set_current_best_solution(solution);
+	ts->set_fitness_current_solution(fitness);
+	ts->set_fitness_current_best_solution(fitness);
+}
+
 void run_genetic_algorithm( std::string instance_name )
 {
 	read_instance(instance_name);
 	QAP qap = QAP( n, d_mat, f_mat);
-
-	//std::cout << "Running genetic algorithm in QAP...\n";
+	TsQAP ts = TsQAP(&qap, n, instance_name);
 	
 	std::vector<int> custos;
 	std::vector<int> tempos;
@@ -57,11 +65,15 @@ void run_genetic_algorithm( std::string instance_name )
 	for(int i=0; i<30; i++){
 		GA_QAP ga = GA_QAP(&qap, size_initial_population);
 		high_resolution_clock::time_point t1 = high_resolution_clock::now();
+		std::cout << "Running genetic algorithm in QAP...\n";
 		ga.run();
+		std::cout << "finish genetic algorithm\n";
+		configure_tabu_search(&qap, &ts, ga.get_best_solution());
+		ts.run();
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 		int duration_in_milisseconds = duration_cast<milliseconds>(t2 - t1).count();
 
-		custos.push_back(ga.get_fitness_current_best_solution());
+		custos.push_back(ts.get_fitness_current_best_solution());
 		tempos.push_back(duration_in_milisseconds);
 	}
 
@@ -71,7 +83,7 @@ void run_genetic_algorithm( std::string instance_name )
 	Dados dados = {custos, tempos, instance_name, n, opt_cost};
 	calcEstatisticas(dados);
 
-	//std::cout << "Execution finished!" << "\n\n";
+	std::cout << "Execution finished!" << "\n\n";
 
 	for(int i = 0; i < n; ++i)
 	{

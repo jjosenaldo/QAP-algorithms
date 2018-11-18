@@ -27,7 +27,7 @@ int main (int argc, char *argv[])
 		while (!instanceFile.eof())
 		{
 			std::getline(instanceFile, instance);
-	//		std::cout << "@ instance uploaded successfully: " << instance << std::endl;
+			std::cout << "@ instance uploaded successfully: " << instance << std::endl;
 			run_genetic_algorithm(instance);
 		}
 
