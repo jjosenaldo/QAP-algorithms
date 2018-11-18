@@ -45,7 +45,6 @@ TsQAP::TsQAP(QAP *instance, int max_size, std::string instance_name)
 	this->current_best_solution = new int[n];
 
 	this->init_matrix(this->last_seen_matrix);
-	this->generate_initial_solution();
 }
 
 TsQAP::~TsQAP()
@@ -254,6 +253,26 @@ void TsQAP::generate_initial_solution()
 	 std::cout << std::endl;
 }
 
+void TsQAP::generate_initial_solution( int * solution)
+{
+	// generate initial "current solution" randomly
+	for(int i = 0; i < this->n; ++i)
+		this->current_solution[i] = solution[i];
+
+	// copies the initial solution into the best one
+	std::copy(this->current_solution, this->current_solution+this->n, this->current_best_solution);
+
+	// sets the fitnesses
+	int initial_fitness = this->problem->calculate_cost_of_solution(this->current_solution);
+	this->set_fitness_current_solution(initial_fitness);
+	this->set_fitness_current_best_solution(initial_fitness);
+
+	std::cout << "Initial solution, with fitness = " << initial_fitness << ":\n";
+	for(int i = 0; i < this->n; ++i)
+		std::cout << this->current_solution[i] << " ";
+	 std::cout << std::endl;
+}
+
 // std::vector<int*> TsQAP::get_unforbidden_neighbors(int* solution)
 // {
 // 	std::vector<int*> neighbors;
@@ -295,9 +314,9 @@ int TsQAP::get_delta(Operation operation){ return this->delta_matrix[operation.g
 
 void TsQAP::set_delta(Operation operation, int val){ this->delta_matrix[operation.get_max()][operation.get_min()] = val;}
 
-void TsQAP::run()
+void TsQAP::run(int * solution)
 {
-	// this->generate_initial_solution();
+	this->generate_initial_solution(solution);
 	Operation best_neighbor_swap;
 
 	int neighbor_delta;

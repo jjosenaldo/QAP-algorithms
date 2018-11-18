@@ -113,7 +113,7 @@ private:
 
 	void set_delta(Operation index, int new_value);
 
-	
+	void generate_initial_solution( int * solution);
 public:
 
 	/**
@@ -156,7 +156,7 @@ public:
 	 *
 	 * @param[in]  qap  The instance QAP 
 	 */
-	void run();
+	void run(int * solution);
 
 
 	int get_fitness_current_best_solution();
