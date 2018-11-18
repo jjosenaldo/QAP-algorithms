@@ -49,7 +49,7 @@ void run_genetic_algorithm( std::string instance_name )
 	read_instance(instance_name);
 	QAP qap = QAP( n, d_mat, f_mat);
 
-	std::cout << "Running genetic algorithm in QAP...\n";
+	//std::cout << "Running genetic algorithm in QAP...\n";
 	
 	std::vector<int> custos;
 	std::vector<int> tempos;
@@ -71,7 +71,7 @@ void run_genetic_algorithm( std::string instance_name )
 	Dados dados = {custos, tempos, instance_name, n, opt_cost};
 	calcEstatisticas(dados);
 
-	std::cout << "Execution finished!" << "\n\n";
+	//std::cout << "Execution finished!" << "\n\n";
 
 	for(int i = 0; i < n; ++i)
 	{

@@ -160,7 +160,7 @@ class GA_QAP
 		 * @brief      optimizes 20% of the current population through 
 		 *             a neighborhood search      
 		 */
-		void local_optimization ();
+		void local_optimization (int current_iteration, int MUTATION_PERIOD);
 
 		void run();
 

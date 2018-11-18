@@ -209,7 +209,8 @@ void GA_QAP::improve_solution ( int index )
 		}
 	}
 
-	std::iter_swap(individual.perm +least_neighbor[0], individual.perm +least_neighbor[1]);
+	if(least_delta < 0)
+		std::iter_swap(individual.perm +least_neighbor[0], individual.perm +least_neighbor[1]);
 }
 
 int GA_QAP::delta_value_linear(int i, int j, int* pi)
@@ -233,31 +234,21 @@ int GA_QAP::delta_value_linear(int i, int j, int* pi)
 	return value;
 }
 
-void GA_QAP::local_optimization ()
+void GA_QAP::local_optimization (int current_iteration, int MUTATION_PERIOD)
 {
-	int individuals = 0.2 * this->population.size();
+	const double PERCENTAGE = 0.2;
+	int left = (current_iteration / MUTATION_PERIOD) % (100 / (int)(PERCENTAGE * 100) ) * (int)(PERCENTAGE*100);
+	int right = (left+(int)(this->size_initial_population * PERCENTAGE)) % this->size_initial_population;
 	
-	int cont = individuals;
-	int i = position_local_optimization;
-	
-	while (cont > 0)
-	{
-		if (i == (int) this->population.size())
-			i = 0;
-
+	for(int i = left; i != right; i = (i+1)%this->size_initial_population)
 		this->improve_solution( i );
-
-		cont--;
-		i++;
-	}
-
-	this->position_local_optimization = i;
+//	std::cout << left << " "<< right << std::endl;
 }
 
 void GA_QAP::run()
 {
 	const int MAX_ITERATIONS_WITHOUT_IMPROVEMENT = 100*this->size_problem;
-	const int MUTATION_PERIOD = 10;
+	const int MUTATION_PERIOD = this->size_problem * 20;
 
 	int cont_mutation = 0;
 	int iterations_without_improvement = 0;
@@ -286,7 +277,7 @@ void GA_QAP::run()
 
 		if(!cont_mutation)
 		{
-			this->local_optimization();
+			this->local_optimization(current_iteration, MUTATION_PERIOD);
 			this->mutation();
 		}
 	}
