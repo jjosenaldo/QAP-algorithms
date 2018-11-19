@@ -52,13 +52,13 @@ void run_genetic_algorithm( std::string instance_name )
 	std::vector<int> custos;
 	std::vector<int> tempos;
 	
+	std::cout << "Running genetic algorithm in QAP...\n";
+	
 	for(int i=0; i<30; i++){
 		TsQAP ts = TsQAP(&qap, n, instance_name);
 		GA_QAP ga = GA_QAP(&qap, size_initial_population);
 		high_resolution_clock::time_point t1 = high_resolution_clock::now();
-		std::cout << "Running genetic algorithm in QAP...\n";
 		ga.run();
-		std::cout << "finish genetic algorithm\n";
 		ts.run(ga.get_best_solution());
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 		int duration_in_milisseconds = duration_cast<milliseconds>(t2 - t1).count();

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "experiments.h"
+#include "latex.h"
 
 int main (int argc, char *argv[])
 {
@@ -32,7 +33,7 @@ int main (int argc, char *argv[])
 		}
 
 		instanceFile.close();
-		// criar_tabelas_latex ();
+		criar_tabelas_latex ();
 	}
 
 	else 

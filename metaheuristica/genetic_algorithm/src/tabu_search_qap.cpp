@@ -267,10 +267,10 @@ void TsQAP::generate_initial_solution( int * solution)
 	this->set_fitness_current_solution(initial_fitness);
 	this->set_fitness_current_best_solution(initial_fitness);
 
-	std::cout << "Initial solution, with fitness = " << initial_fitness << ":\n";
-	for(int i = 0; i < this->n; ++i)
-		std::cout << this->current_solution[i] << " ";
-	 std::cout << std::endl;
+	// std::cout << "Initial solution, with fitness = " << initial_fitness << ":\n";
+	// for(int i = 0; i < this->n; ++i)
+	// 	std::cout << this->current_solution[i] << " ";
+	//  std::cout << std::endl;
 }
 
 // std::vector<int*> TsQAP::get_unforbidden_neighbors(int* solution)

@@ -248,10 +248,10 @@ void TsQAP::generate_initial_solution()
 	this->set_fitness_current_solution(initial_fitness);
 	this->set_fitness_current_best_solution(initial_fitness);
 
-	std::cout << "Initial solution, with fitness = " << initial_fitness << ":\n";
-	for(int i = 0; i < this->n; ++i)
-		std::cout << this->current_solution[i] << " ";
-	 std::cout << std::endl;
+	// std::cout << "Initial solution, with fitness = " << initial_fitness << ":\n";
+	// for(int i = 0; i < this->n; ++i)
+	// 	std::cout << this->current_solution[i] << " ";
+	//  std::cout << std::endl;
 }
 
 // std::vector<int*> TsQAP::get_unforbidden_neighbors(int* solution)
@@ -309,14 +309,14 @@ void TsQAP::run()
 
 	while (this->current_iteration < MAX_ITERATIONS && iterations_not_improved < MAX_ITERATIONS_NOT_IMPROVED)
 	{
-		std::cout << "#######################################################################\n";
-		std::cout << "Current iteration: " << current_iteration  << std::endl;
-		std::cout << "Current solution: ";
-		for(int i = 0; i < this->n; ++i) std::cout << this->current_solution[i] <<" ";
-		std::cout << "\nCurrent best solution: ";
-		for(int i = 0; i < this->n; ++i) std::cout << this->current_best_solution[i] <<" ";
-		std::cout << "\nFitness of the current solution: " << this->fitness_current_solution << std::endl;
-		std::cout << "Fitness of the best solution: " << this->fitness_current_best_solution << std::endl;
+		// std::cout << "#######################################################################\n";
+		// std::cout << "Current iteration: " << current_iteration  << std::endl;
+		// std::cout << "Current solution: ";
+		// for(int i = 0; i < this->n; ++i) std::cout << this->current_solution[i] <<" ";
+		// std::cout << "\nCurrent best solution: ";
+		// for(int i = 0; i < this->n; ++i) std::cout << this->current_best_solution[i] <<" ";
+		// std::cout << "\nFitness of the current solution: " << this->fitness_current_solution << std::endl;
+		// std::cout << "Fitness of the best solution: " << this->fitness_current_best_solution << std::endl;
 
 		// evaluates the neighborhood
 		if(first_iteration)
@@ -332,15 +332,15 @@ void TsQAP::run()
 		}
 			
 
-		std::cout <<  "Delta matrix updated!\n";
-		this->print_delta_matrix();std::cout << std::endl;
-		this->print_naive_delta_matrix();std::cout << std::endl;
+		// std::cout <<  "Delta matrix updated!\n";
+		// this->print_delta_matrix();std::cout << std::endl;
+		// this->print_naive_delta_matrix();std::cout << std::endl;
 
 
-		std::cout << "Best swap: <" << best_neighbor_swap.get_max() 
-			<< ", " << best_neighbor_swap.get_min() << ">, with delta = "
-			<< this->get_delta(best_neighbor_swap) << " and new fitness = " 
-			<< (this->get_delta(best_neighbor_swap)+this->fitness_current_solution) << std::endl;
+		// std::cout << "Best swap: <" << best_neighbor_swap.get_max() 
+		// 	<< ", " << best_neighbor_swap.get_min() << ">, with delta = "
+		// 	<< this->get_delta(best_neighbor_swap) << " and new fitness = " 
+		// 	<< (this->get_delta(best_neighbor_swap)+this->fitness_current_solution) << std::endl;
 			
 		neighbor_delta = this->get_delta(best_neighbor_swap);
 
@@ -348,7 +348,7 @@ void TsQAP::run()
 		this->apply_operation(best_neighbor_swap, this->current_solution);
 		this->increment_fitness_current_solution(neighbor_delta);
 
-		std::cout << "updated current solution\n";
+		// std::cout << "updated current solution\n";
 
 		if(this->fitness_current_solution < this->fitness_current_best_solution)
 		{
@@ -356,7 +356,7 @@ void TsQAP::run()
 			this->set_fitness_current_best_solution(this->fitness_current_solution);
 			iterations_not_improved = 0;
 
-			std::cout << "updated best solution\n";
+			// std::cout << "updated best solution\n";
 		}
 
 		else 
@@ -364,7 +364,7 @@ void TsQAP::run()
 
 		this->set_last_seen(best_neighbor_swap);
 
-		std::cout << "last seen set\n\n";
+		// std::cout << "last seen set\n\n";
 		++this->current_iteration;
 	}
 
