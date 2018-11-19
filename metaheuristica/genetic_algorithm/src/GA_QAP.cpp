@@ -68,9 +68,11 @@ void GA_QAP::print_population()
 	}
 }
 
-Individual GA_QAP::selection ()
+void GA_QAP::selection ()
 {
 	std::vector<int> parents = raffle(0, this->population.size(), 2);
+	print_solution(this->population[parents[0]].perm, this->size_problem);
+	print_solution(this->population[parents[1]].perm, this->size_problem);
 	Individual new_individual = this->crossover(this->population[parents[0]], this->population[parents[1]]);
 
 	if(this->population[parents[0]].fitness < this->population[parents[1]].fitness)
@@ -80,7 +82,6 @@ Individual GA_QAP::selection ()
 		this->population[parents[0]] = new_individual;
 
 	set_as_best(new_individual);
-	return new_individual;
 }
 
 void GA_QAP::swap(int num1, int num2, int* perm_individual)
@@ -114,17 +115,14 @@ void GA_QAP::verify_condition_path_swap (int* perm_child1, int* perm_child2, int
 void GA_QAP::mutation()
 {
 	int total = (this->mutation_rate/100.00) * this->population.size();
-	std::vector<int> positions = raffle(0, this->population.size()-1, total );
+	std::vector<int> positions = raffle(0, this->population.size(), total );
 
 	for (unsigned int i = 0; i < positions.size(); i++)
 	{
 		std::vector<int> positions_to_swap = raffle(0, this->size_problem, 2);
-		
-		/** Trocar os genes selecionados */
-		int aux = population[positions[i]].perm[positions_to_swap[0]];
-		population[positions[i]].perm[positions_to_swap[0]] = population[positions[i]].perm[positions_to_swap[1]];
-		population[positions[i]].perm[positions_to_swap[1]] = aux;
+		Individual& individual = this->population[positions[i]];
 
+		this->swap_position_on_population(individual, positions_to_swap[0], positions_to_swap[1]);
 		this->set_as_best(population[i]);
 	}
 
@@ -133,7 +131,7 @@ void GA_QAP::mutation()
 
 }
 
-Individual GA_QAP::crossover(Individual father, Individual mother)
+Individual GA_QAP::crossover(Individual& father, Individual& mother)
 {
 	// /** Imprimir parâmetos iniciais */
 	// std::cout << "indivíduos escolhidos\n";
@@ -141,6 +139,9 @@ Individual GA_QAP::crossover(Individual father, Individual mother)
 	// print_solution(mother, size_problem);
 
 	/** Sortear uma posição aleatória para iniciar */
+	print_solution(father.perm, this->size_problem);
+	print_solution(mother.perm, this->size_problem);
+	std::cout << "\n";
 	std::vector<int> temp = raffle(0, size_problem, 1);
 	int position = temp[0];
 
@@ -188,7 +189,7 @@ Individual GA_QAP::crossover(Individual father, Individual mother)
 
 void GA_QAP::improve_solution ( int index )
 {
-	Individual individual = this->population[index];
+	Individual& individual = this->population[index];
 	int least_neighbor[2];
 	least_neighbor[0] = -1;
 	least_neighbor[1] = -1;
@@ -210,7 +211,14 @@ void GA_QAP::improve_solution ( int index )
 	}
 
 	if(least_delta < 0)
-		std::iter_swap(individual.perm +least_neighbor[0], individual.perm +least_neighbor[1]);
+		this->swap_position_on_population(individual, least_neighbor[0], least_neighbor[1]);
+}
+
+void GA_QAP::swap_position_on_population(Individual& individual, int f1, int f2)
+{
+	int delta = this->delta_value_linear(f1, f2, individual.perm);
+	individual.n += delta;
+	std::iter_swap(individual.perm +f1, individual.perm +f2);
 }
 
 int GA_QAP::delta_value_linear(int i, int j, int* pi)
