@@ -48,7 +48,7 @@ void GA_QAP::generate_initial_population()
 	}
 }
 
-void GA_QAP::set_as_best(Individual individual)
+void GA_QAP::set_as_best(Individual& individual)
 {		
 	if(individual.fitness < this->fitness_of_current_best_individual)
 	{
@@ -122,6 +122,7 @@ void GA_QAP::mutation()
 
 		this->swap_position_on_population(individual, positions_to_swap[0], positions_to_swap[1]);
 		this->set_as_best(population[i]);
+
 	}
 
 	if (this->mutation_rate > 2)
@@ -133,8 +134,8 @@ Individual GA_QAP::crossover(Individual& father, Individual& mother)
 {
 	// /** Imprimir parâmetos iniciais */
 	// std::cout << "indivíduos escolhidos\n";
-	 print_solution(father.perm, size_problem);
-	 print_solution(mother.perm, size_problem);
+	// print_solution(father, size_problem);
+	// print_solution(mother, size_problem);
 
 	/** Sortear uma posição aleatória para iniciar */
 	std::vector<int> temp = raffle(0, size_problem, 1);
