@@ -57,7 +57,7 @@ struct Individual
 			if(this->perm != (int*)nullptr)
 				delete[] this->perm;
 
-			this->perm = nullptr;
+			this->perm = (int*)nullptr;
 		}
 
 		return *this;

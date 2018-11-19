@@ -71,8 +71,6 @@ void GA_QAP::print_population()
 void GA_QAP::selection ()
 {
 	std::vector<int> parents = raffle(0, this->population.size(), 2);
-	print_solution(this->population[parents[0]].perm, this->size_problem);
-	print_solution(this->population[parents[1]].perm, this->size_problem);
 	Individual new_individual = this->crossover(this->population[parents[0]], this->population[parents[1]]);
 
 	if(this->population[parents[0]].fitness < this->population[parents[1]].fitness)
@@ -135,13 +133,10 @@ Individual GA_QAP::crossover(Individual& father, Individual& mother)
 {
 	// /** Imprimir parâmetos iniciais */
 	// std::cout << "indivíduos escolhidos\n";
-	// print_solution(father, size_problem);
-	// print_solution(mother, size_problem);
+	 print_solution(father.perm, size_problem);
+	 print_solution(mother.perm, size_problem);
 
 	/** Sortear uma posição aleatória para iniciar */
-	print_solution(father.perm, this->size_problem);
-	print_solution(mother.perm, this->size_problem);
-	std::cout << "\n";
 	std::vector<int> temp = raffle(0, size_problem, 1);
 	int position = temp[0];
 
