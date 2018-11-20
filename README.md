@@ -1,7 +1,7 @@
 # QAP-algorithms
 
 #Compilar
-Make
+make
 
 #Executar
-./bin/qap.out <arquivo_com_enderecos_para_instancias>
+.exe.out <arquivo_com_enderecos_para_instancias>
