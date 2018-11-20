@@ -161,7 +161,6 @@ int TsQAP::delta_value_linear(int i, int j)
 				+ (d[i][k] - d[j][k]) * (f[pi[j]][pi[k]] - f[pi[i]][pi[k]]);
 		}
 	}
-
 	value += (d[i][j] - d[j][i]) * (f[pi[j]][pi[i]] - f[pi[i]][pi[j]]);
 
 	return value;
@@ -248,6 +247,26 @@ void TsQAP::generate_initial_solution()
 	this->set_fitness_current_solution(initial_fitness);
 	this->set_fitness_current_best_solution(initial_fitness);
 
+	std::cout << "Initial solution, with fitness = " << initial_fitness << ":\n";
+	for(int i = 0; i < this->n; ++i)
+		std::cout << this->current_solution[i] << " ";
+	 std::cout << std::endl;
+}
+
+void TsQAP::generate_initial_solution( int * solution)
+{
+	// generate initial "current solution" randomly
+	for(int i = 0; i < this->n; ++i)
+		this->current_solution[i] = solution[i];
+
+	// copies the initial solution into the best one
+	std::copy(this->current_solution, this->current_solution+this->n, this->current_best_solution);
+
+	// sets the fitnesses
+	int initial_fitness = this->problem->calculate_cost_of_solution(this->current_solution);
+	this->set_fitness_current_solution(initial_fitness);
+	this->set_fitness_current_best_solution(initial_fitness);
+
 	// std::cout << "Initial solution, with fitness = " << initial_fitness << ":\n";
 	// for(int i = 0; i < this->n; ++i)
 	// 	std::cout << this->current_solution[i] << " ";
@@ -295,9 +314,9 @@ int TsQAP::get_delta(Operation operation){ return this->delta_matrix[operation.g
 
 void TsQAP::set_delta(Operation operation, int val){ this->delta_matrix[operation.get_max()][operation.get_min()] = val;}
 
-void TsQAP::run()
+void TsQAP::run(int * solution)
 {
-	this->generate_initial_solution();
+	this->generate_initial_solution(solution);
 	Operation best_neighbor_swap;
 
 	int neighbor_delta;
@@ -382,6 +401,11 @@ void TsQAP::set_fitness_current_best_solution(int new_fitness) { this->fitness_c
 
 void TsQAP::set_current_best_solution(int* new_best_solution) {std::copy(new_best_solution, new_best_solution + this->n, this->current_best_solution);}
 
+void TsQAP::set_current_solution(int* new_current_solution)
+{
+	std::copy(new_current_solution, new_current_solution + this->n, this->current_solution);	
+}
+
 void TsQAP::print_delta_matrix()
 {
 	std::cout << "DELTA_MATRIX\n";
@@ -396,7 +420,7 @@ void TsQAP::print_delta_matrix()
 
 void TsQAP::print_naive_delta_matrix()
 {
-	std::cout << "NAIVE DELTA_MATRIX (but the correct one)\n";
+	// std::cout << "NAIVE DELTA_MATRIX (but the correct one)\n";
 	for(int i = 0; i < this->n; ++i)
 	{
 		for(int j = 0; j < this->n; ++j)
